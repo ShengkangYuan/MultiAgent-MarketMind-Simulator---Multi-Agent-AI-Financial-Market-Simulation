@@ -1,0 +1,29 @@
+# LTCMCollapse LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_convergence_arbitrageur
+    - llm_leverage_trader
+    - llm_risk_manager
+    - llm_liquidity_provider
+    - llm_central_bank
+
+  llm_convergence_arbitrageur:
+    - market
+
+  llm_leverage_trader:
+    - market
+
+  llm_risk_manager:
+    - market
+
+  llm_liquidity_provider:
+    - market
+
+  llm_central_bank:
+    - market

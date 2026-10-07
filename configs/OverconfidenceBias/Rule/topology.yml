@@ -1,0 +1,29 @@
+# OverconfidenceBias Rule Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_overconfident_trader
+    - rule_self_attributor
+    - rule_calibrated_trader
+    - rule_contrarian_investor
+    - rule_noise_trader
+
+  rule_overconfident_trader:
+    - market
+
+  rule_self_attributor:
+    - market
+
+  rule_calibrated_trader:
+    - market
+
+  rule_contrarian_investor:
+    - market
+
+  rule_noise_trader:
+    - market

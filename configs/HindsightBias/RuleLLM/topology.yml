@@ -1,0 +1,29 @@
+# HindsightBias RuleLLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_hindsight_overconfident
+    - rulellm_outcome_learner
+    - rulellm_process_evaluator
+    - rulellm_contrarian_skeptic
+    - rulellm_noise_trader
+
+  rulellm_hindsight_overconfident:
+    - market
+
+  rulellm_outcome_learner:
+    - market
+
+  rulellm_process_evaluator:
+    - market
+
+  rulellm_contrarian_skeptic:
+    - market
+
+  rulellm_noise_trader:
+    - market

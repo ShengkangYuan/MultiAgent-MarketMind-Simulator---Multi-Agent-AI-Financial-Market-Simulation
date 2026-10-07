@@ -1,0 +1,136 @@
+# DotComBubble Rule Agent Configuration
+
+market:
+  archetype: stock-standard-price-impact  # -> AGENT_POOL/market/stock-standard-price-impact.md
+  name: "Market"
+  class: "examples.DotComBubble.Rule.players:Market"
+  num_instances: 1
+  config:
+    identity: "market"
+    role: coordinator
+    steps_per_turn: 1
+    group_tags:
+      - market
+    extras:
+      # Source: simulation-bases.md §3 market persistence contract
+      record_path: "EXPERIMENT/DotComBubble/Rule/records"
+      # Source: simulation-bases.md §6 Parameter Table
+      initial_price: 100.0
+      # Source: simulation-bases.md §6 Parameter Table
+      fundamental_value: 100.0
+      # Source: simulation-bases.md §6 Parameter Table
+      price_impact: 0.01
+      # Source: simulation-bases.md §6 Parameter Table
+      mean_reversion: 0.005
+      # Source: simulation-bases.md §6 Parameter Table
+      noise_std: 1.0
+      # Source: simulation-bases.md §3 bounded history requirement
+      custom_state_hot_limit: 3
+  persona: !include persona.yml
+
+rule_new_economy_evangelist:
+  name: "NewEconomyEvangelist"
+  class: "examples.DotComBubble.Rule.players:NewEconomyEvangelist"
+  num_instances: 2
+  config:
+    identity: "rule_new_economy_evangelist"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      # Source: simulation-bases.md §4.1.6 worked example, scaled run endowment
+      initial_cash: 1000000.0
+      # Source: simulation-bases.md §4.1.4 narrative-buyer inventory state
+      initial_position: 0
+      # Source: simulation-bases.md §6 Parameter Table
+      order_size: 600
+  persona: !include persona.yml
+
+rule_ipo_flipper:
+  name: "IPOFlipper"
+  class: "examples.DotComBubble.Rule.players:IPOFlipper"
+  num_instances: 2
+  config:
+    identity: "rule_ipo_flipper"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      # Source: simulation-bases.md §4.2.4 cash constraint
+      initial_cash: 800000.0
+      # Source: simulation-bases.md §4.2.6 worked example
+      initial_position: 500
+      # Source: simulation-bases.md §6 Parameter Table
+      flip_threshold: 0.05
+      # Source: simulation-bases.md §6 Parameter Table
+      order_size: 700
+  persona: !include persona.yml
+
+rule_momentum_follower:
+  name: "MomentumFollower"
+  class: "examples.DotComBubble.Rule.players:MomentumFollower"
+  num_instances: 2
+  config:
+    identity: "rule_momentum_follower"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      # Source: simulation-bases.md §4.3.6 worked example, scaled run endowment
+      initial_cash: 800000.0
+      # Source: simulation-bases.md §4.3.4 initial inventory state
+      initial_position: 0
+      # Source: simulation-bases.md §6 Parameter Table
+      momentum_threshold: 0.02
+      # Source: simulation-bases.md §6 Parameter Table
+      order_size: 500
+  persona: !include persona.yml
+
+rule_skeptical_value_investor:
+  name: "SkepticalValueInvestor"
+  class: "examples.DotComBubble.Rule.players:SkepticalValueInvestor"
+  num_instances: 1
+  config:
+    identity: "rule_skeptical_value_investor"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      # Source: simulation-bases.md §4.4.4 cash constraint
+      initial_cash: 1000000.0
+      # Source: simulation-bases.md §4.4.6 worked example
+      initial_position: 300
+      # Source: simulation-bases.md §6 Parameter Table
+      order_size: 400
+      # Source: simulation-bases.md §6 Parameter Table
+      value_buy_threshold: -0.10
+      # Source: simulation-bases.md §6 Parameter Table
+      value_sell_threshold: 0.20
+  persona: !include persona.yml
+
+rule_short_seller:
+  name: "ShortSeller"
+  class: "examples.DotComBubble.Rule.players:ShortSeller"
+  num_instances: 1
+  config:
+    identity: "rule_short_seller"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      # Source: simulation-bases.md §4.5.4 cash constraint
+      initial_cash: 1000000.0
+      # Source: simulation-bases.md §4.5.6 worked example
+      initial_position: 400
+      # Source: simulation-bases.md §6 Parameter Table
+      short_threshold: 0.15
+      # Source: simulation-bases.md §6 Parameter Table
+      cover_threshold: -0.05
+      # Source: simulation-bases.md §6 Parameter Table
+      order_size: 400
+  persona: !include persona.yml

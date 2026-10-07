@@ -1,0 +1,51 @@
+{
+  "round_num": 1,
+  "timestamp": "2026-07-29T16:55:33.059940",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "sell",
+          "quantity": 25.0,
+          "bid_price": 105.42072767362431,
+          "investor": "rule_rational_updater",
+          "strategy": "rational-updater"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "sell",
+            "quantity": 25.0,
+            "bid_price": 105.42072767362431,
+            "investor": "rule_rational_updater",
+            "strategy": "rational-updater"
+          },
+          "source_id": "rule_rational_updater",
+          "timestamp": "2026-07-29T16:55:33.059940",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 3.724
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "sell",
+        "quantity": 25.0,
+        "bid_price": 105.42072767362431,
+        "investor": "rule_rational_updater",
+        "strategy": "rational-updater"
+      },
+      "source_id": "rule_rational_updater",
+      "timestamp": "2026-07-29T16:55:33.059940",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 1,
+    "tick_turn_duration_ms": 3.736,
+    "tick_turn_total_duration_ms": 3.736,
+    "tick_step_count": 1
+  }
+}

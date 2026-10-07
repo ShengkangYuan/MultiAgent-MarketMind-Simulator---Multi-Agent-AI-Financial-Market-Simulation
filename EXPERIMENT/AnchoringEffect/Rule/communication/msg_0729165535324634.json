@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:35.324634",
+  "size_bytes": 521,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"rule_rational_updater\", \"recipient_id\": \"market\", \"payload\": {\"content\": {\"action\": \"hold\", \"quantity\": 0.0, \"bid_price\": 102.06386838282461, \"investor\": \"rule_rational_updater\", \"strategy\": \"rational-updater\", \"_clipped\": true, \"_clipped_from\": \"sell\", \"_clipped_intended_quantity\": 20.638683828246087, \"_clipped_reason\": \"insufficient_position\"}, \"content_type\": \"investor_bid\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:35.323108\", \"priority\": 1, \"extras\": {\"round_num\": 47}}"
+}

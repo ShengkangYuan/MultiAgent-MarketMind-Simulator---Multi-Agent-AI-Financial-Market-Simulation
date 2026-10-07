@@ -1,0 +1,29 @@
+# HindsightBias LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_hindsight_overconfident
+    - llm_outcome_learner
+    - llm_process_evaluator
+    - llm_contrarian_skeptic
+    - llm_noise_trader
+
+  llm_hindsight_overconfident:
+    - market
+
+  llm_outcome_learner:
+    - market
+
+  llm_process_evaluator:
+    - market
+
+  llm_contrarian_skeptic:
+    - market
+
+  llm_noise_trader:
+    - market

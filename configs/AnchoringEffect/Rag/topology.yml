@@ -1,0 +1,45 @@
+# =============================================================================
+# AnchoringEffectRag - Topology Configuration
+# =============================================================================
+# Star topology: Market broadcasts to all RAG+LLM investors
+#
+#         ragllm_anchored_trader ──────────────┐
+#         ragllm_historical_anchor ────────────┤
+#         ragllm_rational_updater ─────────────┼──▶ market ──▶ all investors
+#         ragllm_momentum_trader ──────────────┤           (market data: price, deviation)
+#         ragllm_noise_trader ─────────────────┘
+#
+# Execution flow per round:
+#   Level 0: market executes (broadcasts price + deviation metrics)
+#   Level 1: all investors execute in parallel (submit P,Q orders)
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # Market → All investors (price + deviation data broadcast)
+  market:
+    - ragllm_anchored_trader
+    - ragllm_historical_anchor
+    - ragllm_rational_updater
+    - ragllm_momentum_trader
+    - ragllm_noise_trader
+
+  # Each investor → Market only (order submission)
+  ragllm_anchored_trader:
+    - market
+
+  ragllm_historical_anchor:
+    - market
+
+  ragllm_rational_updater:
+    - market
+
+  ragllm_momentum_trader:
+    - market
+
+  ragllm_noise_trader:
+    - market

@@ -1,0 +1,29 @@
+# OverconfidenceBias LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_overconfident_trader
+    - llm_self_attributor
+    - llm_calibrated_trader
+    - llm_contrarian_investor
+    - llm_noise_trader
+
+  llm_overconfident_trader:
+    - market
+
+  llm_self_attributor:
+    - market
+
+  llm_calibrated_trader:
+    - market
+
+  llm_contrarian_investor:
+    - market
+
+  llm_noise_trader:
+    - market

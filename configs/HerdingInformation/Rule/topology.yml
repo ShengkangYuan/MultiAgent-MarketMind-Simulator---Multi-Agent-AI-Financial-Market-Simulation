@@ -1,0 +1,29 @@
+# HerdingInformation Rule Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_cascade_follower
+    - rule_reputation_herder
+    - rule_independent_thinker
+    - rule_contrarian
+    - rule_noise_trader
+
+  rule_cascade_follower:
+    - market
+
+  rule_reputation_herder:
+    - market
+
+  rule_independent_thinker:
+    - market
+
+  rule_contrarian:
+    - market
+
+  rule_noise_trader:
+    - market

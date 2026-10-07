@@ -1,0 +1,43 @@
+# =============================================================================
+# BlackMonday1987 LLM Topology - Star Pattern
+# =============================================================================
+# Market as hub, all investors communicate through market.
+#
+#    llm_portfolio_insurer ──────────┐
+#    llm_index_arbitrageur ──────────┤
+#    llm_program_trader    ──────────┼──▶ market ──▶ all investors
+#    llm_value_investor    ──────────┤             (market data: price, return)
+#    llm_noise_trader      ──────────┘
+#
+# Execution flow per round:
+#   Level 0: market executes (broadcasts price + dynamics data)
+#   Level 1: all investors execute in parallel (LLM decisions)
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_portfolio_insurer
+    - llm_index_arbitrageur
+    - llm_program_trader
+    - llm_value_investor
+    - llm_noise_trader
+
+  llm_portfolio_insurer:
+    - market
+
+  llm_index_arbitrageur:
+    - market
+
+  llm_program_trader:
+    - market
+
+  llm_value_investor:
+    - market
+
+  llm_noise_trader:
+    - market

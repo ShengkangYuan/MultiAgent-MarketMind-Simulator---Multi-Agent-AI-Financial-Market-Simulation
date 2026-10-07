@@ -1,0 +1,27 @@
+# =============================================================================
+# LiquidityDryupRuleLLM - Topology Configuration
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_market_maker
+    - rulellm_liquidity_seeker
+    - rulellm_value_trader
+    - rulellm_momentum_trader
+    - rulellm_noise_trader
+
+  rulellm_market_maker:
+    - market
+  rulellm_liquidity_seeker:
+    - market
+  rulellm_value_trader:
+    - market
+  rulellm_momentum_trader:
+    - market
+  rulellm_noise_trader:
+    - market

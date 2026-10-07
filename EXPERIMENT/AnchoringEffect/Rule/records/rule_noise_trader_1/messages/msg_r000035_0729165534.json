@@ -1,0 +1,26 @@
+{
+  "round_num": 35,
+  "direction": "received",
+  "timestamp": "2026-07-29T16:55:34.842933",
+  "message": {
+    "message_type": "PEER",
+    "sender_id": "market",
+    "recipient_id": "rule_noise_trader_1",
+    "payload": {
+      "content": {
+        "price": 102.24795267279882,
+        "prev_price": 101.78742734719224,
+        "fundamental": 100.0,
+        "deviation": 0.022479526727988173,
+        "round": 36
+      },
+      "content_type": "market_price",
+      "extras": {}
+    },
+    "timestamp": "2026-07-29T16:55:34.833709",
+    "priority": 1,
+    "extras": {
+      "round_num": 36
+    }
+  }
+}

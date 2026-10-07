@@ -1,0 +1,29 @@
+# MentalAccounting LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_mental_accountant
+    - llm_house_money_trader
+    - llm_rational_portfolio_manager
+    - llm_sunk_cost_holder
+    - llm_noise_trader
+
+  llm_mental_accountant:
+    - market
+
+  llm_house_money_trader:
+    - market
+
+  llm_rational_portfolio_manager:
+    - market
+
+  llm_sunk_cost_holder:
+    - market
+
+  llm_noise_trader:
+    - market

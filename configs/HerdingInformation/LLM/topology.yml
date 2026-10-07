@@ -1,0 +1,29 @@
+# HerdingInformation LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_cascade_follower
+    - llm_reputation_herder
+    - llm_independent_thinker
+    - llm_contrarian
+    - llm_noise_trader
+
+  llm_cascade_follower:
+    - market
+
+  llm_reputation_herder:
+    - market
+
+  llm_independent_thinker:
+    - market
+
+  llm_contrarian:
+    - market
+
+  llm_noise_trader:
+    - market

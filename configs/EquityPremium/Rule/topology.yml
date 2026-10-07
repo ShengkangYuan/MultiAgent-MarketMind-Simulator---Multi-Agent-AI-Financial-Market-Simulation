@@ -1,0 +1,40 @@
+# =============================================================================
+# EquityPremium Topology - Star Pattern
+# =============================================================================
+# Note: player keys with num_instances > 1 use their base key here.
+# The simulator expander resolves them to foo_1, foo_2, ... before building
+# the TopologyGraph, so all edge rules apply to every instance automatically.
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # Market → All investors
+  # num_instances: 3 → mla_1/2/3; num_instances: 2 → conservative_1/2
+  market:
+    - rule_myopic_loss_averse_investor
+    - rule_long_horizon_investor
+    - rule_risk_neutral_investor
+    - rule_conservative_investor
+    - rule_noise_trader
+
+  # Each investor → Market only
+  # num_instances: 3 → expands to mla_1/2/3 → market
+  rule_myopic_loss_averse_investor:
+    - market
+
+  rule_long_horizon_investor:
+    - market
+
+  rule_risk_neutral_investor:
+    - market
+
+  # num_instances: 2 → expands to conservative_1/2 → market
+  rule_conservative_investor:
+    - market
+
+  rule_noise_trader:
+    - market

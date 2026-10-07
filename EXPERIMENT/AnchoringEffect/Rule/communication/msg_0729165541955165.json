@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:41.955165",
+  "size_bytes": 392,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"rule_historical_anchor_2\", \"recipient_id\": \"market\", \"payload\": {\"content\": {\"action\": \"hold\", \"quantity\": 0.0, \"bid_price\": 105.20626678593256, \"investor\": \"rule_historical_anchor_2\", \"strategy\": \"historical-anchor\"}, \"content_type\": \"investor_bid\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:41.952983\", \"priority\": 1, \"extras\": {\"round_num\": 154}}"
+}

@@ -1,0 +1,24 @@
+# =============================================================================
+# DispositionEffectRuleLLM Topology Configuration
+# =============================================================================
+# Star topology: Market broadcasts to all investors, investors send orders to market
+# =============================================================================
+
+type: star
+
+sources:
+  - market
+
+connections:
+  market:
+    # Market broadcasts to all investors
+    - rulellm_disposition_investor_1
+    - rulellm_disposition_investor_2
+    - rulellm_disposition_investor_3
+    - rulellm_rational_investor_1
+    - rulellm_rational_investor_2
+    - rulellm_tax_aware_investor_1
+    - rulellm_tax_aware_investor_2
+    - rulellm_institutional_investor_1
+    - rulellm_institutional_investor_2
+    - rulellm_index_holder

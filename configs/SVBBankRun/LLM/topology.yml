@@ -1,0 +1,21 @@
+type: "star"
+sources:
+  - market
+
+connections:
+  market:
+    - llm_depositor
+    - llm_social_media_influencer
+    - llm_bank_manager
+    - llm_regulator
+    - llm_bond_trader
+  llm_depositor:
+    - market
+  llm_social_media_influencer:
+    - market
+  llm_bank_manager:
+    - market
+  llm_regulator:
+    - market
+  llm_bond_trader:
+    - market

@@ -1,0 +1,100 @@
+# GameStopShortSqueeze — Rag Variant
+
+## §1 Overview
+
+The Rag variant implements the short squeeze with RAG-augmented LLM reasoning. Retrieved documents about the GME 2021 event, Reddit WallStreetBets posts, short squeeze mechanics, and historical squeezes (VW 2008, Silver 1979) reinforce each agent's behavioral role. Rag retrieval may amplify §4.1 retail enthusiasm (through GME historical momentum retrieval) or §4.2 fear (through retrieved squeeze postmortem data).
+
+| Aspect             | Detail                                       |
+|--------------------|----------------------------------------------|
+| Variant            | Rag                                          |
+| Simulation         | GameStopShortSqueeze                         |
+| Decision Mechanism | RAG-augmented LLM                            |
+| Theory Reference   | `simulation-bases.md §4.1–§4.5`              |
+| Market Broadcast   | `price`, `fundamental`, `deviation`, `round` |
+
+---
+
+## §2 Theory → Implementation Mapping
+
+### §2.1 RagLLMRetailCoordinated (`simulation-bases.md §4.1`)
+| Theory Component         | Implementation                                                                                    |
+|--------------------------|---------------------------------------------------------------------------------------------------|
+| Social coordination      | System prompt: retail coordinator; RAG retrieves WallStreetBets posts, GME Jan 2021 momentum data |
+| Historical reinforcement | Retrieved GME squeeze data may amplify buying conviction                                          |
+
+### §2.2 RagLLMShortSellerHF (`simulation-bases.md §4.2`)
+| Theory Component   | Implementation                                                                                     |
+|--------------------|----------------------------------------------------------------------------------------------------|
+| Forced covering    | System prompt: short-seller persona; RAG retrieves Melvin Capital postmortem, VW 2008 squeeze data |
+| Fear amplification | Retrieved squeeze postmortems reinforce covering urgency                                           |
+
+### §2.3 RagLLMMarketMakerGamma (`simulation-bases.md §4.3`)
+| Theory Component | Implementation                                                                           |
+|------------------|------------------------------------------------------------------------------------------|
+| Gamma hedging    | System prompt: market maker; RAG retrieves options flow data and gamma squeeze mechanics |
+
+### §2.4 RagLLMInstitutionalValue (`simulation-bases.md §4.4`)
+| Theory Component        | Implementation                                                                        |
+|-------------------------|---------------------------------------------------------------------------------------|
+| Fundamental value       | System prompt: value investor; RAG retrieves analyst reports on GameStop fundamentals |
+| Conviction strengthened | Retrieved fundamental analysis may reinforce early exit decision                      |
+
+### §2.5 RagLLMMomentumRetail (`simulation-bases.md §4.5`)
+| Theory Component | Implementation                                                      |
+|------------------|---------------------------------------------------------------------|
+| FOMO             | System prompt: FOMO retail; RAG retrieves social media buzz metrics |
+
+---
+
+## §3 Rag-Specific Notes
+
+- **SQI amplification likely**: Retrieved GME momentum data reinforces §4.1 buying, potentially pushing SQI higher than Rule.
+- **Faster covering**: Retrieved squeeze postmortems may accelerate §4.2 covering (fear), shortening SCD vs. Rule.
+- **Corpus dependency**: Key — if retrieval corpus is GME-focused, all metrics skew toward historical GME values.
+
+---
+
+## §4 Expected Ranges (Rag Variant vs. Rule Baseline)
+
+| Metric | Rag Expected Range | vs. Rule | Basis                                               |
+|--------|--------------------|----------|-----------------------------------------------------|
+| SQI    | 1.5–7.0            | Higher   | Retrieved squeeze cases reinforce §4.1 buying       |
+| PAR    | 0.3–1.5            | Higher   | Larger and longer squeeze                           |
+| SCD    | 1–6 rounds         | Shorter  | Faster covering due to retrieved fear evidence      |
+| IEP    | Rounds 2–8         | Earlier  | Retrieved fundamental analysis prompts earlier sell |
+| WTI    | 0.15–0.50          | Higher   | Larger wealth transfer in amplified squeeze         |
+
+## §5 References and Quality Review
+
+This variant traces to `../simulation-bases.md §4` for investor design and
+`../analysis-bases.md §2` for metric definitions. Post-run review should verify
+full round count, order schema completeness, price and portfolio sanity,
+retrieval health, LLM parse/retry logs, and squeeze-phase patterns.
+
+## §6 Running Instructions
+
+```bash
+python examples/GameStopShortSqueeze/Rag/run_gamestopshortsqueeze_rag.py \
+  -c configs/GameStopShortSqueeze/Rag/simulation.yml
+```
+
+## §7 Expected Behavior
+
+RAG should preserve the RuleLLM action schema while adding retrieved short
+squeeze context to each decision round. Retrieved GME and squeeze material may
+increase buying conviction for retail and short-covering agents, while
+fundamental context may strengthen institutional selling.
+
+## §8 Cross-Variant Role
+
+The RAG variant measures whether external squeeze literature changes behavior
+relative to RuleLLM prompts with the same embedded decision rules.
+
+## §9 Implementation Traceability
+
+`Rag/prompts.py` imports RuleLLM system prompts and adds `{rag_context}` in the
+user template. `Rag/players.py` records `rag_context` with each decision and
+`Rag/analysis.py` writes `rag_stats.json` alongside the standard analysis
+outputs. Accepted decisions must keep the same canonical order schema as
+RuleLLM. The RAG user prompt includes the agent's configured decision parameters
+alongside retrieved context.

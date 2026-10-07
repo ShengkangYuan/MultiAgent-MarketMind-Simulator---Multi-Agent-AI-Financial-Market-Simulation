@@ -1,0 +1,29 @@
+# MentalAccounting Rule Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_mental_accountant
+    - rule_house_money_trader
+    - rule_rational_portfolio_manager
+    - rule_sunk_cost_holder
+    - rule_noise_trader
+
+  rule_mental_accountant:
+    - market
+
+  rule_house_money_trader:
+    - market
+
+  rule_rational_portfolio_manager:
+    - market
+
+  rule_sunk_cost_holder:
+    - market
+
+  rule_noise_trader:
+    - market

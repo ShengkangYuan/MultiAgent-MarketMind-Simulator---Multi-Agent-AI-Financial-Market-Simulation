@@ -1,0 +1,23 @@
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_myopic_loss_averse
+    - llm_long_term_investor
+    - llm_institutional_investor
+    - llm_risk_averse_saver
+    - llm_rational_optimizer
+
+  llm_myopic_loss_averse:
+    - market
+  llm_long_term_investor:
+    - market
+  llm_institutional_investor:
+    - market
+  llm_risk_averse_saver:
+    - market
+  llm_rational_optimizer:
+    - market

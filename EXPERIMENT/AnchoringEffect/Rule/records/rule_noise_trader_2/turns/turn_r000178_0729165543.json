@@ -1,0 +1,51 @@
+{
+  "round_num": 178,
+  "timestamp": "2026-07-29T16:55:43.594923",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "hold",
+          "quantity": 0.0,
+          "bid_price": 104.43317799536814,
+          "investor": "rule_noise_trader_2",
+          "strategy": "noise-trader"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "hold",
+            "quantity": 0.0,
+            "bid_price": 104.43317799536814,
+            "investor": "rule_noise_trader_2",
+            "strategy": "noise-trader"
+          },
+          "source_id": "rule_noise_trader_2",
+          "timestamp": "2026-07-29T16:55:43.594923",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.082
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 104.43317799536814,
+        "investor": "rule_noise_trader_2",
+        "strategy": "noise-trader"
+      },
+      "source_id": "rule_noise_trader_2",
+      "timestamp": "2026-07-29T16:55:43.594923",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 178,
+    "tick_turn_duration_ms": 0.09,
+    "tick_turn_total_duration_ms": 25.575,
+    "tick_step_count": 1
+  }
+}

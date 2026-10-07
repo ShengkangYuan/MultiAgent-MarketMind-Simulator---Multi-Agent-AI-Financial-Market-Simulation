@@ -1,0 +1,52 @@
+# =============================================================================
+# VolatilityClustering Topology - Star Pattern
+# =============================================================================
+# Market as hub, all investors communicate through market.
+#
+# Note: player keys with num_instances > 1 use their base key here.
+# The simulator expander resolves them to foo_1, foo_2, ... before building
+# the TopologyGraph, so all edge rules apply to every instance automatically.
+#
+#         rule_fundamentalist ──────────┐
+#         rule_trend_follower ──────────┤
+#         rule_noise_trader ────────────┼──▶ market ──▶ all investors
+#         rule_slow_adapter ────────────┤             (market: price, volatility)
+#         rule_volatility_trader ───────┘
+#
+# Execution flow per round:
+#   Level 0: market executes (broadcasts price + volatility)
+#   Level 1: all investors execute in parallel (submit P,Q orders)
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # Market → All investors (price + volatility broadcast)
+  # num_instances: 2 → trend_follower_1/2, noise_trader_1/2
+  market:
+    - rule_fundamentalist
+    - rule_trend_follower
+    - rule_noise_trader
+    - rule_slow_adapter
+    - rule_volatility_trader
+
+  # Each investor → Market only (order submission)
+  rule_fundamentalist:
+    - market
+
+  # num_instances: 2 → expands to trend_follower_1/2 → market
+  rule_trend_follower:
+    - market
+
+  # num_instances: 2 → expands to noise_trader_1/2 → market
+  rule_noise_trader:
+    - market
+
+  rule_slow_adapter:
+    - market
+
+  rule_volatility_trader:
+    - market

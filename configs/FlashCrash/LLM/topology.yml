@@ -1,0 +1,23 @@
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_high_frequency_trader
+    - llm_flash_market_maker
+    - llm_stop_loss_trader
+    - llm_fundamental_trader
+    - llm_algorithmic_trader
+
+  llm_high_frequency_trader:
+    - market
+  llm_flash_market_maker:
+    - market
+  llm_stop_loss_trader:
+    - market
+  llm_fundamental_trader:
+    - market
+  llm_algorithmic_trader:
+    - market

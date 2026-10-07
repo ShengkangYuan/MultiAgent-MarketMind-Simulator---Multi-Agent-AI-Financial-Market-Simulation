@@ -1,0 +1,45 @@
+# =============================================================================
+# FlashCrash Topology - Star Pattern
+# =============================================================================
+# Market microstructure simulation with liquidity dynamics
+#
+# Note: player keys with num_instances > 1 use their base key here.
+# The simulator expander resolves them to foo_1, foo_2, ... before building
+# the TopologyGraph, so all edge rules apply to every instance automatically.
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # num_instances: 2 → hft_1/2, market_maker_1/2, stop_loss_1/2
+  market:
+    - rule_high_frequency_trader
+    - rule_market_maker
+    - rule_algorithmic_trader
+    - rule_stop_loss_trader
+    - rule_fundamental_trader
+    - rule_retail_trader
+
+  # num_instances: 2 → expands to hft_1/2 → market
+  rule_high_frequency_trader:
+    - market
+
+  # num_instances: 2 → expands to market_maker_1/2 → market
+  rule_market_maker:
+    - market
+
+  rule_algorithmic_trader:
+    - market
+
+  # num_instances: 2 → expands to stop_loss_1/2 → market
+  rule_stop_loss_trader:
+    - market
+
+  rule_fundamental_trader:
+    - market
+
+  rule_retail_trader:
+    - market

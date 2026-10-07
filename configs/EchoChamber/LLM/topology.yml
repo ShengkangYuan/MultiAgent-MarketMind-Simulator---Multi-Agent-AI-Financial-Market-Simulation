@@ -1,0 +1,32 @@
+# =============================================================================
+# EchoChamberLLM Topology - Star Pattern
+# =============================================================================
+# OpinionEnvironment as hub, all LLM agents communicate through llm_opinion_environment.
+
+type: "star"
+
+sources:
+  - llm_opinion_environment
+
+connections:
+  llm_opinion_environment:
+    - llm_ideologue
+    - llm_conformist
+    - llm_critical_thinker
+    - llm_bridge_builder
+    - llm_passive_bystander
+
+  llm_ideologue:
+    - llm_opinion_environment
+
+  llm_conformist:
+    - llm_opinion_environment
+
+  llm_critical_thinker:
+    - llm_opinion_environment
+
+  llm_bridge_builder:
+    - llm_opinion_environment
+
+  llm_passive_bystander:
+    - llm_opinion_environment

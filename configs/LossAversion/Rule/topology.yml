@@ -1,0 +1,29 @@
+# LossAversion Rule Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_loss_averse_investor
+    - rule_break_even_trader
+    - rule_rational_trader
+    - rule_momentum_trader
+    - rule_market_maker
+
+  rule_loss_averse_investor:
+    - market
+
+  rule_break_even_trader:
+    - market
+
+  rule_rational_trader:
+    - market
+
+  rule_momentum_trader:
+    - market
+
+  rule_market_maker:
+    - market

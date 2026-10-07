@@ -1,0 +1,153 @@
+# =============================================================================
+# LiquidityDryup Players Configuration
+# =============================================================================
+# Market Maker Inventory Model Simulation
+#
+# Phenomenon: Liquidity Dry-up
+#   - Market makers withdraw liquidity during stress
+#   - Creates self-reinforcing cycles of illiquidity
+#   - Reference: Grossman & Miller (1988), Amihud & Mendelson (1986)
+#
+# Investor Types:
+#   - MarketMaker: Provides liquidity but withdraws in stress
+#   - LiquiditySeeker: Needs liquidity, struggles during dry-up
+#   - ValueTrader: Provides liquidity when mispricing detected
+#   - MomentumTrader: Can trigger liquidity crises
+#   - NoiseTrader: Random trades
+# =============================================================================
+
+market:
+  archetype: stock-standard-price-impact  # -> AGENT_POOL/market/stock-standard-price-impact.md
+  name: "Market"
+  class: "examples.LiquidityDryup.Rule.players:Market"
+  num_instances: 1
+  config:
+    identity: "market"
+    role: coordinator
+    steps_per_turn: 1
+    group_tags:
+      - market
+    extras:
+      record_path: "EXPERIMENT/LiquidityDryup/Rule/records"  # Source: framework infrastructure
+      # Market parameters
+      fundamental_value: 100.0  # Source: simulation-bases.md §6
+      initial_price: 100.0  # Source: simulation-bases.md §6
+      price_impact: 0.08  # Source: simulation-bases.md §6
+      mean_reversion: 0.015  # Source: simulation-bases.md §6
+      noise_std: 0.4  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      base_liquidity: 50.0  # Source: simulation-bases.md §6
+  persona: !include persona.yml
+
+rule_market_maker:
+  archetype: market-maker  # -> AGENT_POOL/finance/market-maker.md
+  name: "Market Maker"
+  class: "examples.LiquidityDryup.Rule.players:MarketMaker"
+  # Expander → market_maker_1, market_maker_2, market_maker_3
+  num_instances: 3
+  config:
+    identity: "rule_market_maker"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/LiquidityDryup/Rule/records"  # Source: framework infrastructure
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 50.0  # Source: finance-liquidity-dryup.md §9
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # MarketMaker specific
+      volatility_threshold: 0.02  # Source: simulation-bases.md §4.1.7
+      base_liquidity: 30.0  # Source: simulation-bases.md §4.1.7
+      withdraw_rebalance: 0.3  # Source: simulation-bases.md §4.1.7
+      normal_rebalance: 0.2  # Source: simulation-bases.md §4.1.7
+  persona: !include persona.yml
+
+rule_liquidity_seeker:
+  archetype: liquidity-seeker  # -> AGENT_POOL/finance/liquidity-seeker.md
+  name: "Liquidity Seeker"
+  class: "examples.LiquidityDryup.Rule.players:LiquiditySeeker"
+  # Expander → liquidity_seeker_1, liquidity_seeker_2, liquidity_seeker_3
+  num_instances: 3
+  config:
+    identity: "rule_liquidity_seeker"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/LiquidityDryup/Rule/records"  # Source: framework infrastructure
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 50.0  # Source: finance-liquidity-dryup.md §9
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # LiquiditySeeker specific
+      target_volatility: 15.0  # Source: simulation-bases.md §4.2.7
+      liquidity_base: 100.0  # Source: simulation-bases.md §4.2.7
+  persona: !include persona.yml
+
+rule_value_trader:
+  archetype: value-trader  # -> AGENT_POOL/finance/value-trader.md
+  name: "Value Trader"
+  class: "examples.LiquidityDryup.Rule.players:ValueTrader"
+  # Expander → value_trader_1, value_trader_2
+  num_instances: 2
+  config:
+    identity: "rule_value_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/LiquidityDryup/Rule/records"  # Source: framework infrastructure
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 50.0  # Source: finance-liquidity-dryup.md §9
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # ValueTrader specific
+      liquidity_threshold: 0.05  # Source: simulation-bases.md §4.3.7
+      trade_threshold: 0.03  # Source: simulation-bases.md §4.3.7
+      base_liquidity_provision: 20  # Source: simulation-bases.md §4.3.7
+      value_multiplier: 30  # Source: simulation-bases.md §4.3.7
+  persona: !include persona.yml
+
+rule_momentum_trader:
+  archetype: momentum-trader  # -> AGENT_POOL/finance/momentum-trader.md
+  name: "Momentum Trader"
+  class: "examples.LiquidityDryup.Rule.players:MomentumTrader"
+  # Expander → momentum_trader_1, momentum_trader_2
+  num_instances: 2
+  config:
+    identity: "rule_momentum_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/LiquidityDryup/Rule/records"  # Source: framework infrastructure
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 50.0  # Source: finance-liquidity-dryup.md §9
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # MomentumTrader specific
+      momentum_threshold: 0.01  # Source: simulation-bases.md §4.4.7
+      momentum_multiplier: 200  # Source: simulation-bases.md §4.4.7
+  persona: !include persona.yml
+
+rule_noise_trader:
+  archetype: noise-trader  # -> AGENT_POOL/finance/noise-trader.md
+  name: "Noise Trader"
+  class: "examples.LiquidityDryup.Rule.players:NoiseTrader"
+  # Expander → noise_trader_1, noise_trader_2
+  num_instances: 2
+  config:
+    identity: "rule_noise_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/LiquidityDryup/Rule/records"  # Source: framework infrastructure
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 50.0  # Source: finance-liquidity-dryup.md §9
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # NoiseTrader specific
+      noise_volatility: 10.0  # Source: simulation-bases.md §4.5.7
+  persona: !include persona.yml

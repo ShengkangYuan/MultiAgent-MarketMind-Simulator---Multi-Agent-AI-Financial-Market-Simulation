@@ -1,0 +1,33 @@
+# =============================================================================
+# RumorSpreadRuleLLM - Topology Configuration
+# =============================================================================
+# Star topology: InformationEnvironment broadcasts to all RuleLLM agents
+# =============================================================================
+
+type: "star"
+
+sources:
+  - rulellm_information_environment
+
+connections:
+  rulellm_information_environment:
+    - rulellm_gullible_spreader
+    - rulellm_distorting_relayer
+    - rulellm_skeptical_evaluator
+    - rulellm_fact_checker
+    - rulellm_uninformed_bystander
+
+  rulellm_gullible_spreader:
+    - rulellm_information_environment
+
+  rulellm_distorting_relayer:
+    - rulellm_information_environment
+
+  rulellm_skeptical_evaluator:
+    - rulellm_information_environment
+
+  rulellm_fact_checker:
+    - rulellm_information_environment
+
+  rulellm_uninformed_bystander:
+    - rulellm_information_environment

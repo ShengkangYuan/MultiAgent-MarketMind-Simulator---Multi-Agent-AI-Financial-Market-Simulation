@@ -1,0 +1,23 @@
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_market_maker
+    - llm_liquidity_seeker
+    - llm_value_trader
+    - llm_momentum_trader
+    - llm_noise_trader
+
+  llm_market_maker:
+    - market
+  llm_liquidity_seeker:
+    - market
+  llm_value_trader:
+    - market
+  llm_momentum_trader:
+    - market
+  llm_noise_trader:
+    - market

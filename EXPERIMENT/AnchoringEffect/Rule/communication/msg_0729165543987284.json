@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:43.987284",
+  "size_bytes": 379,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"market\", \"recipient_id\": \"rule_noise_trader_2\", \"payload\": {\"content\": {\"price\": 105.78481436807924, \"prev_price\": 105.04492034588084, \"fundamental\": 100.0, \"deviation\": 0.05784814368079239, \"round\": 185}, \"content_type\": \"market_price\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:43.979339\", \"priority\": 1, \"extras\": {\"round_num\": 185}}"
+}

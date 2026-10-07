@@ -1,0 +1,29 @@
+# GFC2008 Rule Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_mbs_originator
+    - rule_leveraged_investor
+    - rule_rating_agency
+    - rule_distressed_buyer
+    - rule_regulator
+
+  rule_mbs_originator:
+    - market
+
+  rule_leveraged_investor:
+    - market
+
+  rule_rating_agency:
+    - market
+
+  rule_distressed_buyer:
+    - market
+
+  rule_regulator:
+    - market

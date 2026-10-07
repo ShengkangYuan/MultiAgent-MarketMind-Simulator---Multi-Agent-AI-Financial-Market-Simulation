@@ -1,0 +1,37 @@
+# =============================================================================
+# DispositionEffect Topology - Star Pattern
+# =============================================================================
+# Note: player keys with num_instances > 1 use their base key here.
+# The simulator expander resolves them to foo_1, foo_2, ... before building
+# the TopologyGraph, so all edge rules apply to every instance automatically.
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    # num_instances: 50 → expands to rule_disposition_investor_1 … rule_disposition_investor_50
+    - rule_disposition_investor
+    - rule_rational_investor
+    - rule_tax_aware_investor
+    - rule_index_holder
+    - rule_institutional_investor
+
+  # num_instances: 50 → expands to rule_disposition_investor_1 → market … rule_disposition_investor_50 → market
+  rule_disposition_investor:
+    - market
+
+  rule_rational_investor:
+    - market
+
+  rule_tax_aware_investor:
+    - market
+
+  rule_index_holder:
+    - market
+
+  rule_institutional_investor:
+    - market

@@ -1,0 +1,24 @@
+# SorosPound Rule Topology Configuration
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_macro_hedge_fund
+    - rule_peg_defender
+    - rule_convergence_trader
+    - rule_opportunistic_trader
+    - rule_noise_trader
+  rule_macro_hedge_fund:
+    - market
+  rule_peg_defender:
+    - market
+  rule_convergence_trader:
+    - market
+  rule_opportunistic_trader:
+    - market
+  rule_noise_trader:
+    - market

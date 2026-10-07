@@ -1,0 +1,32 @@
+# Streamlit server configuration optimized for multi-user production deployment.
+# Placed in .streamlit/config.toml (project-level, auto-loaded by Streamlit).
+
+[server]
+headless = true
+# XSRF protection stays on (default security posture); CORS then stays at
+# Streamlit's permissive default, which is what local single-user runs want.
+# Setting enableCORS=false together with XSRF=true triggers a startup warning
+# and Streamlit force-overrides CORS back to true.
+enableXsrfProtection = true
+maxUploadSize = 50
+# Reduce WebSocket reconnect churn under load
+enableWebsocketCompression = true
+# Auto-destroy session 5 min after browser disconnect (tab close / network drop).
+disconnectedSessionTTL = 300
+
+[browser]
+gatherUsageStats = false
+
+[runner]
+# Reduce rerun overhead
+fastReruns = true
+
+[theme]
+# MarketMind Sim "Aurora" light theme — matches masim/interface/styles.py
+# design tokens (brand teal #287a6d, soft cool-gray canvas, white surfaces).
+base = "light"
+primaryColor = "#287a6d"
+backgroundColor = "#f6f8fb"
+secondaryBackgroundColor = "#ffffff"
+textColor = "#17212b"
+font = "sans serif"

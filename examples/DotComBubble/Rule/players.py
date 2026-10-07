@@ -1,0 +1,563 @@
+"""DotComBubble Rule-Based Simulation
+
+1995-2001 Internet bubble — NASDAQ rose 400% then fell 78%.
+
+Theoretical Foundation:
+- Shiller (2000): Irrational exuberance and narrative economics
+- Ofek & Richardson (2003): Internet bubble dynamics
+- Abreu & Brunnermeier (2003): Synchronization risk and bubble persistence
+
+Agents:
+- Market: Price formation via net-demand + mean-reversion
+- NewEconomyEvangelist: Believes in the new paradigm and ignores traditional
+  valuation (destabilizing)
+- IPOFlipper: Buys IPOs and quickly sells for short-term profit (destabilizing)
+- MomentumFollower: Follows price trends and amplifies moves (destabilizing)
+- SkepticalValueInvestor: Waits for correction, buys undervalued assets (stabilizing)
+- ShortSeller: Bets against overvalued stocks but faces squeeze risk (stabilizing)
+"""
+
+import logging
+import os
+import random
+from typing import Any, Dict, List
+
+from masim.player.base import Action, Observation
+from masim.player.general import GeneralPlayer
+from masim.utils.history import HistoryBuffer
+
+logger = logging.getLogger(__name__)
+
+
+def _build_order(
+    player: GeneralPlayer,
+    action: str,
+    quantity: int,
+    price: float,
+    reasoning: str,
+) -> Dict[str, Any]:
+    """Build the canonical trading order shared by all DotComBubble variants."""
+    if action not in ("buy", "sell", "hold"):
+        raise ValueError(f"{player.identity} emitted invalid action: {action}")
+    if price <= 0:
+        raise ValueError(f"{player.identity} emitted non-positive bid_price: {price}")
+    if quantity < 0:
+        raise ValueError(f"{player.identity} emitted negative quantity: {quantity}")
+    return {
+        "type": "order",
+        "from": player.identity,
+        "action": action,
+        "bid_price": float(price),
+        "quantity": int(quantity),
+        "reasoning": reasoning,
+        "agent_type": player.__class__.__name__,
+        "strategy": player.__class__.__name__,
+    }
+
+
+def _initialize_investor(player: GeneralPlayer) -> None:
+    """Initialize the shared investor state from required config fields."""
+    extras = player.config.extras
+    player.state.custom_state["cash"] = float(extras["initial_cash"])
+    player.state.custom_state["position"] = int(extras["initial_position"])
+    player.state.custom_state["price_history"] = []
+
+
+def _buy_quantity(order_size: int, cash: float, price: float) -> int:
+    """Return an affordable quantity while failing on invalid market data."""
+    if price <= 0:
+        raise ValueError(f"Cannot size a buy order at non-positive price {price}")
+    return min(order_size, int(cash / price))
+
+
+class Market(GeneralPlayer):
+    """Tech/equity market — clears orders and broadcasts price each round."""
+
+    async def perceive(self, observation: Observation, prev_result=None) -> None:
+        if "price" not in self.state.custom_state:
+            extras = self.config.extras
+            record_path = extras["record_path"]
+            base_path = os.path.join(record_path, self.config.identity)
+            custom_state_hot_limit = extras["custom_state_hot_limit"]
+            self.state.custom_state["price"] = float(extras["initial_price"])
+            self.state.custom_state["fundamental"] = float(extras["fundamental_value"])
+            self.state.custom_state["price_impact"] = float(extras["price_impact"])
+            self.state.custom_state["mean_reversion"] = float(extras["mean_reversion"])
+            self.state.custom_state["noise_std"] = float(extras["noise_std"])
+            if self.state.custom_state["price"] <= 0:
+                raise ValueError("initial_price must be positive")
+            if self.state.custom_state["fundamental"] <= 0:
+                raise ValueError("fundamental_value must be positive")
+            self.state.custom_state["price_history"] = HistoryBuffer(
+                folder=os.path.join(base_path, "price"),
+                entry_limit=custom_state_hot_limit,
+            )
+            self.state.custom_state["fundamental_history"] = HistoryBuffer(
+                folder=os.path.join(base_path, "fundamental"),
+                entry_limit=custom_state_hot_limit,
+            )
+
+        self.state.custom_state["round"] = observation.round
+        orders: List[Dict] = []
+        if observation.inbounds:
+            for inb in observation.inbounds:
+                payload = inb.payload
+                if (
+                    isinstance(payload, dict)
+                    and "type" not in payload
+                    and "order" in payload
+                ):
+                    payload = payload["order"]
+                if isinstance(payload, dict) and payload.get("action") in (
+                    "buy",
+                    "sell",
+                    "hold",
+                ):
+                    orders.append(payload)
+
+        price = self.state.custom_state["price"]
+        fundamental = self.state.custom_state["fundamental"]
+        buy_vol = sum(o["quantity"] for o in orders if o["action"] == "buy")
+        sell_vol = sum(
+            o["quantity"] for o in orders if o["action"] == "sell"
+        )
+        net_demand = buy_vol - sell_vol
+
+        price_change = self.state.custom_state["price_impact"] * net_demand
+        reversion = self.state.custom_state["mean_reversion"] * (fundamental - price)
+        noise = random.gauss(0, self.state.custom_state["noise_std"])
+        new_price = max(price + price_change + reversion + noise, 0.01)
+        self.state.custom_state["price"] = new_price
+        self.state.custom_state["price_history"].append(new_price)
+        self.state.custom_state["fundamental_history"].append(fundamental)
+
+        deviation = (new_price - fundamental) / fundamental
+        self.state.custom_state["deviation"] = deviation
+        logger.debug(
+            "Round %d: price=%.2f deviation=%.4f",
+            observation.round,
+            new_price,
+            deviation,
+        )
+
+    async def decide(self) -> Dict:
+        price = self.state.custom_state["price"]
+        fundamental = self.state.custom_state["fundamental"]
+        deviation = self.state.custom_state["deviation"]
+        market_data = {
+            "price": price,
+            "fundamental": fundamental,
+            "deviation": deviation,
+            "round": self.state.custom_state["round"],
+        }
+        return {
+            "market_data": market_data,
+            "outbound_messages": [
+                {"payload": market_data, "content_type": "market_update"}
+            ],
+        }
+
+    async def act(self, decision_payload: Dict) -> Action:
+        return Action(
+            action_type="market_broadcast",
+            payload=decision_payload,
+            source_id=self.identity,
+        )
+
+
+class NewEconomyEvangelist(GeneralPlayer):
+    """Ignore traditional valuation metrics during the internet bubble.
+
+    Theory: simulation-bases.md §4.1 — NewEconomyEvangelist
+    Theoretical basis: Shiller (2000) narrative economics and the dismissal of
+    conventional valuation ratios.
+    See simulation-bases.md §4.1 for mathematical model.
+    Role: destabilizing.
+    """
+
+    async def perceive(self, observation: Observation, prev_result=None) -> None:
+        if "cash" not in self.state.custom_state:
+            _initialize_investor(self)
+
+        self.state.custom_state["round"] = observation.round
+        if observation.inbounds:
+            for inb in observation.inbounds:
+                data = inb.payload
+                if isinstance(data, dict) and "price" in data:
+                    self.state.custom_state["market_data"] = data
+                    self.state.custom_state["price_history"].append(data["price"])
+
+    async def decide(self) -> Dict:
+        market_data = self.state.custom_state["market_data"]
+        price = market_data["price"]
+        deviation = market_data["deviation"]
+        cash = self.state.custom_state["cash"]
+        position = self.state.custom_state["position"]
+        extras = self.config.extras
+        order_size = int(extras["order_size"])
+
+        action, quantity = "hold", 0
+        # Ignores overvaluation — keeps buying as long as price is rising
+        if deviation > -0.20:
+            # Buy as long as not deeply below fundamental
+            qty = _buy_quantity(order_size, cash, price)
+            if qty > 0:
+                action, quantity = "buy", qty
+        elif deviation < -0.30:
+            # Only sell at extreme crash
+            qty = min(order_size // 2, max(position, 0))
+            if qty > 0:
+                action, quantity = "sell", qty
+
+        order = _build_order(
+            self,
+            action,
+            quantity,
+            price,
+            "new-economy narrative buyer follows buy-unless-crash rule",
+        )
+        return {
+            **order,
+            "outbound_messages": [
+                {
+                    "payload": order,
+                    "content_type": "order",
+                }
+            ],
+        }
+
+    async def act(self, decision_payload: Dict) -> Action:
+        action = decision_payload["action"]
+        quantity = decision_payload["quantity"]
+        price = self.state.custom_state["market_data"]["price"]
+        if action == "buy" and quantity > 0:
+            self.state.custom_state["cash"] -= quantity * price
+            self.state.custom_state["position"] += quantity
+        elif action == "sell" and quantity > 0:
+            self.state.custom_state["cash"] += quantity * price
+            self.state.custom_state["position"] -= quantity
+        return Action(
+            action_type="order", payload=decision_payload, source_id=self.identity
+        )
+
+
+class IPOFlipper(GeneralPlayer):
+    """Buys IPOs and quickly sells for short-term profit.
+
+    Theory: simulation-bases.md §4.2 — IPOFlipper
+    Theoretical basis: Ofek & Richardson (2003) IPO dynamics and Ritter (1991)
+    on underpricing and flipping.
+    See simulation-bases.md §4.2 for mathematical model.
+    Role: destabilizing.
+    """
+
+    async def perceive(self, observation: Observation, prev_result=None) -> None:
+        if "cash" not in self.state.custom_state:
+            _initialize_investor(self)
+
+        self.state.custom_state["round"] = observation.round
+        if observation.inbounds:
+            for inb in observation.inbounds:
+                data = inb.payload
+                if isinstance(data, dict) and "price" in data:
+                    self.state.custom_state["market_data"] = data
+                    self.state.custom_state["price_history"].append(data["price"])
+
+    async def decide(self) -> Dict:
+        market_data = self.state.custom_state["market_data"]
+        price = market_data["price"]
+        deviation = market_data["deviation"]
+        cash = self.state.custom_state["cash"]
+        position = self.state.custom_state["position"]
+        extras = self.config.extras
+        order_size = int(extras["order_size"])
+        flip_threshold = float(extras["flip_threshold"])
+
+        action, quantity = "hold", 0
+        if deviation > flip_threshold and position > 0:
+            # Price popped — flip (sell)
+            qty = min(order_size, max(position, 0))
+            if qty > 0:
+                action, quantity = "sell", qty
+        elif deviation < 0:
+            # Price dipped — buy in for next flip
+            qty = _buy_quantity(order_size, cash, price)
+            if qty > 0:
+                action, quantity = "buy", qty
+
+        order = _build_order(
+            self,
+            action,
+            quantity,
+            price,
+            "IPO flipper trades around deviation pop/dip thresholds",
+        )
+        return {
+            **order,
+            "outbound_messages": [
+                {
+                    "payload": order,
+                    "content_type": "order",
+                }
+            ],
+        }
+
+    async def act(self, decision_payload: Dict) -> Action:
+        action = decision_payload["action"]
+        quantity = decision_payload["quantity"]
+        price = self.state.custom_state["market_data"]["price"]
+        if action == "buy" and quantity > 0:
+            self.state.custom_state["cash"] -= quantity * price
+            self.state.custom_state["position"] += quantity
+        elif action == "sell" and quantity > 0:
+            self.state.custom_state["cash"] += quantity * price
+            self.state.custom_state["position"] -= quantity
+        return Action(
+            action_type="order", payload=decision_payload, source_id=self.identity
+        )
+
+
+class MomentumFollower(GeneralPlayer):
+    """Follows price trends and amplifies moves — trend-chasing behavior.
+
+    Theory: simulation-bases.md §4.3 — MomentumFollower
+    Theoretical basis: Abreu & Brunnermeier (2003) synchronization and
+    Jegadeesh & Titman (1993) momentum.
+    See simulation-bases.md §4.3 for mathematical model.
+    Role: destabilizing.
+    """
+
+    async def perceive(self, observation: Observation, prev_result=None) -> None:
+        if "cash" not in self.state.custom_state:
+            _initialize_investor(self)
+
+        self.state.custom_state["round"] = observation.round
+        if observation.inbounds:
+            for inb in observation.inbounds:
+                data = inb.payload
+                if isinstance(data, dict) and "price" in data:
+                    self.state.custom_state["market_data"] = data
+                    self.state.custom_state["price_history"].append(data["price"])
+
+    async def decide(self) -> Dict:
+        market_data = self.state.custom_state["market_data"]
+        price = market_data["price"]
+        deviation = market_data["deviation"]
+        cash = self.state.custom_state["cash"]
+        position = self.state.custom_state["position"]
+        extras = self.config.extras
+        order_size = int(extras["order_size"])
+        momentum_threshold = float(extras["momentum_threshold"])
+
+        # Compute short-term momentum from price history
+        price_history = self.state.custom_state["price_history"]
+        action, quantity = "hold", 0
+        if len(price_history) >= 2:
+            previous_price = price_history[-2]
+            if previous_price <= 0:
+                raise ValueError("Momentum calculation requires positive prices")
+            momentum = (price_history[-1] - previous_price) / previous_price
+            if momentum > momentum_threshold:
+                qty = _buy_quantity(order_size, cash, price)
+                if qty > 0:
+                    action, quantity = "buy", qty
+            elif momentum < -momentum_threshold:
+                qty = min(order_size, max(position, 0))
+                if qty > 0:
+                    action, quantity = "sell", qty
+
+        order = _build_order(
+            self,
+            action,
+            quantity,
+            price,
+            "momentum follower reacts to one-period price continuation",
+        )
+        return {
+            **order,
+            "outbound_messages": [
+                {
+                    "payload": order,
+                    "content_type": "order",
+                }
+            ],
+        }
+
+    async def act(self, decision_payload: Dict) -> Action:
+        action = decision_payload["action"]
+        quantity = decision_payload["quantity"]
+        price = self.state.custom_state["market_data"]["price"]
+        if action == "buy" and quantity > 0:
+            self.state.custom_state["cash"] -= quantity * price
+            self.state.custom_state["position"] += quantity
+        elif action == "sell" and quantity > 0:
+            self.state.custom_state["cash"] += quantity * price
+            self.state.custom_state["position"] -= quantity
+        return Action(
+            action_type="order", payload=decision_payload, source_id=self.identity
+        )
+
+
+class SkepticalValueInvestor(GeneralPlayer):
+    """Avoids overvalued tech stocks — waits for correction, then buys.
+
+    Theory: simulation-bases.md §4.4 — SkepticalValueInvestor
+    Theoretical basis: Graham (1949) value investing and Abreu & Brunnermeier
+    (2003) on early rational arbitrage.
+    See simulation-bases.md §4.4 for mathematical model.
+    Role: stabilizing.
+    """
+
+    async def perceive(self, observation: Observation, prev_result=None) -> None:
+        if "cash" not in self.state.custom_state:
+            _initialize_investor(self)
+
+        self.state.custom_state["round"] = observation.round
+        if observation.inbounds:
+            for inb in observation.inbounds:
+                data = inb.payload
+                if isinstance(data, dict) and "price" in data:
+                    self.state.custom_state["market_data"] = data
+                    self.state.custom_state["price_history"].append(data["price"])
+
+    async def decide(self) -> Dict:
+        market_data = self.state.custom_state["market_data"]
+        price = market_data["price"]
+        deviation = market_data["deviation"]
+        cash = self.state.custom_state["cash"]
+        position = self.state.custom_state["position"]
+        extras = self.config.extras
+        value_buy_threshold = float(extras["value_buy_threshold"])
+        value_sell_threshold = float(extras["value_sell_threshold"])
+        order_size = int(extras["order_size"])
+
+        action, quantity = "hold", 0
+        if deviation < value_buy_threshold:
+            # Post-crash buying
+            qty = _buy_quantity(order_size, cash, price)
+            if qty > 0:
+                action, quantity = "buy", qty
+        elif deviation > value_sell_threshold:
+            # Sell overvalued assets
+            qty = min(order_size, max(position, 0))
+            if qty > 0:
+                action, quantity = "sell", qty
+
+        order = _build_order(
+            self,
+            action,
+            quantity,
+            price,
+            "skeptical value investor trades only at valuation extremes",
+        )
+        return {
+            **order,
+            "outbound_messages": [
+                {
+                    "payload": order,
+                    "content_type": "order",
+                }
+            ],
+        }
+
+    async def act(self, decision_payload: Dict) -> Action:
+        action = decision_payload["action"]
+        quantity = decision_payload["quantity"]
+        price = self.state.custom_state["market_data"]["price"]
+        if action == "buy" and quantity > 0:
+            self.state.custom_state["cash"] -= quantity * price
+            self.state.custom_state["position"] += quantity
+        elif action == "sell" and quantity > 0:
+            self.state.custom_state["cash"] += quantity * price
+            self.state.custom_state["position"] -= quantity
+        return Action(
+            action_type="order", payload=decision_payload, source_id=self.identity
+        )
+
+
+class ShortSeller(GeneralPlayer):
+    """Bets against overvalued stocks — faces squeeze risk during bubble.
+
+    Theory: simulation-bases.md §4.5 — ShortSeller
+    Theoretical basis: Abreu & Brunnermeier (2003) limits to arbitrage and
+    synchronization risk.
+    See simulation-bases.md §4.5 for mathematical model.
+    Role: stabilizing.
+    """
+
+    async def perceive(self, observation: Observation, prev_result=None) -> None:
+        if "cash" not in self.state.custom_state:
+            _initialize_investor(self)
+
+        self.state.custom_state["round"] = observation.round
+        if observation.inbounds:
+            for inb in observation.inbounds:
+                data = inb.payload
+                if isinstance(data, dict) and "price" in data:
+                    self.state.custom_state["market_data"] = data
+                    self.state.custom_state["price_history"].append(data["price"])
+
+    async def decide(self) -> Dict:
+        market_data = self.state.custom_state["market_data"]
+        price = market_data["price"]
+        deviation = market_data["deviation"]
+        cash = self.state.custom_state["cash"]
+        position = self.state.custom_state["position"]
+        extras = self.config.extras
+        short_threshold = float(extras["short_threshold"])
+        cover_threshold = float(extras["cover_threshold"])
+        order_size = int(extras["order_size"])
+
+        action, quantity = "hold", 0
+        if deviation > short_threshold:
+            # Short (sell) overvalued stocks
+            qty = min(order_size, max(position, 0))
+            if qty > 0:
+                action, quantity = "sell", qty
+        elif deviation < cover_threshold:
+            # Cover shorts (buy back) as price falls
+            qty = _buy_quantity(order_size, cash, price)
+            if qty > 0:
+                action, quantity = "buy", qty
+
+        order = _build_order(
+            self,
+            action,
+            quantity,
+            price,
+            "short seller trades against extreme overvaluation and covers "
+            "after correction",
+        )
+        return {
+            **order,
+            "outbound_messages": [
+                {
+                    "payload": order,
+                    "content_type": "order",
+                }
+            ],
+        }
+
+    async def act(self, decision_payload: Dict) -> Action:
+        action = decision_payload["action"]
+        quantity = decision_payload["quantity"]
+        price = self.state.custom_state["market_data"]["price"]
+        if action == "buy" and quantity > 0:
+            self.state.custom_state["cash"] -= quantity * price
+            self.state.custom_state["position"] += quantity
+        elif action == "sell" and quantity > 0:
+            self.state.custom_state["cash"] += quantity * price
+            self.state.custom_state["position"] -= quantity
+        return Action(
+            action_type="order", payload=decision_payload, source_id=self.identity
+        )
+
+
+__all__ = [
+    "Market",
+    "NewEconomyEvangelist",
+    "IPOFlipper",
+    "MomentumFollower",
+    "SkepticalValueInvestor",
+    "ShortSeller",
+]

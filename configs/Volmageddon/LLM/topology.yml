@@ -1,0 +1,29 @@
+# Volmageddon LLM Communication Topology
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_short_vol_trader
+    - llm_vol_etn_manager
+    - llm_long_vol_hedger
+    - llm_vol_arbitrageur
+    - llm_equity_trader
+
+  llm_short_vol_trader:
+    - market
+
+  llm_vol_etn_manager:
+    - market
+
+  llm_long_vol_hedger:
+    - market
+
+  llm_vol_arbitrageur:
+    - market
+
+  llm_equity_trader:
+    - market

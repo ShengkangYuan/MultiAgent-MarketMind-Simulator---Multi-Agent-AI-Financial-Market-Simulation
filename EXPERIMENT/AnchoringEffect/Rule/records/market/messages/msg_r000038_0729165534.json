@@ -1,0 +1,30 @@
+{
+  "round_num": 38,
+  "direction": "received",
+  "timestamp": "2026-07-29T16:55:34.954926",
+  "message": {
+    "message_type": "PEER",
+    "sender_id": "rule_fundamental_analyst",
+    "recipient_id": "market",
+    "payload": {
+      "content": {
+        "action": "sell",
+        "quantity": 7.331261122259381,
+        "bid_price": 102.83386069859812,
+        "investor": "rule_fundamental_analyst",
+        "strategy": "fundamental-analyst",
+        "_clipped": true,
+        "_clipped_from": "sell",
+        "_clipped_intended_quantity": 20.46177949860196,
+        "_clipped_reason": "insufficient_position"
+      },
+      "content_type": "investor_bid",
+      "extras": {}
+    },
+    "timestamp": "2026-07-29T16:55:34.939701",
+    "priority": 1,
+    "extras": {
+      "round_num": 38
+    }
+  }
+}

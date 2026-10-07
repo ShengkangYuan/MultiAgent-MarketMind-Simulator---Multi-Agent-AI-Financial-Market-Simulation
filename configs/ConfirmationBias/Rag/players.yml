@@ -1,0 +1,288 @@
+# =============================================================================
+# ConfirmationBias Rag Players Configuration
+# =============================================================================
+# 1 Market (rule-based) + 5 RAG-augmented LLM Investor types.
+# Every non-infrastructure parameter is annotated with an inline
+# `# Source: ...` reference tying it back to `finance-confirmation-bias.md §9`
+# or to a labelled provenance (`normalization`, `implementation infrastructure`,
+# `bias calibration`, `LLM decoding profile`, `RAG infrastructure`).
+# =============================================================================
+
+# =============================================================================
+# Shared Knowledge Configuration
+# =============================================================================
+knowledge:
+  backend: "local"                                      # Source: RAG infrastructure (local FAISS backend per masim RAG contract)
+  global_uri: "examples/document-sources"               # Source: RAG infrastructure (shared corpus root)
+  resource_csv:
+    - "examples/document-sources/books.csv"             # Source: RAG infrastructure (curated document index)
+    - "examples/document-sources/source"                # Source: RAG infrastructure (raw document tree)
+  preprocessing:
+    parser: "mineru"                                    # Source: RAG infrastructure (MinerU parser default)
+    output_position: "MinerU_processed"                 # Source: RAG infrastructure (parser output cache)
+  rag:
+    output_position: "rag_index"                        # Source: RAG infrastructure (vector index cache)
+    embed_type: "litellm"                               # Source: RAG infrastructure (LiteLLM proxy for embeddings)
+    embed_model: "openai/hunyuan-embedding"             # Source: RAG infrastructure (Tencent Hunyuan embedding via OpenAI-compatible API)
+    embed_api_key: "{{ HUNYUAN_API_KEY }}"              # Source: RAG infrastructure (env-substituted secret)
+    embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG infrastructure (embedding endpoint)
+    chunk_size: 512                                     # Source: RAG infrastructure (default chunk size per masim RAG contract)
+    chunk_overlap: 64                                   # Source: RAG infrastructure (default chunk overlap per masim RAG contract)
+    top_k: 5                                            # Source: RAG infrastructure (default retrieval count)
+
+# -----------------------------------------------------------------------------
+# Market (Coordinator)
+# -----------------------------------------------------------------------------
+market:
+  archetype: stock-standard-price-impact  # -> AGENT_POOL/market/stock-standard-price-impact.md
+  name: "Market"
+  class: "examples.ConfirmationBias.Rag.players:Market"
+  num_instances: 1
+  config:
+    identity: "market"
+    role: coordinator
+    steps_per_turn: 1
+    group_tags:
+      - market
+    extras:
+      record_path: "EXPERIMENT/ConfirmationBias/Rag/records"  # Source: implementation infrastructure (record-path convention)
+      fundamental_value: 100.0     # Source: target §9 F; normalization (100-scale index)
+      initial_price: 100.0         # Source: target §9 P0; normalization (fundamental-anchored seed)
+      price_impact: 0.02           # Source: target §9 λ; Hong & Stein (1999) https://doi.org/10.1111/0022-1082.00184
+      mean_reversion: 0.02         # Source: target §9 γ; Fama (1970) https://doi.org/10.2307/2325486
+      noise_std: 0.02              # Source: target §9 σ; standard calibration consistent with AvailabilityBias family
+      custom_state_hot_limit: 3    # Source: implementation infrastructure (hot-state ring buffer)
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# RAG Belief Anchors
+# Theory: Nickerson (1998)
+# -----------------------------------------------------------------------------
+ragllm_belief_anchor:
+  name: "RAG Belief Anchor"
+  class: "examples.ConfirmationBias.Rag.players:RagLLMBeliefAnchor"
+  # Expander → ragllm_belief_anchor_1, ragllm_belief_anchor_2
+  num_instances: 2
+  config:
+    identity: "ragllm_belief_anchor"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/ConfirmationBias/Rag/records"  # Source: implementation infrastructure (record-path convention)
+      initial_cash: 50000.0        # Source: normalization (cash endowment)
+      initial_position: 0.0        # Source: normalization (flat opening position)
+      custom_state_hot_limit: 3    # Source: implementation infrastructure (hot-state ring buffer)
+      private_knowledge:
+        from_global_resources:
+          - "MinerU_processed"     # Source: RAG infrastructure (inherit parsed corpus)
+        local_resources:
+          local_uri: ""            # Source: RAG infrastructure (no per-agent extra corpus)
+          local_resources: []      # Source: RAG infrastructure (empty local resource list)
+        rag:
+          from_global_index_dir:
+            - "rag_index"          # Source: RAG infrastructure (inherit shared index)
+          local_index_dir: ""      # Source: RAG infrastructure (no per-agent index)
+          embed_type: "litellm"    # Source: RAG infrastructure (embedding backend)
+          embed_model: "openai/hunyuan-embedding"  # Source: RAG infrastructure (embedding model)
+          embed_api_key: "{{ HUNYUAN_API_KEY }}"   # Source: RAG infrastructure (env-substituted secret)
+          embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG infrastructure (embedding endpoint)
+          chunk_size: 512          # Source: RAG infrastructure (chunk size)
+          chunk_overlap: 64        # Source: RAG infrastructure (chunk overlap)
+          top_k: 5                 # Source: RAG infrastructure (retrieval top-k)
+      llm:
+        sys_message: "examples.ConfirmationBias.Rag.prompts:RAG_BELIEF_ANCHOR_SYS"  # Source: implementation infrastructure (prompt binding)
+        user_message: "examples.ConfirmationBias.Rag.prompts:RAG_USER_TEMPLATE"     # Source: implementation infrastructure (prompt binding)
+        lm_type: "api"             # Source: implementation infrastructure (LLM backend selector)
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: implementation infrastructure (default LLM per masim runtime)
+        generation_config:
+          temperature: 0.3         # Source: LLM decoding profile — RAG-grounded rational persona (low stochasticity)
+          max_tokens: 600          # Source: LLM decoding profile — longer ceiling to accommodate retrieved context echoes
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# RAG Selective Scanners
+# Theory: Lord, Ross & Lepper (1979)
+# -----------------------------------------------------------------------------
+ragllm_selective_scanner:
+  name: "RAG Selective Scanner"
+  class: "examples.ConfirmationBias.Rag.players:RagLLMSelectiveScanner"
+  # Expander → ragllm_selective_scanner_1, ragllm_selective_scanner_2
+  num_instances: 2
+  config:
+    identity: "ragllm_selective_scanner"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/ConfirmationBias/Rag/records"  # Source: implementation infrastructure (record-path convention)
+      initial_cash: 50000.0        # Source: normalization (cash endowment)
+      initial_position: 0.0        # Source: normalization (flat opening position)
+      custom_state_hot_limit: 3    # Source: implementation infrastructure (hot-state ring buffer)
+      private_knowledge:
+        from_global_resources:
+          - "MinerU_processed"     # Source: RAG infrastructure (inherit parsed corpus)
+        local_resources:
+          local_uri: ""            # Source: RAG infrastructure (no per-agent extra corpus)
+          local_resources: []      # Source: RAG infrastructure (empty local resource list)
+        rag:
+          from_global_index_dir:
+            - "rag_index"          # Source: RAG infrastructure (inherit shared index)
+          local_index_dir: ""      # Source: RAG infrastructure (no per-agent index)
+          embed_type: "litellm"    # Source: RAG infrastructure (embedding backend)
+          embed_model: "openai/hunyuan-embedding"  # Source: RAG infrastructure (embedding model)
+          embed_api_key: "{{ HUNYUAN_API_KEY }}"   # Source: RAG infrastructure (env-substituted secret)
+          embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG infrastructure (embedding endpoint)
+          chunk_size: 512          # Source: RAG infrastructure (chunk size)
+          chunk_overlap: 64        # Source: RAG infrastructure (chunk overlap)
+          top_k: 5                 # Source: RAG infrastructure (retrieval top-k)
+      llm:
+        sys_message: "examples.ConfirmationBias.Rag.prompts:RAG_SELECTIVE_SCANNER_SYS"  # Source: implementation infrastructure (prompt binding)
+        user_message: "examples.ConfirmationBias.Rag.prompts:RAG_USER_TEMPLATE"         # Source: implementation infrastructure (prompt binding)
+        lm_type: "api"             # Source: implementation infrastructure (LLM backend selector)
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: implementation infrastructure (default LLM per masim runtime)
+        generation_config:
+          temperature: 0.3         # Source: LLM decoding profile — RAG-grounded persona (low stochasticity)
+          max_tokens: 600          # Source: LLM decoding profile — longer ceiling for retrieved context
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# RAG Balanced Analyst
+# Theory: Rabin & Schrag (1999)
+# -----------------------------------------------------------------------------
+ragllm_balanced_analyst:
+  name: "RAG Balanced Analyst"
+  class: "examples.ConfirmationBias.Rag.players:RagLLMBalancedAnalyst"
+  num_instances: 1
+  config:
+    identity: "ragllm_balanced_analyst"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/ConfirmationBias/Rag/records"  # Source: implementation infrastructure (record-path convention)
+      initial_cash: 50000.0        # Source: normalization (cash endowment)
+      initial_position: 0.0        # Source: normalization (flat opening position)
+      custom_state_hot_limit: 3    # Source: implementation infrastructure (hot-state ring buffer)
+      private_knowledge:
+        from_global_resources:
+          - "MinerU_processed"     # Source: RAG infrastructure (inherit parsed corpus)
+        local_resources:
+          local_uri: ""            # Source: RAG infrastructure (no per-agent extra corpus)
+          local_resources: []      # Source: RAG infrastructure (empty local resource list)
+        rag:
+          from_global_index_dir:
+            - "rag_index"          # Source: RAG infrastructure (inherit shared index)
+          local_index_dir: ""      # Source: RAG infrastructure (no per-agent index)
+          embed_type: "litellm"    # Source: RAG infrastructure (embedding backend)
+          embed_model: "openai/hunyuan-embedding"  # Source: RAG infrastructure (embedding model)
+          embed_api_key: "{{ HUNYUAN_API_KEY }}"   # Source: RAG infrastructure (env-substituted secret)
+          embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG infrastructure (embedding endpoint)
+          chunk_size: 512          # Source: RAG infrastructure (chunk size)
+          chunk_overlap: 64        # Source: RAG infrastructure (chunk overlap)
+          top_k: 5                 # Source: RAG infrastructure (retrieval top-k)
+      llm:
+        sys_message: "examples.ConfirmationBias.Rag.prompts:RAG_BALANCED_ANALYST_SYS"  # Source: implementation infrastructure (prompt binding)
+        user_message: "examples.ConfirmationBias.Rag.prompts:RAG_USER_TEMPLATE"         # Source: implementation infrastructure (prompt binding)
+        lm_type: "api"             # Source: implementation infrastructure (LLM backend selector)
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: implementation infrastructure (default LLM per masim runtime)
+        generation_config:
+          temperature: 0.3         # Source: LLM decoding profile — RAG-grounded rational baseline
+          max_tokens: 600          # Source: LLM decoding profile — longer ceiling for retrieved context
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# RAG Contrarian Trader
+# Theory: Hong & Stein (1999)
+# -----------------------------------------------------------------------------
+ragllm_contrarian_trader:
+  name: "RAG Contrarian Trader"
+  class: "examples.ConfirmationBias.Rag.players:RagLLMContrarianTrader"
+  num_instances: 1
+  config:
+    identity: "ragllm_contrarian_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/ConfirmationBias/Rag/records"  # Source: implementation infrastructure (record-path convention)
+      initial_cash: 50000.0        # Source: normalization (cash endowment)
+      initial_position: 0.0        # Source: normalization (flat opening position)
+      custom_state_hot_limit: 3    # Source: implementation infrastructure (hot-state ring buffer)
+      private_knowledge:
+        from_global_resources:
+          - "MinerU_processed"     # Source: RAG infrastructure (inherit parsed corpus)
+        local_resources:
+          local_uri: ""            # Source: RAG infrastructure (no per-agent extra corpus)
+          local_resources: []      # Source: RAG infrastructure (empty local resource list)
+        rag:
+          from_global_index_dir:
+            - "rag_index"          # Source: RAG infrastructure (inherit shared index)
+          local_index_dir: ""      # Source: RAG infrastructure (no per-agent index)
+          embed_type: "litellm"    # Source: RAG infrastructure (embedding backend)
+          embed_model: "openai/hunyuan-embedding"  # Source: RAG infrastructure (embedding model)
+          embed_api_key: "{{ HUNYUAN_API_KEY }}"   # Source: RAG infrastructure (env-substituted secret)
+          embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG infrastructure (embedding endpoint)
+          chunk_size: 512          # Source: RAG infrastructure (chunk size)
+          chunk_overlap: 64        # Source: RAG infrastructure (chunk overlap)
+          top_k: 5                 # Source: RAG infrastructure (retrieval top-k)
+      llm:
+        sys_message: "examples.ConfirmationBias.Rag.prompts:RAG_CONTRARIAN_TRADER_SYS"  # Source: implementation infrastructure (prompt binding)
+        user_message: "examples.ConfirmationBias.Rag.prompts:RAG_USER_TEMPLATE"         # Source: implementation infrastructure (prompt binding)
+        lm_type: "api"             # Source: implementation infrastructure (LLM backend selector)
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: implementation infrastructure (default LLM per masim runtime)
+        generation_config:
+          temperature: 0.3         # Source: LLM decoding profile — RAG-grounded contrarian persona
+          max_tokens: 600          # Source: LLM decoding profile — longer ceiling for retrieved context
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# RAG Noise Traders
+# Theory: Black (1986)
+# -----------------------------------------------------------------------------
+ragllm_noise_trader:
+  name: "RAG Noise Trader"
+  class: "examples.ConfirmationBias.Rag.players:RagLLMNoiseTrader"
+  # Expander → ragllm_noise_trader_1, ragllm_noise_trader_2
+  num_instances: 2
+  config:
+    identity: "ragllm_noise_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/ConfirmationBias/Rag/records"  # Source: implementation infrastructure (record-path convention)
+      initial_cash: 20000.0        # Source: normalization (smaller cash endowment for background liquidity)
+      initial_position: 0.0        # Source: normalization (flat opening position)
+      custom_state_hot_limit: 3    # Source: implementation infrastructure (hot-state ring buffer)
+      private_knowledge:
+        from_global_resources:
+          - "MinerU_processed"     # Source: RAG infrastructure (inherit parsed corpus)
+        local_resources:
+          local_uri: ""            # Source: RAG infrastructure (no per-agent extra corpus)
+          local_resources: []      # Source: RAG infrastructure (empty local resource list)
+        rag:
+          from_global_index_dir:
+            - "rag_index"          # Source: RAG infrastructure (inherit shared index)
+          local_index_dir: ""      # Source: RAG infrastructure (no per-agent index)
+          embed_type: "litellm"    # Source: RAG infrastructure (embedding backend)
+          embed_model: "openai/hunyuan-embedding"  # Source: RAG infrastructure (embedding model)
+          embed_api_key: "{{ HUNYUAN_API_KEY }}"   # Source: RAG infrastructure (env-substituted secret)
+          embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG infrastructure (embedding endpoint)
+          chunk_size: 512          # Source: RAG infrastructure (chunk size)
+          chunk_overlap: 64        # Source: RAG infrastructure (chunk overlap)
+          top_k: 5                 # Source: RAG infrastructure (retrieval top-k)
+      llm:
+        sys_message: "examples.ConfirmationBias.Rag.prompts:RAG_NOISE_TRADER_SYS"  # Source: implementation infrastructure (prompt binding)
+        user_message: "examples.ConfirmationBias.Rag.prompts:RAG_USER_TEMPLATE"    # Source: implementation infrastructure (prompt binding)
+        lm_type: "api"             # Source: implementation infrastructure (LLM backend selector)
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: implementation infrastructure (default LLM per masim runtime)
+        generation_config:
+          temperature: 0.9         # Source: LLM decoding profile — high stochasticity per Black (1986) noise-trader convention
+          max_tokens: 600          # Source: LLM decoding profile — longer ceiling for retrieved context
+  persona: !include persona.yml

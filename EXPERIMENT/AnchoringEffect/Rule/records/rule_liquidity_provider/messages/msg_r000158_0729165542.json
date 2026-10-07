@@ -1,0 +1,26 @@
+{
+  "round_num": 158,
+  "direction": "received",
+  "timestamp": "2026-07-29T16:55:42.263045",
+  "message": {
+    "message_type": "PEER",
+    "sender_id": "market",
+    "recipient_id": "rule_liquidity_provider",
+    "payload": {
+      "content": {
+        "price": 107.49146131499145,
+        "prev_price": 107.28400287517042,
+        "fundamental": 100.0,
+        "deviation": 0.07491461314991454,
+        "round": 159
+      },
+      "content_type": "market_price",
+      "extras": {}
+    },
+    "timestamp": "2026-07-29T16:55:42.246254",
+    "priority": 1,
+    "extras": {
+      "round_num": 159
+    }
+  }
+}

@@ -1,0 +1,29 @@
+# EuropeanDebtCrisis Rule Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_periphery_bond_seller
+    - rule_creditor_panicker
+    - rule_core_bond_buyer
+    - rule_ecb_intervenor
+    - rule_hedged_fund
+
+  rule_periphery_bond_seller:
+    - market
+
+  rule_creditor_panicker:
+    - market
+
+  rule_core_bond_buyer:
+    - market
+
+  rule_ecb_intervenor:
+    - market
+
+  rule_hedged_fund:
+    - market

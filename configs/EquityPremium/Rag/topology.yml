@@ -1,0 +1,27 @@
+# =============================================================================
+# EquityPremiumRag - Topology Configuration
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_myopic_loss_averse
+    - ragllm_long_term_investor
+    - ragllm_institutional_investor
+    - ragllm_risk_averse_saver
+    - ragllm_rational_optimizer
+
+  ragllm_myopic_loss_averse:
+    - market
+  ragllm_long_term_investor:
+    - market
+  ragllm_institutional_investor:
+    - market
+  ragllm_risk_averse_saver:
+    - market
+  ragllm_rational_optimizer:
+    - market

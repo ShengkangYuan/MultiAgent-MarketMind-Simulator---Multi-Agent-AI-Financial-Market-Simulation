@@ -1,0 +1,51 @@
+{
+  "round_num": 24,
+  "timestamp": "2026-07-29T16:55:34.185981",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "sell",
+          "quantity": 20.133418883992398,
+          "bid_price": 103.62800190719308,
+          "investor": "rule_fundamental_analyst",
+          "strategy": "fundamental-analyst"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "sell",
+            "quantity": 20.133418883992398,
+            "bid_price": 103.62800190719308,
+            "investor": "rule_fundamental_analyst",
+            "strategy": "fundamental-analyst"
+          },
+          "source_id": "rule_fundamental_analyst",
+          "timestamp": "2026-07-29T16:55:34.185981",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.083
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "sell",
+        "quantity": 20.133418883992398,
+        "bid_price": 103.62800190719308,
+        "investor": "rule_fundamental_analyst",
+        "strategy": "fundamental-analyst"
+      },
+      "source_id": "rule_fundamental_analyst",
+      "timestamp": "2026-07-29T16:55:34.185981",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 24,
+    "tick_turn_duration_ms": 0.09,
+    "tick_turn_total_duration_ms": 8.189,
+    "tick_step_count": 1
+  }
+}

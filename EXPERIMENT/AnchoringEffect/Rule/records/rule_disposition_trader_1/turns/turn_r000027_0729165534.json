@@ -1,0 +1,63 @@
+{
+  "round_num": 27,
+  "timestamp": "2026-07-29T16:55:34.345391",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "buy",
+          "quantity": 3.425768907986867,
+          "bid_price": 100.80175885907072,
+          "investor": "rule_disposition_trader_1",
+          "strategy": "disposition-trader",
+          "_clipped": true,
+          "_clipped_from": "buy",
+          "_clipped_intended_quantity": 14.531455177285611,
+          "_clipped_reason": "insufficient_cash"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "buy",
+            "quantity": 3.425768907986867,
+            "bid_price": 100.80175885907072,
+            "investor": "rule_disposition_trader_1",
+            "strategy": "disposition-trader",
+            "_clipped": true,
+            "_clipped_from": "buy",
+            "_clipped_intended_quantity": 14.531455177285611,
+            "_clipped_reason": "insufficient_cash"
+          },
+          "source_id": "rule_disposition_trader_1",
+          "timestamp": "2026-07-29T16:55:34.345391",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.078
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "buy",
+        "quantity": 3.425768907986867,
+        "bid_price": 100.80175885907072,
+        "investor": "rule_disposition_trader_1",
+        "strategy": "disposition-trader",
+        "_clipped": true,
+        "_clipped_from": "buy",
+        "_clipped_intended_quantity": 14.531455177285611,
+        "_clipped_reason": "insufficient_cash"
+      },
+      "source_id": "rule_disposition_trader_1",
+      "timestamp": "2026-07-29T16:55:34.345391",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 27,
+    "tick_turn_duration_ms": 0.084,
+    "tick_turn_total_duration_ms": 7.862,
+    "tick_step_count": 1
+  }
+}

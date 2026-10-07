@@ -1,0 +1,29 @@
+# EndowmentEffect LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_endowed_holder
+    - llm_status_quo_seller
+    - llm_rational_arbitrageur
+    - llm_new_buyer
+    - llm_noise_trader
+
+  llm_endowed_holder:
+    - market
+
+  llm_status_quo_seller:
+    - market
+
+  llm_rational_arbitrageur:
+    - market
+
+  llm_new_buyer:
+    - market
+
+  llm_noise_trader:
+    - market

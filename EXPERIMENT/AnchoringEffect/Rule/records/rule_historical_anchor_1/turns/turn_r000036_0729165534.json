@@ -1,0 +1,51 @@
+{
+  "round_num": 36,
+  "timestamp": "2026-07-29T16:55:34.851149",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "hold",
+          "quantity": 0.0,
+          "bid_price": 102.24795267279882,
+          "investor": "rule_historical_anchor_1",
+          "strategy": "historical-anchor"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "hold",
+            "quantity": 0.0,
+            "bid_price": 102.24795267279882,
+            "investor": "rule_historical_anchor_1",
+            "strategy": "historical-anchor"
+          },
+          "source_id": "rule_historical_anchor_1",
+          "timestamp": "2026-07-29T16:55:34.851149",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.167
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 102.24795267279882,
+        "investor": "rule_historical_anchor_1",
+        "strategy": "historical-anchor"
+      },
+      "source_id": "rule_historical_anchor_1",
+      "timestamp": "2026-07-29T16:55:34.851149",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 36,
+    "tick_turn_duration_ms": 0.181,
+    "tick_turn_total_duration_ms": 9.07,
+    "tick_step_count": 1
+  }
+}

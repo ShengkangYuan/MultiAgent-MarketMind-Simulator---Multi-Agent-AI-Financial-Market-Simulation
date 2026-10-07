@@ -1,0 +1,505 @@
+[
+  {
+    "name": "timer_operate_duration",
+    "value": 2.5787353515625,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.212976"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 101,
+      "duration_ms": 2.5787353515625
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.212976"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.7216205596923828,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.271506"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 102,
+      "duration_ms": 1.7216205596923828
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.275429"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 2.137899398803711,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.345022"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 103,
+      "duration_ms": 2.137899398803711
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.345022"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.035928726196289,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.423068"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 104,
+      "duration_ms": 1.035928726196289
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.423068"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0139942169189453,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.484483"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 105,
+      "duration_ms": 1.0139942169189453
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.484483"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 2.0208358764648438,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.553114"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 106,
+      "duration_ms": 2.0208358764648438
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.553114"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.641988754272461,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.609558"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 107,
+      "duration_ms": 1.641988754272461
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.609558"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 2.3076534271240234,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.678315"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 108,
+      "duration_ms": 2.3076534271240234
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.678315"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.6255378723144531,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.745496"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 109,
+      "duration_ms": 1.6255378723144531
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.745496"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0073184967041016,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.810679"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 110,
+      "duration_ms": 1.0073184967041016
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.810679"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.600027084350586,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.875160"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 111,
+      "duration_ms": 1.600027084350586
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.875160"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.8172264099121094,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.938197"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 112,
+      "duration_ms": 1.8172264099121094
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.938197"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 2.889871597290039,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.002151"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 113,
+      "duration_ms": 2.889871597290039
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.002151"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.3511180877685547,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.065260"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 114,
+      "duration_ms": 1.3511180877685547
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.065260"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 2.5053024291992188,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.123538"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 115,
+      "duration_ms": 2.5053024291992188
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.123538"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.2431144714355469,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.192092"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 116,
+      "duration_ms": 1.2431144714355469
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.192092"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 0.0,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.257313"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 117,
+      "duration_ms": 0.0
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.257313"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.192331314086914,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.327431"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 118,
+      "duration_ms": 1.192331314086914
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.327431"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.6546249389648438,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.397405"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 119,
+      "duration_ms": 1.6546249389648438
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.397405"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0242462158203125,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.462109"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 120,
+      "duration_ms": 1.0242462158203125
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.462771"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 0.0,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.524784"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 121,
+      "duration_ms": 0.0
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.524784"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 0.0,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.593712"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 122,
+      "duration_ms": 0.0
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.593712"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0323524475097656,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.667518"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 123,
+      "duration_ms": 1.0323524475097656
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.667518"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0266304016113281,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.733220"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 124,
+      "duration_ms": 1.0266304016113281
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.733220"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0085105895996094,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.798517"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_disposition_trader_1",
+      "round_num": 125,
+      "duration_ms": 1.0085105895996094
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:39.798517"
+  }
+]_id": null,
+    "timestamp": "2026-07-29T16:55:39.799705"
+  }
+]

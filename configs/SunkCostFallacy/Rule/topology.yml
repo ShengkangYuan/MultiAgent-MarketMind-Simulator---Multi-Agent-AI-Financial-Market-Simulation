@@ -1,0 +1,21 @@
+type: "star"
+sources:
+  - market
+
+connections:
+  market:
+    - rule_sunk_cost_holder
+    - rule_commitment_escalator
+    - rule_rational_cutter
+    - rule_opportunity_cost_trader
+    - rule_noise_trader
+  rule_sunk_cost_holder:
+    - market
+  rule_commitment_escalator:
+    - market
+  rule_rational_cutter:
+    - market
+  rule_opportunity_cost_trader:
+    - market
+  rule_noise_trader:
+    - market

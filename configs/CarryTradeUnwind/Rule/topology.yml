@@ -1,0 +1,43 @@
+# =============================================================================
+# CarryTradeUnwind Rule Topology - Star Pattern
+# =============================================================================
+# Market as hub, all investors communicate through market.
+#
+#    rule_carry_trader         ──────────┐
+#    rule_leveraged_carry_fund ──────────┤
+#    rule_funding_currency_buyer ────────┼──▶ market ──▶ all investors
+#    rule_hedged_carry_trader   ──────────┤             (FX rate, return, deviation)
+#    rule_noise_trader         ──────────┘
+#
+# Execution flow per round:
+#   Level 0: market executes (broadcasts FX rate + dynamics data)
+#   Level 1: all investors execute in parallel
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_carry_trader
+    - rule_leveraged_carry_fund
+    - rule_funding_currency_buyer
+    - rule_hedged_carry_trader
+    - rule_noise_trader
+
+  rule_carry_trader:
+    - market
+
+  rule_leveraged_carry_fund:
+    - market
+
+  rule_funding_currency_buyer:
+    - market
+
+  rule_hedged_carry_trader:
+    - market
+
+  rule_noise_trader:
+    - market

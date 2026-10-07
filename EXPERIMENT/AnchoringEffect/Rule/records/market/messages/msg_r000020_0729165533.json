@@ -1,0 +1,26 @@
+{
+  "round_num": 20,
+  "direction": "received",
+  "timestamp": "2026-07-29T16:55:33.999564",
+  "message": {
+    "message_type": "PEER",
+    "sender_id": "rule_momentum_trader_2",
+    "recipient_id": "market",
+    "payload": {
+      "content": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 102.18702285299354,
+        "investor": "rule_momentum_trader_2",
+        "strategy": "momentum-trader"
+      },
+      "content_type": "investor_bid",
+      "extras": {}
+    },
+    "timestamp": "2026-07-29T16:55:33.990310",
+    "priority": 1,
+    "extras": {
+      "round_num": 20
+    }
+  }
+}

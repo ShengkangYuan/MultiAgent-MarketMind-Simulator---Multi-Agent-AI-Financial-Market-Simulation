@@ -1,0 +1,57 @@
+{
+  "round_num": 67,
+  "timestamp": "2026-07-29T16:55:36.257798",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "market_data": {
+            "price": 105.01052542087179,
+            "prev_price": 105.13808361826712,
+            "fundamental": 100.0,
+            "deviation": 0.050105254208717864,
+            "round": 67
+          }
+        },
+        "action": {
+          "action_type": "market_broadcast",
+          "payload": {
+            "market_data": {
+              "price": 105.01052542087179,
+              "prev_price": 105.13808361826712,
+              "fundamental": 100.0,
+              "deviation": 0.050105254208717864,
+              "round": 67
+            }
+          },
+          "source_id": "market",
+          "timestamp": "2026-07-29T16:55:36.257798",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.042
+      }
+    ],
+    "final_action": {
+      "action_type": "market_broadcast",
+      "payload": {
+        "market_data": {
+          "price": 105.01052542087179,
+          "prev_price": 105.13808361826712,
+          "fundamental": 100.0,
+          "deviation": 0.050105254208717864,
+          "round": 67
+        }
+      },
+      "source_id": "market",
+      "timestamp": "2026-07-29T16:55:36.257798",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 67,
+    "tick_turn_duration_ms": 0.048,
+    "tick_turn_total_duration_ms": 5.033,
+    "tick_step_count": 1
+  }
+}

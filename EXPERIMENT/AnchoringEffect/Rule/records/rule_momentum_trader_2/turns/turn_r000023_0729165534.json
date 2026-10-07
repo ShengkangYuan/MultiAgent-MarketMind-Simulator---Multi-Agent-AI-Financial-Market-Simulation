@@ -1,0 +1,51 @@
+{
+  "round_num": 23,
+  "timestamp": "2026-07-29T16:55:34.133145",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "hold",
+          "quantity": 0.0,
+          "bid_price": 103.41536972244718,
+          "investor": "rule_momentum_trader_2",
+          "strategy": "momentum-trader"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "hold",
+            "quantity": 0.0,
+            "bid_price": 103.41536972244718,
+            "investor": "rule_momentum_trader_2",
+            "strategy": "momentum-trader"
+          },
+          "source_id": "rule_momentum_trader_2",
+          "timestamp": "2026-07-29T16:55:34.133145",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.06
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 103.41536972244718,
+        "investor": "rule_momentum_trader_2",
+        "strategy": "momentum-trader"
+      },
+      "source_id": "rule_momentum_trader_2",
+      "timestamp": "2026-07-29T16:55:34.133145",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 23,
+    "tick_turn_duration_ms": 0.066,
+    "tick_turn_total_duration_ms": 6.29,
+    "tick_step_count": 1
+  }
+}

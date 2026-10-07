@@ -1,0 +1,29 @@
+# CurrencyCrisis RuleLLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_speculative_attacker
+    - rulellm_self_fulfilling_trader
+    - rulellm_central_bank_defender
+    - rulellm_fundamental_hedger
+    - rulellm_noise_trader
+
+  rulellm_speculative_attacker:
+    - market
+
+  rulellm_self_fulfilling_trader:
+    - market
+
+  rulellm_central_bank_defender:
+    - market
+
+  rulellm_fundamental_hedger:
+    - market
+
+  rulellm_noise_trader:
+    - market

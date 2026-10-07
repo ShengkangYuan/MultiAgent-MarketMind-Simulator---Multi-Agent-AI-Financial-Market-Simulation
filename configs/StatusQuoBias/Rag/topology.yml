@@ -1,0 +1,24 @@
+# StatusQuoBias Rag Topology Configuration
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_inertial_holder
+    - ragllm_default_follower
+    - ragllm_active_rebalancer
+    - ragllm_momentum_trader
+    - ragllm_noise_trader
+  ragllm_inertial_holder:
+    - market
+  ragllm_default_follower:
+    - market
+  ragllm_active_rebalancer:
+    - market
+  ragllm_momentum_trader:
+    - market
+  ragllm_noise_trader:
+    - market

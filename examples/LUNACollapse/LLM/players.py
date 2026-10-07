@@ -1,0 +1,206 @@
+"""LUNACollapse LLM Variant Players
+
+LLM-driven agents for the LUNACollapse simulation using LangChainAPIInference.
+"""
+
+import logging
+
+from lmbase.inference.api_call import LangChainAPIInference
+from lmbase.inference.base import InferInput
+
+from masim.player.base import Action
+from masim.player.general import GeneralPlayer
+
+from examples.LUNACollapse.LLM.prompts import (
+    LLM_STABLECOINHOLDER_PROMPT,
+    LLM_ARBITRAGEUR_PROMPT,
+    LLM_DEFILENDER_PROMPT,
+    LLM_ANCHORDEPOSITOR_PROMPT,
+    LLM_VALUEBUYER_PROMPT,
+)
+from examples.LUNACollapse.Rule.players import (
+    Market,
+    _apply_trade,
+    _build_order,
+    _require_positive,
+)
+from masim.utils.llm_utils import is_retryable_llm_error, parse_llm_response_with_thinking
+
+logger = logging.getLogger("LUNACollapse.LLM")
+
+
+def _validate_decision(decision: dict, identity: str) -> dict:
+    """Validate the shared LUNA LLM decision contract."""
+    action = decision["action"]
+    if action not in ("buy", "sell", "hold"):
+        raise ValueError(f"[{identity}] invalid action: {action}")
+    bid_price = float(decision["bid_price"])
+    _require_positive(bid_price, "bid_price")
+    quantity = int(decision["quantity"])
+    if quantity < 0:
+        raise ValueError(f"[{identity}] quantity must be non-negative, got {quantity}")
+    return {
+        "action": action,
+        "bid_price": bid_price,
+        "quantity": quantity,
+        "reasoning": decision["reasoning"],
+        "analysis": decision["analysis"],
+    }
+
+
+class LLMInvestor(GeneralPlayer):
+    """Base class for LLM-driven LUNACollapse investors.
+
+    Theory: simulation-bases.md §4.
+    Strategy specification: persona prompts map to simulation-bases.md §4.
+    """
+
+    _system_prompt = ""
+
+    def __getstate__(self):
+        state = self.__dict__.copy()
+        state.pop("_llm", None)
+        return state
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+        self._llm = None
+
+    async def perceive(self, observation, prev_result=None) -> None:
+        self.state.custom_state["round"] = observation.round
+        if "cash" not in self.state.custom_state:
+            extras = self.config.extras
+            self.state.custom_state["cash"] = extras["initial_cash"]
+            self.state.custom_state["position"] = extras["initial_position"]
+        for msg in observation.inbounds:
+            payload = msg.payload if hasattr(msg, "payload") else msg
+            if isinstance(payload, dict) and payload.get("type") == "market_update":
+                self.state.custom_state["price"] = payload["price"]
+                self.state.custom_state["fundamental"] = payload["fundamental"]
+                self.state.custom_state["deviation"] = payload["deviation"]
+
+    async def decide(self) -> dict:
+        llm_cfg = self.config.extras["llm"]
+        llm = LangChainAPIInference(
+            lm_name=llm_cfg["lm_name"],
+            generation_config=llm_cfg["generation_config"],
+        )
+        price = self.state.custom_state["price"]
+        _require_positive(price, "price")
+        fundamental = self.state.custom_state["fundamental"]
+        deviation = self.state.custom_state["deviation"]
+        cash = self.state.custom_state["cash"]
+        position = self.state.custom_state["position"]
+        round_num = self.state.custom_state["round"]
+        portfolio_value = cash + position * price
+        user_msg = (
+            f"Current Market State (Round {round_num}):\n"
+            f"- Current Price: ${price:.2f}\n"
+            f"- Fundamental Value: ${fundamental:.2f}\n"
+            f"- Price Deviation: {deviation * 100:+.2f}%\n"
+            f"- Your Cash: ${cash:.2f}\n"
+            f"- Your Position: {position} shares\n"
+            f"- Portfolio Value: ${portfolio_value:.2f}\n\n"
+            "Choose one trading action for this round.\n\n"
+            "Required output:\n"
+            "<analysis>brief reasoning</analysis>\n"
+            f"<decision>{{\"action\": \"buy\"|\"sell\"|\"hold\", \"bid_price\": {price:.2f}, "
+            "\"quantity\": non-negative integer, \"reasoning\": \"brief rationale\"}}</decision>"
+        )
+        infer_input = InferInput(system_msg=self._system_prompt, user_msg=user_msg)
+        decision = None
+        last_error = None
+        for attempt in range(3):
+            try:
+                response = llm.run([infer_input]).outputs[0].response
+                decision = parse_llm_response_with_thinking(response)
+                decision = _validate_decision(decision, self.identity)
+                break
+            except Exception as exc:
+                last_error = exc
+                parse_error = isinstance(exc, (ValueError, KeyError))
+                retryable_api_error = is_retryable_llm_error(exc)
+                if attempt < 2 and (parse_error or retryable_api_error):
+                    logger.debug(
+                        "[%s] LLM call/parse failed (attempt %d), retrying...",
+                        self.identity,
+                        attempt + 1,
+                    )
+                    continue
+                if not parse_error and not retryable_api_error:
+                    raise
+
+        if decision is None:
+            raise RuntimeError(
+                f"[{self.identity}] LLM parse failed after 3 retries: {last_error}"
+            )
+
+        return decision
+
+    async def act(self, decision_payload: dict) -> Action:
+        action = decision_payload["action"]
+        quantity = int(decision_payload["quantity"])
+        bid_price = float(decision_payload["bid_price"])
+        price = self.state.custom_state["price"]
+        _require_positive(price, "price")
+        _require_positive(bid_price, "bid_price")
+        cash = self.state.custom_state["cash"]
+        position = self.state.custom_state["position"]
+        quantity = _apply_trade(self.state.custom_state, action, quantity, price)
+        order = _build_order(
+            self,
+            action,
+            quantity,
+            bid_price,
+            str(decision_payload["reasoning"]),
+        )
+        order["analysis"] = str(decision_payload["analysis"])
+        decision_payload["outbound_messages"] = [{"payload": order, "content_type": "order"}]
+        return Action(
+            action_type="order",
+            payload={
+                "order": order,
+                "outbound_messages": [{"payload": order, "content_type": "order"}],
+            },
+            source_id=self.identity,
+        )
+
+
+class LLMStablecoinHolder(LLMInvestor):
+    """LLM-driven stablecoin redeemer. Theory: simulation-bases.md §4.1."""
+
+    _system_prompt = LLM_STABLECOINHOLDER_PROMPT
+
+
+class LLMArbitrageur(LLMInvestor):
+    """LLM-driven arbitrage amplifier. Theory: simulation-bases.md §4.2."""
+
+    _system_prompt = LLM_ARBITRAGEUR_PROMPT
+
+
+class LLMDeFiLender(LLMInvestor):
+    """LLM-driven DeFi liquidation engine. Theory: simulation-bases.md §4.3."""
+
+    _system_prompt = LLM_DEFILENDER_PROMPT
+
+
+class LLMAnchorDepositor(LLMInvestor):
+    """LLM-driven yield depositor exit agent. Theory: simulation-bases.md §4.4."""
+
+    _system_prompt = LLM_ANCHORDEPOSITOR_PROMPT
+
+
+class LLMValueBuyer(LLMInvestor):
+    """LLM-driven contrarian value buyer. Theory: simulation-bases.md §4.5."""
+
+    _system_prompt = LLM_VALUEBUYER_PROMPT
+
+
+__all__ = [
+    "Market",
+    "LLMStablecoinHolder",
+    "LLMArbitrageur",
+    "LLMDeFiLender",
+    "LLMAnchorDepositor",
+    "LLMValueBuyer",
+]

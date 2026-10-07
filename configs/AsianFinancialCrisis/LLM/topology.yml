@@ -1,0 +1,45 @@
+# =============================================================================
+# AsianFinancialCrisis LLM - Topology Configuration
+# =============================================================================
+# Star topology: Market broadcasts to all agents; agents send orders to market.
+#
+#         llm_hot_money_funder ────────────────┐
+#         llm_contagion_trader ────────────────┤
+#         llm_imf_rescuer ─────────────────────┼──▶ market ──▶ all agents
+#         llm_value_contrarian ────────────────┤        (price, deviation, volume)
+#         llm_noise_trader ────────────────────┘
+#
+# Execution flow per round:
+#   Level 0: market broadcasts current price + market data
+#   Level 1: all agents execute in parallel, submit orders
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # Market → All agents (price + market data broadcast)
+  market:
+    - llm_hot_money_funder
+    - llm_contagion_trader
+    - llm_imf_rescuer
+    - llm_value_contrarian
+    - llm_noise_trader
+
+  # Each agent → Market only (order submission)
+  llm_hot_money_funder:
+    - market
+
+  llm_contagion_trader:
+    - market
+
+  llm_imf_rescuer:
+    - market
+
+  llm_value_contrarian:
+    - market
+
+  llm_noise_trader:
+    - market

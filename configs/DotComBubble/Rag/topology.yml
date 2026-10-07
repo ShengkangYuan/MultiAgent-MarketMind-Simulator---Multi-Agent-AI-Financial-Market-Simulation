@@ -1,0 +1,29 @@
+# DotComBubble Rag Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_new_economy_evangelist
+    - ragllm_ipo_flipper
+    - ragllm_momentum_follower
+    - ragllm_skeptical_value_investor
+    - ragllm_short_seller
+
+  ragllm_new_economy_evangelist:
+    - market
+
+  ragllm_ipo_flipper:
+    - market
+
+  ragllm_momentum_follower:
+    - market
+
+  ragllm_skeptical_value_investor:
+    - market
+
+  ragllm_short_seller:
+    - market

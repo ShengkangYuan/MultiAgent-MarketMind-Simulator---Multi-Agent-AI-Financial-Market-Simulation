@@ -1,0 +1,48 @@
+# =============================================================================
+# HerdEffectLLM Topology - Star Pattern
+# =============================================================================
+# Market as hub, all LLM investors communicate through market.
+#
+#         llm_momentum_investor ──────┐
+#         llm_contrarian_investor ────┤
+#         llm_risk_averse_investor ───┼──▶ market ──┬──▶ llm_momentum_investor
+#         llm_aggressive_investor ────┤             ├──▶ llm_contrarian_investor
+#         llm_noise_trader ─────────┘             ├──▶ llm_risk_averse_investor
+#                                          ├──▶ llm_aggressive_investor
+#                    (orders: P,Q)         └──▶ llm_noise_trader
+#                                               (market data: price, volume)
+#
+# Execution flow per round:
+#   Level 0: market executes (broadcasts price + volume)
+#   Level 1: all LLM investors execute in parallel (submit orders)
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # Market → All LLM investors (price + volume broadcast)
+  market:
+    - llm_momentum_investor
+    - llm_contrarian_investor
+    - llm_risk_averse_investor
+    - llm_aggressive_investor
+    - llm_noise_trader
+
+  # Each LLM investor → Market only (order submission)
+  llm_momentum_investor:
+    - market
+
+  llm_contrarian_investor:
+    - market
+
+  llm_risk_averse_investor:
+    - market
+
+  llm_aggressive_investor:
+    - market
+
+  llm_noise_trader:
+    - market

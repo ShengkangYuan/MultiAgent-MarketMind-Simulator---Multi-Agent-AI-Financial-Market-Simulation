@@ -1,0 +1,39 @@
+# =============================================================================
+# Demo Players Configuration
+# =============================================================================
+# Each player has its own persona config (can be shared via !include).
+# All players are equal - topology defines communication targets.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Coordinator (hub in star topology)
+# -----------------------------------------------------------------------------
+coordinator:
+  name: "Coordinator"
+  class: "examples.Demo.players:SimpleCoordinator"
+  num_instances: 1
+  config:
+    identity: "coordinator"
+    role: coordinator
+    steps_per_turn: 1
+    group_tags:
+      - coordinators
+    extras: {}
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# Regular Players
+# -----------------------------------------------------------------------------
+player:
+  name: "Player"
+  class: "examples.Demo.players:SimplePlayer"
+  # Expander → player_1, player_2
+  num_instances: 2
+  config:
+    identity: "player"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - players
+    extras: {}
+  persona: !include persona.yml

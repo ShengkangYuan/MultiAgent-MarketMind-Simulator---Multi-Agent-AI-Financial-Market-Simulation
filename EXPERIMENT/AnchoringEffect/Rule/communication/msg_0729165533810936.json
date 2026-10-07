@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:33.810936",
+  "size_bytes": 522,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"rule_noise_trader_1\", \"recipient_id\": \"market\", \"payload\": {\"content\": {\"action\": \"buy\", \"quantity\": 31.117620939653353, \"bid_price\": 104.01730708866933, \"investor\": \"rule_noise_trader_1\", \"strategy\": \"noise-trader\", \"_clipped\": true, \"_clipped_from\": \"buy\", \"_clipped_intended_quantity\": 424.79444492030456, \"_clipped_reason\": \"insufficient_cash\"}, \"content_type\": \"investor_bid\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:33.805353\", \"priority\": 1, \"extras\": {\"round_num\": 16}}"
+}

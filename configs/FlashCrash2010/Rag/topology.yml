@@ -1,0 +1,29 @@
+# FlashCrash2010 Rag Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_hft_market_maker
+    - ragllm_momentum_chaser
+    - ragllm_fundamental_trader
+    - ragllm_stop_loss_trader
+    - ragllm_noise_trader
+
+  ragllm_hft_market_maker:
+    - market
+
+  ragllm_momentum_chaser:
+    - market
+
+  ragllm_fundamental_trader:
+    - market
+
+  ragllm_stop_loss_trader:
+    - market
+
+  ragllm_noise_trader:
+    - market

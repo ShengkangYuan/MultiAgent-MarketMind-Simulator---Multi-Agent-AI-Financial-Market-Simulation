@@ -1,0 +1,37 @@
+# =============================================================================
+# AssetBubbleLLM - Topology Configuration
+# =============================================================================
+# Star topology: Market broadcasts to all LLM investors
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_momentum_speculator
+    - llm_rational_arbitrageur
+    - llm_noise_trader
+    - llm_fundamental_investor
+    - llm_leveraged_buyer
+    - llm_conservative_holder
+
+  llm_momentum_speculator:
+    - market
+
+  llm_rational_arbitrageur:
+    - market
+
+  llm_noise_trader:
+    - market
+
+  llm_fundamental_investor:
+    - market
+
+  llm_leveraged_buyer:
+    - market
+
+  llm_conservative_holder:
+    - market

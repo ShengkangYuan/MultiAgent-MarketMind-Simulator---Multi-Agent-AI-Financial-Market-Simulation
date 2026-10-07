@@ -1,0 +1,45 @@
+# =============================================================================
+# AsianFinancialCrisis Rule - Topology Configuration
+# =============================================================================
+# Star topology: Market broadcasts to all agents; agents send orders to market.
+#
+#         rule_hot_money_funder ────────────────┐
+#         rule_contagion_trader ────────────────┤
+#         rule_imf_rescuer ─────────────────────┼──▶ market ──▶ all agents
+#         rule_value_contrarian ────────────────┤        (price, deviation, volume)
+#         rule_noise_trader ────────────────────┘
+#
+# Execution flow per round:
+#   Level 0: market broadcasts current price + market data
+#   Level 1: all agents execute in parallel, submit orders
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # Market → All agents (price + market data broadcast)
+  market:
+    - rule_hot_money_funder
+    - rule_contagion_trader
+    - rule_imf_rescuer
+    - rule_value_contrarian
+    - rule_noise_trader
+
+  # Each agent → Market only (order submission)
+  rule_hot_money_funder:
+    - market
+
+  rule_contagion_trader:
+    - market
+
+  rule_imf_rescuer:
+    - market
+
+  rule_value_contrarian:
+    - market
+
+  rule_noise_trader:
+    - market

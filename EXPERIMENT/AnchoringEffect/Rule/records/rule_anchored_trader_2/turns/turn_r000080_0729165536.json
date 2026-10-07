@@ -1,0 +1,63 @@
+{
+  "round_num": 80,
+  "timestamp": "2026-07-29T16:55:36.955822",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "buy",
+          "quantity": 19.50747757193096,
+          "bid_price": 100.19038342575016,
+          "investor": "rule_anchored_trader_2",
+          "strategy": "anchored-trader",
+          "_clipped": true,
+          "_clipped_from": "buy",
+          "_clipped_intended_quantity": 20.0,
+          "_clipped_reason": "insufficient_cash"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "buy",
+            "quantity": 19.50747757193096,
+            "bid_price": 100.19038342575016,
+            "investor": "rule_anchored_trader_2",
+            "strategy": "anchored-trader",
+            "_clipped": true,
+            "_clipped_from": "buy",
+            "_clipped_intended_quantity": 20.0,
+            "_clipped_reason": "insufficient_cash"
+          },
+          "source_id": "rule_anchored_trader_2",
+          "timestamp": "2026-07-29T16:55:36.955822",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.093
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "buy",
+        "quantity": 19.50747757193096,
+        "bid_price": 100.19038342575016,
+        "investor": "rule_anchored_trader_2",
+        "strategy": "anchored-trader",
+        "_clipped": true,
+        "_clipped_from": "buy",
+        "_clipped_intended_quantity": 20.0,
+        "_clipped_reason": "insufficient_cash"
+      },
+      "source_id": "rule_anchored_trader_2",
+      "timestamp": "2026-07-29T16:55:36.955822",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 80,
+    "tick_turn_duration_ms": 0.1,
+    "tick_turn_total_duration_ms": 11.071,
+    "tick_step_count": 1
+  }
+}

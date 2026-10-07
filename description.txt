@@ -1,0 +1,1 @@
+MarketMind Sim — an interactive multi-agent financial-market simulation platform and Streamlit studio built on the MASIM engine.

@@ -1,0 +1,59 @@
+# =============================================================================
+# MarketMind Sim — core runtime dependencies
+# =============================================================================
+# Everything required to launch the web interface, replay the included sample
+# results, and run Rule / LLM / RuleLLM simulations.  Tested on Python 3.11.
+#
+# Installation (see README.md for the full walkthrough):
+#
+#     python -m venv .venv
+#     # Windows: .venv\Scripts\activate    |   macOS/Linux: source .venv/bin/activate
+#     pip install -r requirements.txt
+#     pip install -e . --no-deps
+#
+# NOTES
+# -----
+# * ``lmbase`` is bundled IN this repository (``./lmbase``) as a small offline
+#   stub providing the interfaces masim imports lazily (InferInput /
+#   InferOutput / LangChainAPIInference / BlockBasedStoreManager).  It is
+#   installed automatically from the local folder by the ``-e ./lmbase``
+#   line below — no network clone or API key is required.
+# * The RAG engine variants (examples/*/Rag) need extra, heavier dependencies
+#   (llama-index, PyMuPDF, a local embedding model).  They are OPTIONAL and
+#   kept in ``requirements-rag.txt``:
+#
+#       pip install -r requirements-rag.txt
+#
+# * LLM / RuleLLM variants call an external model API; set ARK_API_KEY (or
+#   the provider's key) in a ``.env`` file.  Rule variants and the whole
+#   interface work fully offline with no API key.
+# =============================================================================
+
+# ── Bundled offline lmbase stub (local path, resolved relative to this file) ─
+-e ./lmbase
+
+# ── Core numeric stack ─────────────────────────────────────────────────────
+numpy>=1.26
+pandas>=2.0
+scipy>=1.11
+
+# ── Simulation runtime ─────────────────────────────────────────────────────
+ray>=2.10
+psutil>=5.9
+filelock>=3.13
+pydantic>=2.5
+
+# ── I/O + config ───────────────────────────────────────────────────────────
+python-dotenv>=1.0
+pyyaml>=6.0
+httpx>=0.27
+requests>=2.31
+
+# ── Visualisation ──────────────────────────────────────────────────────────
+matplotlib>=3.8
+networkx>=3.2
+
+# ── Web interface ──────────────────────────────────────────────────────────
+# 1.45+ required: the UI uses modern button APIs (width="stretch") and
+# st.dialog. Tested with Streamlit 1.51–1.60.
+streamlit>=1.45

@@ -1,0 +1,1252 @@
+[
+  {
+    "round": 151,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 152,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 153,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 154,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 155,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 156,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 157,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 158,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 159,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 160,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 161,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 162,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 163,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 164,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 165,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 166,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 167,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 168,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 169,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 170,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 171,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 172,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 173,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 174,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 175,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 176,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 177,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 178,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 179,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 180,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 181,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 182,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 183,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 184,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 185,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 186,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 187,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 188,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 189,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 190,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 191,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 192,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 193,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 194,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 195,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 196,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 197,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 198,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 199,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  },
+  {
+    "round": 200,
+    "round_clock": "ExecutionClock(count_executions=200, start_time=None, last_duration_ms=47.89579997304827, total_duration_ms=10501.40309985727)",
+    "execution_levels": [
+      [
+        "market"
+      ],
+      [
+        "rule_anchored_trader_1",
+        "rule_anchored_trader_2",
+        "rule_historical_anchor_1",
+        "rule_historical_anchor_2",
+        "rule_rational_updater",
+        "rule_momentum_trader_1",
+        "rule_momentum_trader_2",
+        "rule_noise_trader_1",
+        "rule_noise_trader_2",
+        "rule_disposition_trader_1",
+        "rule_disposition_trader_2",
+        "rule_contrarian_trader",
+        "rule_fundamental_analyst",
+        "rule_liquidity_provider"
+      ]
+    ]
+  }
+]

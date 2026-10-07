@@ -1,0 +1,29 @@
+# MentalAccounting Rag Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_mental_accountant
+    - ragllm_house_money_trader
+    - ragllm_rational_portfolio_manager
+    - ragllm_sunk_cost_holder
+    - ragllm_noise_trader
+
+  ragllm_mental_accountant:
+    - market
+
+  ragllm_house_money_trader:
+    - market
+
+  ragllm_rational_portfolio_manager:
+    - market
+
+  ragllm_sunk_cost_holder:
+    - market
+
+  ragllm_noise_trader:
+    - market

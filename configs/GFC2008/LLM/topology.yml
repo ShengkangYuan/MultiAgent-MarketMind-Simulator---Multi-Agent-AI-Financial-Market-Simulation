@@ -1,0 +1,29 @@
+# GFC2008 LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_mbs_originator
+    - llm_leveraged_investor
+    - llm_rating_agency
+    - llm_distressed_buyer
+    - llm_regulator
+
+  llm_mbs_originator:
+    - market
+
+  llm_leveraged_investor:
+    - market
+
+  llm_rating_agency:
+    - market
+
+  llm_distressed_buyer:
+    - market
+
+  llm_regulator:
+    - market

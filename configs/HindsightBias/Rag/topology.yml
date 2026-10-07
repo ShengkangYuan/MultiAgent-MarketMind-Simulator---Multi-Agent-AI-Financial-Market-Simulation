@@ -1,0 +1,29 @@
+# HindsightBias Rag Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_hindsight_overconfident
+    - ragllm_outcome_learner
+    - ragllm_process_evaluator
+    - ragllm_contrarian_skeptic
+    - ragllm_noise_trader
+
+  ragllm_hindsight_overconfident:
+    - market
+
+  ragllm_outcome_learner:
+    - market
+
+  ragllm_process_evaluator:
+    - market
+
+  ragllm_contrarian_skeptic:
+    - market
+
+  ragllm_noise_trader:
+    - market

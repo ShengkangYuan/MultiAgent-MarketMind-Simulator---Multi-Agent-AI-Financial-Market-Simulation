@@ -1,0 +1,29 @@
+# DotComBubble RuleLLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_new_economy_evangelist
+    - rulellm_ipo_flipper
+    - rulellm_momentum_follower
+    - rulellm_skeptical_value_investor
+    - rulellm_short_seller
+
+  rulellm_new_economy_evangelist:
+    - market
+
+  rulellm_ipo_flipper:
+    - market
+
+  rulellm_momentum_follower:
+    - market
+
+  rulellm_skeptical_value_investor:
+    - market
+
+  rulellm_short_seller:
+    - market

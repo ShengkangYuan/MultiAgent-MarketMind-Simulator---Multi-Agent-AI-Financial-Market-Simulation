@@ -1,0 +1,31 @@
+# =============================================================================
+# BlackMonday1987 RuleLLM Topology - Star Pattern
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_portfolio_insurer
+    - rulellm_index_arbitrageur
+    - rulellm_program_trader
+    - rulellm_value_investor
+    - rulellm_noise_trader
+
+  rulellm_portfolio_insurer:
+    - market
+
+  rulellm_index_arbitrageur:
+    - market
+
+  rulellm_program_trader:
+    - market
+
+  rulellm_value_investor:
+    - market
+
+  rulellm_noise_trader:
+    - market

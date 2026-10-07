@@ -1,0 +1,29 @@
+# RepresentativenessBias Rule Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_pattern_matcher
+    - rule_category_overgeneralizer
+    - rule_bayesian_updater
+    - rule_contrarian_statistical
+    - rule_noise_trader
+
+  rule_pattern_matcher:
+    - market
+
+  rule_category_overgeneralizer:
+    - market
+
+  rule_bayesian_updater:
+    - market
+
+  rule_contrarian_statistical:
+    - market
+
+  rule_noise_trader:
+    - market

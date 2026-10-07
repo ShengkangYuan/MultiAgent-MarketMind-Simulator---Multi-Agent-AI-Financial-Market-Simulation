@@ -1,0 +1,45 @@
+# =============================================================================
+# EchoChamberRuleLLM - Topology Configuration
+# =============================================================================
+# Star topology: OpinionEnvironment broadcasts to all hybrid rule+LLM agents
+#
+#         rulellm_ideologue ──────────────┐
+#         rulellm_conformist ─────────────┤
+#         rulellm_critical_thinker ───────┼──▶ rulellm_opinion_environment ──▶ all agents
+#         rulellm_bridge_builder ─────────┤             (polarization, opinion, cluster data)
+#         rulellm_passive_follower ───────┘
+#
+# Execution flow per round:
+#   Level 0: rulellm_opinion_environment executes (broadcasts polarization + opinion metrics)
+#   Level 1: all agents execute in parallel (submit polarize/depolarize/neutral actions)
+# =============================================================================
+
+type: "star"
+
+sources:
+  - rulellm_opinion_environment
+
+connections:
+  # Environment → All agents (polarization + opinion data broadcast)
+  rulellm_opinion_environment:
+    - rulellm_ideologue
+    - rulellm_conformist
+    - rulellm_critical_thinker
+    - rulellm_bridge_builder
+    - rulellm_passive_follower
+
+  # Each agent → Environment only (action submission)
+  rulellm_ideologue:
+    - rulellm_opinion_environment
+
+  rulellm_conformist:
+    - rulellm_opinion_environment
+
+  rulellm_critical_thinker:
+    - rulellm_opinion_environment
+
+  rulellm_bridge_builder:
+    - rulellm_opinion_environment
+
+  rulellm_passive_follower:
+    - rulellm_opinion_environment

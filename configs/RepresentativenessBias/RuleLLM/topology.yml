@@ -1,0 +1,24 @@
+# RepresentativenessBias RuleLLM Topology Configuration
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_pattern_matcher
+    - rulellm_category_overgeneralizer
+    - rulellm_bayesian_updater
+    - rulellm_contrarian_statistical
+    - rulellm_noise_trader
+  rulellm_pattern_matcher:
+    - market
+  rulellm_category_overgeneralizer:
+    - market
+  rulellm_bayesian_updater:
+    - market
+  rulellm_contrarian_statistical:
+    - market
+  rulellm_noise_trader:
+    - market

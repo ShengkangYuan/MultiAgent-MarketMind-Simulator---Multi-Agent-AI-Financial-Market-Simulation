@@ -1,0 +1,510 @@
+[
+  {
+    "name": "timer_operate_duration",
+    "value": 2.519369125366211,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:41.730845"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 151,
+      "duration_ms": 2.519369125366211
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:41.730845"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.5711784362792969,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:41.800856"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 152,
+      "duration_ms": 1.5711784362792969
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:41.804403"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 3.7660598754882812,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:41.876757"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 153,
+      "duration_ms": 3.7660598754882812
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:41.876757"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0075569152832031,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:41.950700"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 154,
+      "duration_ms": 1.0075569152832031
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:41.950700"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0025501251220703,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.045666"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 155,
+      "duration_ms": 1.0025501251220703
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.045666"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0230541229248047,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.102904"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 156,
+      "duration_ms": 1.0230541229248047
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.102904"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.1720657348632812,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.153202"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 157,
+      "duration_ms": 1.1720657348632812
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.153202"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 0.9007453918457031,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.213764"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 158,
+      "duration_ms": 0.9007453918457031
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.213764"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.1544227600097656,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.271371"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 159,
+      "duration_ms": 1.1544227600097656
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.271371"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0061264038085938,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.330822"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 160,
+      "duration_ms": 1.0061264038085938
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.330822"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0111331939697266,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.390113"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 161,
+      "duration_ms": 1.0111331939697266
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.390113"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 0.8563995361328125,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.529103"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 162,
+      "duration_ms": 0.8563995361328125
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.529103"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0285377502441406,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.593430"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 163,
+      "duration_ms": 1.0285377502441406
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.593430"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 0.0,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.639212"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 164,
+      "duration_ms": 0.0
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.639212"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 0.0,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.684695"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 165,
+      "duration_ms": 0.0
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.684695"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 0.0,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.744306"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 166,
+      "duration_ms": 0.0
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.744306"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 2.0165443420410156,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.795573"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 167,
+      "duration_ms": 2.0165443420410156
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.795573"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 0.0,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.857896"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 168,
+      "duration_ms": 0.0
+    },
+ : ""tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.857896"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.5196800231933594,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.921023"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 169,
+      "duration_ms": 1.5196800231933594
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.921023"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0309219360351562,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.981951"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 170,
+      "duration_ms": 1.0309219360351562
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:42.981951"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 2.617359161376953,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:43.032220"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 171,
+      "duration_ms": 2.617359161376953
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:43.032220"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 2.008199691772461,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:43.249467"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 172,
+      "duration_ms": 2.008199691772461
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:43.249467"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.6560554504394531,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:43.338045"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 173,
+      "duration_ms": 1.6560554504394531
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:43.338045"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0139942169189453,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:43.393694"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 174,
+      "duration_ms": 1.0139942169189453
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:43.393694"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.528024673461914,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:43.449402"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_contrarian_trader",
+      "round_num": 175,
+      "duration_ms": 1.528024673461914
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:43.449402"
+  }
+]970214844
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:43.451795"
+  }
+].447874"
+  }
+]

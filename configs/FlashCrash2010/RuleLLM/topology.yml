@@ -1,0 +1,29 @@
+# FlashCrash2010 RuleLLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_hft_market_maker
+    - rulellm_momentum_chaser
+    - rulellm_fundamental_trader
+    - rulellm_stop_loss_trader
+    - rulellm_noise_trader
+
+  rulellm_hft_market_maker:
+    - market
+
+  rulellm_momentum_chaser:
+    - market
+
+  rulellm_fundamental_trader:
+    - market
+
+  rulellm_stop_loss_trader:
+    - market
+
+  rulellm_noise_trader:
+    - market

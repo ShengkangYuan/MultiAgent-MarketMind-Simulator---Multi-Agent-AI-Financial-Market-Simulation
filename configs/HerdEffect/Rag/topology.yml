@@ -1,0 +1,27 @@
+# =============================================================================
+# HerdEffectRag - Topology Configuration
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_momentum_investor
+    - ragllm_contrarian_investor
+    - ragllm_risk_averse_investor
+    - ragllm_aggressive_investor
+    - ragllm_noise_trader
+
+  ragllm_momentum_investor:
+    - market
+  ragllm_contrarian_investor:
+    - market
+  ragllm_risk_averse_investor:
+    - market
+  ragllm_aggressive_investor:
+    - market
+  ragllm_noise_trader:
+    - market

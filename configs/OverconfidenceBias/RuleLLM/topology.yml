@@ -1,0 +1,29 @@
+# OverconfidenceBias RuleLLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_overconfident_trader
+    - rulellm_self_attributor
+    - rulellm_calibrated_trader
+    - rulellm_contrarian_investor
+    - rulellm_noise_trader
+
+  rulellm_overconfident_trader:
+    - market
+
+  rulellm_self_attributor:
+    - market
+
+  rulellm_calibrated_trader:
+    - market
+
+  rulellm_contrarian_investor:
+    - market
+
+  rulellm_noise_trader:
+    - market

@@ -1,0 +1,45 @@
+# =============================================================================
+# RumorSpread Topology - Star Pattern
+# =============================================================================
+# InformationEnvironment as hub, all agents communicate through rule_information_environment.
+#
+#         rule_gullible_spreader ──────────┐
+#         rule_distorting_relayer ─────────┤
+#         rule_skeptical_evaluator ────────┼──▶ rule_information_environment ──▶ all agents
+#         rule_fact_checker ───────────────┤             (belief, distortion, truth)
+#         rule_uninformed_bystander ───────┘
+#
+# Execution flow per round:
+#   Level 0: rule_information_environment executes (broadcasts belief + distortion metrics)
+#   Level 1: all agents execute in parallel (submit spread/correct/ignore actions)
+# =============================================================================
+
+type: "star"
+
+sources:
+  - rule_information_environment
+
+connections:
+  # Environment → All agents (belief + distortion data broadcast)
+  rule_information_environment:
+    - rule_gullible_spreader
+    - rule_distorting_relayer
+    - rule_skeptical_evaluator
+    - rule_fact_checker
+    - rule_uninformed_bystander
+
+  # Each agent → Environment only (action submission)
+  rule_gullible_spreader:
+    - rule_information_environment
+
+  rule_distorting_relayer:
+    - rule_information_environment
+
+  rule_skeptical_evaluator:
+    - rule_information_environment
+
+  rule_fact_checker:
+    - rule_information_environment
+
+  rule_uninformed_bystander:
+    - rule_information_environment

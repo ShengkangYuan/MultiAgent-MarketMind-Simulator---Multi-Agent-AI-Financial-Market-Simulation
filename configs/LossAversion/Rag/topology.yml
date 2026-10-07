@@ -1,0 +1,29 @@
+# LossAversion Rag Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_loss_averse_investor
+    - ragllm_break_even_trader
+    - ragllm_rational_trader
+    - ragllm_momentum_trader
+    - ragllm_market_maker
+
+  ragllm_loss_averse_investor:
+    - market
+
+  ragllm_break_even_trader:
+    - market
+
+  ragllm_rational_trader:
+    - market
+
+  ragllm_momentum_trader:
+    - market
+
+  ragllm_market_maker:
+    - market

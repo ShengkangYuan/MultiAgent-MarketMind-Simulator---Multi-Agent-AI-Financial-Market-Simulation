@@ -1,0 +1,26 @@
+{
+  "round_num": 149,
+  "direction": "received",
+  "timestamp": "2026-07-29T16:55:41.632837",
+  "message": {
+    "message_type": "PEER",
+    "sender_id": "rule_liquidity_provider",
+    "recipient_id": "market",
+    "payload": {
+      "content": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 105.2994589523684,
+        "investor": "rule_liquidity_provider",
+        "strategy": "liquidity-provider"
+      },
+      "content_type": "investor_bid",
+      "extras": {}
+    },
+    "timestamp": "2026-07-29T16:55:41.607666",
+    "priority": 1,
+    "extras": {
+      "round_num": 149
+    }
+  }
+}

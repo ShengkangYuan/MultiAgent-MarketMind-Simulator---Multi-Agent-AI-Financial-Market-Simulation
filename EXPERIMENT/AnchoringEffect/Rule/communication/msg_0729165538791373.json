@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:38.791373",
+  "size_bytes": 382,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"market\", \"recipient_id\": \"rule_momentum_trader_2\", \"payload\": {\"content\": {\"price\": 101.68023725275592, \"prev_price\": 101.40571277108265, \"fundamental\": 100.0, \"deviation\": 0.01680237252755916, \"round\": 110}, \"content_type\": \"market_price\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:38.782865\", \"priority\": 1, \"extras\": {\"round_num\": 110}}"
+}

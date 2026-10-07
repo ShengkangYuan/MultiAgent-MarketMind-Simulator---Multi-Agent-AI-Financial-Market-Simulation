@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:33.591321",
+  "size_bytes": 384,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"rule_momentum_trader_2\", \"recipient_id\": \"market\", \"payload\": {\"content\": {\"action\": \"buy\", \"quantity\": 20.0, \"bid_price\": 106.2775752342329, \"investor\": \"rule_momentum_trader_2\", \"strategy\": \"momentum-trader\"}, \"content_type\": \"investor_bid\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:33.584479\", \"priority\": 1, \"extras\": {\"round_num\": 12}}"
+}

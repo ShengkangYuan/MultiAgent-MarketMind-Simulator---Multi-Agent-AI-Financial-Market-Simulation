@@ -1,0 +1,57 @@
+# =============================================================================
+# MarketCrash Topology - Star Pattern
+# =============================================================================
+# Market as hub, all investors communicate through market.
+#
+# Note: player keys with num_instances > 1 use their base key here.
+# The simulator expander resolves them to foo_1, foo_2, ... before building
+# the TopologyGraph, so all edge rules apply to every instance automatically.
+#
+#         rule_risk_parity_fund ────────┐
+#         rule_leveraged_hedge_fund ────┤
+#         rule_market_maker ────────────┼──▶ market ──▶ all investors
+#         rule_passive_investor ────────┤             (market: price, liquidity, vol)
+#         rule_panic_seller ───────────┤
+#         rule_bottom_fisher ──────────┘
+#
+# Execution flow per round:
+#   Level 0: market executes (broadcasts price + liquidity + volatility)
+#   Level 1: all investors execute in parallel (submit P,Q orders)
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # Market → All investors (price + liquidity broadcast)
+  # num_instances: 2 → leveraged_hedge_fund_1/2, panic_seller_1/2
+  market:
+    - rule_risk_parity_fund
+    - rule_leveraged_hedge_fund
+    - rule_market_maker
+    - rule_passive_investor
+    - rule_panic_seller
+    - rule_bottom_fisher
+
+  # Each investor → Market only (order submission)
+  rule_risk_parity_fund:
+    - market
+
+  # num_instances: 2 → expands to leveraged_hedge_fund_1/2 → market
+  rule_leveraged_hedge_fund:
+    - market
+
+  rule_market_maker:
+    - market
+
+  rule_passive_investor:
+    - market
+
+  # num_instances: 2 → expands to panic_seller_1/2 → market
+  rule_panic_seller:
+    - market
+
+  rule_bottom_fisher:
+    - market

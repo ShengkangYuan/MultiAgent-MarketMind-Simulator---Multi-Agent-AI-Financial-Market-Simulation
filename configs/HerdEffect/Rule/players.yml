@@ -1,0 +1,173 @@
+# =============================================================================
+# Herd Effect Players Configuration - Emergent Herding Model
+# =============================================================================
+# 1 Market + 5 Investors (NO HerdingInvestor - herding EMERGES from dynamics)
+#
+# Strategies:
+#   - Momentum:   Q ∝ +ΔP%, trend following (destabilizing)
+#   - Contrarian: Q ∝ -ΔP%, value investing (stabilizing)
+#   - RiskAverse: Q ∝ 1/σ², volatility-adjusted (early exit in crash)
+#   - Aggressive: Q = κ×ΔP% + accel, leveraged momentum (extreme)
+#   - Noise:      Q ~ N(0,σ²), random trading (liquidity/trigger)
+#
+# Key Insight: Herd behavior EMERGES from Momentum+Aggressive positive feedback
+#              without an explicit imitator - more academically rigorous.
+#
+# References:
+#   - Jegadeesh & Titman (1993), De Bondt & Thaler (1985)
+#   - Shiller (1984), De Long et al. (1990), Markowitz (1952)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Market (central price setter with order-based clearing)
+# -----------------------------------------------------------------------------
+market:
+  archetype: stock-standard-price-impact  # -> AGENT_POOL/market/stock-standard-price-impact.md
+  name: "Market"
+  class: "examples.HerdEffect.Rule.players:Market"
+  num_instances: 1
+  config:
+    identity: "market"
+    role: coordinator
+    steps_per_turn: 1
+    group_tags:
+      - market
+    extras:
+      record_path: "EXPERIMENT/HerdEffect/Rule/records"  # Source: framework infrastructure
+      # Market parameters
+      initial_price: 100.0  # Source: simulation-bases.md §6
+      fundamental_value: 100.0  # Source: simulation-bases.md §6
+      supply_elasticity: 0.1  # Source: simulation-bases.md §6
+      mean_reversion: 0.02  # Source: simulation-bases.md §6
+      noise_std: 0.5  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# Investors (5 types - NO HerdingInvestor for emergent model)
+# -----------------------------------------------------------------------------
+
+rule_momentum_investor:
+  name: "Momentum Investor"
+  class: "examples.HerdEffect.Rule.players:MomentumInvestor"
+  # Expander → investor_momentum_1, investor_momentum_2
+  num_instances: 2
+  config:
+    identity: "rule_momentum_investor"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/HerdEffect/Rule/records"  # Source: framework infrastructure
+      # Base investor parameters
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 0.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # Momentum specific parameters
+      # Price aggressiveness
+      lambda_price: 0.5  # Source: simulation-bases.md §4.1.7
+      # Capital allocation ratio
+      beta: 0.3  # Source: simulation-bases.md §4.1.7
+  persona: !include persona.yml
+
+rule_contrarian_investor:
+  name: "Contrarian Investor"
+  class: "examples.HerdEffect.Rule.players:ContrarianInvestor"
+  # Expander → investor_contrarian_1, investor_contrarian_2
+  num_instances: 2
+  config:
+    identity: "rule_contrarian_investor"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/HerdEffect/Rule/records"  # Source: framework infrastructure
+      # Base investor parameters
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 0.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # Contrarian specific parameters
+      fundamental: 100.0  # Source: simulation-bases.md §4.2.7
+      # Value deviation sensitivity
+      beta: 0.5  # Source: simulation-bases.md §4.2.7
+      # Bid noise
+      noise_std: 0.5  # Source: simulation-bases.md §6
+  persona: !include persona.yml
+
+# NOTE: HerdingInvestor REMOVED for Emergent Herding Model
+# Herding behavior now emerges from Momentum + Aggressive interaction
+
+rule_risk_averse_investor:
+  name: "Risk Averse Investor"
+  class: "examples.HerdEffect.Rule.players:RiskAverseInvestor"
+  # Expander → investor_risk_averse_1, investor_risk_averse_2
+  num_instances: 2
+  config:
+    identity: "rule_risk_averse_investor"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/HerdEffect/Rule/records"  # Source: framework infrastructure
+      # Base investor parameters
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 0.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # RiskAverse specific parameters
+      # Risk tolerance coefficient
+      k: 0.5  # Source: simulation-bases.md §4.3.7
+      # Periods for volatility calculation
+      lookback: 5  # Source: simulation-bases.md §4.3.7
+  persona: !include persona.yml
+
+rule_aggressive_investor:
+  name: "Aggressive Investor"
+  class: "examples.HerdEffect.Rule.players:AggressiveInvestor"
+  # Expander → investor_aggressive_1, investor_aggressive_2
+  num_instances: 2
+  config:
+    identity: "rule_aggressive_investor"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/HerdEffect/Rule/records"  # Source: framework infrastructure
+      # Base investor parameters
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 0.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # Aggressive specific parameters
+      # Aggressive price factor
+      kappa: 1.0  # Source: simulation-bases.md §4.5.7
+      # Aggressive capital allocation
+      beta: 0.5  # Source: simulation-bases.md §4.5.7
+      # Acceleration trading bonus
+      accel_bonus: 0.3  # Source: simulation-bases.md §4.5.7
+  persona: !include persona.yml
+
+rule_noise_trader:
+  name: "Noise Trader"
+  class: "examples.HerdEffect.Rule.players:NoiseTrader"
+  # Expander → investor_noise_1, investor_noise_2
+  num_instances: 2
+  config:
+    identity: "rule_noise_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/HerdEffect/Rule/records"  # Source: framework infrastructure
+      # Base investor parameters
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 0.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # Noise specific parameters
+      price_noise_std: 2.0  # Source: simulation-bases.md §4.4.7
+      qty_noise_std: 5.0  # Source: simulation-bases.md §4.4.7
+      position_mean_reversion: 0.1  # Source: simulation-bases.md §4.4.7
+  persona: !include persona.yml

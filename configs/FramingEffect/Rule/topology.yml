@@ -1,0 +1,29 @@
+# FramingEffect Rule Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_gain_frame_follower
+    - rule_loss_frame_reactor
+    - rule_frame_invariant_trader
+    - rule_arbitrage_framer
+    - rule_noise_trader
+
+  rule_gain_frame_follower:
+    - market
+
+  rule_loss_frame_reactor:
+    - market
+
+  rule_frame_invariant_trader:
+    - market
+
+  rule_arbitrage_framer:
+    - market
+
+  rule_noise_trader:
+    - market

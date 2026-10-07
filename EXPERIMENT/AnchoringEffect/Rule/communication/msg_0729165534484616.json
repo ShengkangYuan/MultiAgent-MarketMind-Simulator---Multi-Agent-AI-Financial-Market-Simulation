@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:34.484616",
+  "size_bytes": 390,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"rule_liquidity_provider\", \"recipient_id\": \"market\", \"payload\": {\"content\": {\"action\": \"hold\", \"quantity\": 0.0, \"bid_price\": 101.50988387914396, \"investor\": \"rule_liquidity_provider\", \"strategy\": \"liquidity-provider\"}, \"content_type\": \"investor_bid\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:34.473132\", \"priority\": 1, \"extras\": {\"round_num\": 28}}"
+}

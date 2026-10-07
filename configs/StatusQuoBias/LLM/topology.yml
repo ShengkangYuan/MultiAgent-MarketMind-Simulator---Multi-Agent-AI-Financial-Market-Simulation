@@ -1,0 +1,24 @@
+# StatusQuoBias LLM Topology Configuration
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_inertial_holder
+    - llm_default_follower
+    - llm_active_rebalancer
+    - llm_momentum_trader
+    - llm_noise_trader
+  llm_inertial_holder:
+    - market
+  llm_default_follower:
+    - market
+  llm_active_rebalancer:
+    - market
+  llm_momentum_trader:
+    - market
+  llm_noise_trader:
+    - market

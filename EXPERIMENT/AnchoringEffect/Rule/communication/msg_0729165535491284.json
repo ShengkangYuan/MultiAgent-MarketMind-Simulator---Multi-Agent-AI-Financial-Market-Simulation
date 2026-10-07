@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:35.491284",
+  "size_bytes": 381,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"market\", \"recipient_id\": \"rule_liquidity_provider\", \"payload\": {\"content\": {\"price\": 101.73108730901996, \"prev_price\": 101.77714745665622, \"fundamental\": 100.0, \"deviation\": 0.01731087309019955, \"round\": 50}, \"content_type\": \"market_price\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:35.479196\", \"priority\": 1, \"extras\": {\"round_num\": 50}}"
+}

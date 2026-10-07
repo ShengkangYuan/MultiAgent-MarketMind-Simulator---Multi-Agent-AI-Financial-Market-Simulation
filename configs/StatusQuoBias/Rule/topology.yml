@@ -1,0 +1,24 @@
+# StatusQuoBias Rule Topology Configuration
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_inertial_holder
+    - rule_default_follower
+    - rule_active_rebalancer
+    - rule_momentum_trader
+    - rule_noise_trader
+  rule_inertial_holder:
+    - market
+  rule_default_follower:
+    - market
+  rule_active_rebalancer:
+    - market
+  rule_momentum_trader:
+    - market
+  rule_noise_trader:
+    - market

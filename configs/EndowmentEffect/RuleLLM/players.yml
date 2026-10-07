@@ -1,0 +1,157 @@
+# EndowmentEffect RuleLLM Agent Configuration
+
+market:
+  archetype: stock-standard-price-impact  # -> AGENT_POOL/market/stock-standard-price-impact.md
+  name: "Market"
+  class: "examples.EndowmentEffect.RuleLLM.players:Market"
+  num_instances: 1
+  config:
+    identity: "market"
+    role: coordinator
+    steps_per_turn: 1
+    group_tags:
+      - market
+    extras:
+      record_path: "EXPERIMENT/EndowmentEffect/RuleLLM/records"  # Source: infrastructure
+      initial_price: 100.0        # Source: simulation-bases.md §6 — normalized fundamental
+      fundamental_value: 100.0    # Source: simulation-bases.md §6 — Muth (1961) normalization
+      price_impact: 0.02          # Source: simulation-bases.md §6 — calibration
+      mean_reversion: 0.05        # Source: simulation-bases.md §6 — calibration
+      noise_std: 0.01             # Source: simulation-bases.md §6 — calibration
+      custom_state_hot_limit: 3   # Source: infrastructure
+  persona: !include persona.yml
+
+rulellm_endowed_holder:
+  name: "EndowedHolder"
+  class: "examples.EndowmentEffect.RuleLLM.players:RuleLLMEndowedHolder"
+  num_instances: 2
+  config:
+    identity: "rulellm_endowed_holder"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/EndowmentEffect/RuleLLM/records"  # Source: infrastructure
+      initial_cash: 800000.0      # Source: simulation-bases.md §4.1 — endowed holder capitalization
+      initial_position: 500       # Source: simulation-bases.md §4.1 — initial endowment
+      endowment_premium: 0.15     # Source: simulation-bases.md §6 — Kahneman et al. (1990) WTA/WTP gap
+      base_size: 300              # Source: simulation-bases.md §4.1 — order size cap
+      custom_state_hot_limit: 3   # Source: infrastructure
+      llm:                        # Source: LLM-wiring
+        sys_message: "examples.EndowmentEffect.RuleLLM.prompts:RULELLM_ENDOWED_HOLDER_SYS"  # Source: LLM-wiring
+        user_message: "examples.EndowmentEffect.RuleLLM.prompts:RULELLM_USER_TEMPLATE"      # Source: LLM-wiring
+        lm_type: "api"            # Source: LLM-wiring
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: LLM-wiring
+        generation_config:        # Source: LLM-wiring
+          temperature: 0.5        # Source: LLM-wiring — moderate for rule-guided persona
+          max_tokens: 512         # Source: LLM-wiring
+  persona: !include persona.yml
+
+rulellm_status_quo_seller:
+  name: "StatusQuoSeller"
+  class: "examples.EndowmentEffect.RuleLLM.players:RuleLLMStatusQuoSeller"
+  num_instances: 2
+  config:
+    identity: "rulellm_status_quo_seller"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/EndowmentEffect/RuleLLM/records"  # Source: infrastructure
+      initial_cash: 800000.0      # Source: simulation-bases.md §4.2 — status quo seller capitalization
+      initial_position: 500       # Source: simulation-bases.md §4.2 — initial endowment
+      status_quo_premium: 0.20    # Source: simulation-bases.md §6 — Samuelson & Zeckhauser (1988)
+      base_size: 300              # Source: simulation-bases.md §4.2 — order size cap
+      custom_state_hot_limit: 3   # Source: infrastructure
+      llm:                        # Source: LLM-wiring
+        sys_message: "examples.EndowmentEffect.RuleLLM.prompts:RULELLM_STATUS_QUO_SELLER_SYS"  # Source: LLM-wiring
+        user_message: "examples.EndowmentEffect.RuleLLM.prompts:RULELLM_USER_TEMPLATE"         # Source: LLM-wiring
+        lm_type: "api"            # Source: LLM-wiring
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: LLM-wiring
+        generation_config:        # Source: LLM-wiring
+          temperature: 0.4        # Source: LLM-wiring — low for inertia-guided persona
+          max_tokens: 512         # Source: LLM-wiring
+  persona: !include persona.yml
+
+rulellm_rational_arbitrageur:
+  name: "RationalArbitrageur"
+  class: "examples.EndowmentEffect.RuleLLM.players:RuleLLMRationalArbitrageur"
+  num_instances: 2
+  config:
+    identity: "rulellm_rational_arbitrageur"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/EndowmentEffect/RuleLLM/records"  # Source: infrastructure
+      initial_cash: 1000000.0     # Source: simulation-bases.md §4.3 — arbitrageur capitalization
+      initial_position: 0         # Source: simulation-bases.md §4.3 — enters unendowed
+      arb_threshold: 0.05         # Source: simulation-bases.md §6 — Muth (1961) rational threshold
+      base_size: 400              # Source: simulation-bases.md §4.3 — proportional order cap
+      custom_state_hot_limit: 3   # Source: infrastructure
+      llm:                        # Source: LLM-wiring
+        sys_message: "examples.EndowmentEffect.RuleLLM.prompts:RULELLM_RATIONAL_ARBITRAGEUR_SYS"  # Source: LLM-wiring
+        user_message: "examples.EndowmentEffect.RuleLLM.prompts:RULELLM_USER_TEMPLATE"            # Source: LLM-wiring
+        lm_type: "api"            # Source: LLM-wiring
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: LLM-wiring
+        generation_config:        # Source: LLM-wiring
+          temperature: 0.3        # Source: LLM-wiring — very low for rational rule-guided
+          max_tokens: 512         # Source: LLM-wiring
+  persona: !include persona.yml
+
+rulellm_new_buyer:
+  name: "NewBuyer"
+  class: "examples.EndowmentEffect.RuleLLM.players:RuleLLMNewBuyer"
+  num_instances: 2
+  config:
+    identity: "rulellm_new_buyer"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/EndowmentEffect/RuleLLM/records"  # Source: infrastructure
+      initial_cash: 1000000.0     # Source: simulation-bases.md §4.4 — new buyer capitalization
+      initial_position: 0         # Source: simulation-bases.md §4.4 — enters unendowed
+      buy_threshold: 0.03         # Source: simulation-bases.md §6 — Kahneman et al. (1990) WTP at fundamental
+      base_size: 300              # Source: simulation-bases.md §4.4 — order size cap
+      custom_state_hot_limit: 3   # Source: infrastructure
+      llm:                        # Source: LLM-wiring
+        sys_message: "examples.EndowmentEffect.RuleLLM.prompts:RULELLM_NEW_BUYER_SYS"  # Source: LLM-wiring
+        user_message: "examples.EndowmentEffect.RuleLLM.prompts:RULELLM_USER_TEMPLATE"  # Source: LLM-wiring
+        lm_type: "api"            # Source: LLM-wiring
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: LLM-wiring
+        generation_config:        # Source: LLM-wiring
+          temperature: 0.3        # Source: LLM-wiring — low for rational rule-guided
+          max_tokens: 512         # Source: LLM-wiring
+  persona: !include persona.yml
+
+rulellm_noise_trader:
+  name: "NoiseTrader"
+  class: "examples.EndowmentEffect.RuleLLM.players:RuleLLMNoiseTrader"
+  num_instances: 1
+  config:
+    identity: "rulellm_noise_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/EndowmentEffect/RuleLLM/records"  # Source: infrastructure
+      initial_cash: 500000.0      # Source: simulation-bases.md §4.5 — noise trader capitalization
+      initial_position: 0         # Source: simulation-bases.md §4.5 — enters unendowed
+      trade_probability: 0.3      # Source: simulation-bases.md §6 — Black (1986) 30% per-round
+      noise_size: 150             # Source: simulation-bases.md §4.5 — random order size bound
+      custom_state_hot_limit: 3   # Source: infrastructure
+      llm:                        # Source: LLM-wiring
+        sys_message: "examples.EndowmentEffect.RuleLLM.prompts:RULELLM_NOISE_TRADER_SYS"  # Source: LLM-wiring
+        user_message: "examples.EndowmentEffect.RuleLLM.prompts:RULELLM_USER_TEMPLATE"    # Source: LLM-wiring
+        lm_type: "api"            # Source: LLM-wiring
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: LLM-wiring
+        generation_config:        # Source: LLM-wiring
+          temperature: 0.8        # Source: LLM-wiring — high for random noise persona
+          max_tokens: 512         # Source: LLM-wiring
+  persona: !include persona.yml

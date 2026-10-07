@@ -1,0 +1,33 @@
+# =============================================================================
+# EchoChamberRag - Topology Configuration
+# =============================================================================
+# Star topology: OpinionEnvironment broadcasts to all RAG-augmented agents.
+# =============================================================================
+
+type: "star"
+
+sources:
+  - ragllm_opinion_environment
+
+connections:
+  ragllm_opinion_environment:
+    - ragllm_ideologue
+    - ragllm_conformist
+    - ragllm_critical_thinker
+    - ragllm_bridge_builder
+    - ragllm_passive_follower
+
+  ragllm_ideologue:
+    - ragllm_opinion_environment
+
+  ragllm_conformist:
+    - ragllm_opinion_environment
+
+  ragllm_critical_thinker:
+    - ragllm_opinion_environment
+
+  ragllm_bridge_builder:
+    - ragllm_opinion_environment
+
+  ragllm_passive_follower:
+    - ragllm_opinion_environment

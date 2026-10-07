@@ -1,0 +1,33 @@
+# =============================================================================
+# RumorSpreadRag - Topology Configuration
+# =============================================================================
+# Star topology: InformationEnvironment broadcasts to all RAG agents
+# =============================================================================
+
+type: "star"
+
+sources:
+  - ragllm_information_environment
+
+connections:
+  ragllm_information_environment:
+    - ragllm_gullible_spreader
+    - ragllm_distorting_relayer
+    - ragllm_skeptical_evaluator
+    - ragllm_fact_checker
+    - ragllm_uninformed_bystander
+
+  ragllm_gullible_spreader:
+    - ragllm_information_environment
+
+  ragllm_distorting_relayer:
+    - ragllm_information_environment
+
+  ragllm_skeptical_evaluator:
+    - ragllm_information_environment
+
+  ragllm_fact_checker:
+    - ragllm_information_environment
+
+  ragllm_uninformed_bystander:
+    - ragllm_information_environment

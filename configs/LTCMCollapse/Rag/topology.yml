@@ -1,0 +1,29 @@
+# LTCMCollapse Rag Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_convergence_arbitrageur
+    - ragllm_leverage_trader
+    - ragllm_risk_manager
+    - ragllm_liquidity_provider
+    - ragllm_central_bank
+
+  ragllm_convergence_arbitrageur:
+    - market
+
+  ragllm_leverage_trader:
+    - market
+
+  ragllm_risk_manager:
+    - market
+
+  ragllm_liquidity_provider:
+    - market
+
+  ragllm_central_bank:
+    - market

@@ -1,0 +1,197 @@
+# DispositionEffect Rag players. Defaults trace to simulation-bases.md §4/§6.
+
+knowledge:
+  llm_generation: &llm_generation
+    temperature: 0.3  # Source: variant implementation setting; explain.md §3
+    max_new_tokens: 500  # Source: variant implementation setting; explain.md §3
+  rag_defaults: &rag_defaults
+    docs_dir: "examples/DispositionEffect"  # Source: local theory corpus; simulation-bases.md
+    url_csv: ""  # Source: disabled fallback; local theory corpus is authoritative
+    urls: []  # Source: disabled fallback; makes the smoke run network-independent
+    agent_autonomous: false  # Source: explain.md §4
+    catalog_path: ""  # Source: unused when agent_autonomous is false
+    llm_suggested: false  # Source: explain.md §4
+    llm_suggested_n_urls: 5  # Source: explain.md §4
+    docs_save_dir: "${DISPOSITION_RAG_CACHE_DIR:-EXPERIMENT/DispositionEffect/Rag}/documents"  # Source: explain.md §6
+    top_k: 5  # Source: explain.md §4
+    query_gain_threshold: 0.05  # Source: simulation-bases.md §4 retrieval context
+    query_loss_threshold: -0.05  # Source: simulation-bases.md §4 retrieval context
+    context_char_limit: 500  # Source: explain.md §4
+    embed_type: "huggingface"  # Source: local reproducible embedding backend
+    embed_model: "BAAI/bge-small-en-v1.5"  # Source: KnowledgeStore default model
+    embed_api_base: ""  # Source: unused by local HuggingFace embeddings
+    chunk_size: 512  # Source: explain.md §4
+    chunk_overlap: 64  # Source: explain.md §4
+    knowledge_sources: []  # Source: disabled legacy input
+
+market:
+  archetype: stock-standard-price-impact  # -> AGENT_POOL/market/stock-standard-price-impact.md
+  name: "Market"
+  class: "examples.DispositionEffect.Rag.players:Market"
+  num_instances: 1
+  config:
+    identity: "market"
+    role: coordinator
+    steps_per_turn: 1
+    group_tags: [market]
+    extras:
+      record_path: "${DISPOSITION_RAG_OUTPUT_DIR:-EXPERIMENT/DispositionEffect/Rag}/records"  # Source: simulation.yml
+      fundamental_value: 100.0  # Source: simulation-bases.md §6
+      initial_price: 100.0  # Source: simulation-bases.md §6
+      price_impact: 0.08  # Source: simulation-bases.md §6
+      mean_reversion: 0.05  # Source: simulation-bases.md §6
+      noise_std: 0.6  # Source: simulation-bases.md §6
+      news_probability: 0.15  # Source: simulation-bases.md §6
+      news_impact_range: 4.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: simulation.yml round_history_limit
+  persona: !include persona.yml
+
+ragllm_disposition_investor:
+  name: "RAG Disposition Investor"
+  class: "examples.DispositionEffect.Rag.players:RagDispositionInvestor"
+  num_instances: 3
+  config:
+    identity: "ragllm_disposition_investor"
+    role: player
+    steps_per_turn: 1
+    group_tags: [rag_investors]
+    extras:
+      record_path: "${DISPOSITION_RAG_OUTPUT_DIR:-EXPERIMENT/DispositionEffect/Rag}/records"  # Source: simulation.yml
+      initial_cash: 10000.0  # Source: simulation-bases.md §4.1
+      initial_position: 30.0  # Source: simulation-bases.md §4.1
+      initial_purchase_price: 100.0  # Source: simulation-bases.md §6
+      max_position: 30.0  # Source: simulation-bases.md §4.1
+      custom_state_hot_limit: 3  # Source: simulation.yml round_history_limit
+      gain_threshold: 0.03  # Source: simulation-bases.md §6
+      loss_threshold: -0.10  # Source: simulation-bases.md §6
+      loss_aversion: 2.25  # Source: simulation-bases.md §6
+      sell_fraction_gain: 0.5  # Source: simulation-bases.md §6
+      sell_fraction_loss: 0.15  # Source: simulation-bases.md §6
+      buy_fraction: 0.15  # Source: simulation-bases.md §4.1
+      llm:
+        sys_message: "examples.DispositionEffect.Rag.prompts:RAG_DISPOSITION_BIASED_SYS"  # Source: explain.md §3
+        user_message: "examples.DispositionEffect.Rag.prompts:RAG_USER_TEMPLATE"  # Source: explain.md §3
+        lm_type: "api"  # Source: explain.md §4
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: variant runtime choice
+        max_retries: 3  # Source: explain.md §4
+        generation_config: *llm_generation
+      rag:
+        <<: *rag_defaults
+        persist_dir: "${DISPOSITION_RAG_CACHE_DIR:-EXPERIMENT/DispositionEffect/Rag}/rag_index/ragllm_disposition_investor"  # Source: explain.md §6
+  persona: !include persona.yml
+
+ragllm_rational_investor:
+  name: "RAG Rational Investor"
+  class: "examples.DispositionEffect.Rag.players:RagRationalInvestor"
+  num_instances: 2
+  config:
+    identity: "ragllm_rational_investor"
+    role: player
+    steps_per_turn: 1
+    group_tags: [rag_investors]
+    extras:
+      record_path: "${DISPOSITION_RAG_OUTPUT_DIR:-EXPERIMENT/DispositionEffect/Rag}/records"  # Source: simulation.yml
+      initial_cash: 10000.0  # Source: simulation-bases.md §4.2
+      initial_position: 30.0  # Source: simulation-bases.md §4.2
+      initial_purchase_price: 100.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: simulation.yml round_history_limit
+      target_allocation: 0.5  # Source: simulation-bases.md §6
+      rebalance_threshold: 0.1  # Source: simulation-bases.md §4.2
+      llm:
+        sys_message: "examples.DispositionEffect.Rag.prompts:RAG_RATIONAL_SYS"  # Source: explain.md §3
+        user_message: "examples.DispositionEffect.Rag.prompts:RAG_USER_TEMPLATE"  # Source: explain.md §3
+        lm_type: "api"  # Source: explain.md §4
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: variant runtime choice
+        max_retries: 3  # Source: explain.md §4
+        generation_config: *llm_generation
+      rag:
+        <<: *rag_defaults
+        persist_dir: "${DISPOSITION_RAG_CACHE_DIR:-EXPERIMENT/DispositionEffect/Rag}/rag_index/ragllm_rational_investor"  # Source: explain.md §6
+  persona: !include persona.yml
+
+ragllm_tax_aware_investor:
+  name: "RAG Tax Aware Investor"
+  class: "examples.DispositionEffect.Rag.players:RagTaxAwareInvestor"
+  num_instances: 2
+  config:
+    identity: "ragllm_tax_aware_investor"
+    role: player
+    steps_per_turn: 1
+    group_tags: [rag_investors]
+    extras:
+      record_path: "${DISPOSITION_RAG_OUTPUT_DIR:-EXPERIMENT/DispositionEffect/Rag}/records"  # Source: simulation.yml
+      initial_cash: 10000.0  # Source: simulation-bases.md §4.3
+      initial_position: 30.0  # Source: simulation-bases.md §4.3
+      initial_purchase_price: 100.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: simulation.yml round_history_limit
+      tax_loss_threshold: -0.05  # Source: simulation-bases.md §6
+      capital_gains_hold: 0.15  # Source: simulation-bases.md §6
+      tax_harvest_fraction: 0.5  # Source: simulation-bases.md §6
+      llm:
+        sys_message: "examples.DispositionEffect.Rag.prompts:RAG_TAX_AWARE_SYS"  # Source: explain.md §3
+        user_message: "examples.DispositionEffect.Rag.prompts:RAG_USER_TEMPLATE"  # Source: explain.md §3
+        lm_type: "api"  # Source: explain.md §4
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: variant runtime choice
+        max_retries: 3  # Source: explain.md §4
+        generation_config: *llm_generation
+      rag:
+        <<: *rag_defaults
+        persist_dir: "${DISPOSITION_RAG_CACHE_DIR:-EXPERIMENT/DispositionEffect/Rag}/rag_index/ragllm_tax_aware_investor"  # Source: explain.md §6
+  persona: !include persona.yml
+
+ragllm_index_holder:
+  name: "RAG Index Holder"
+  class: "examples.DispositionEffect.Rag.players:RagIndexHolder"
+  num_instances: 1
+  config:
+    identity: "ragllm_index_holder"
+    role: player
+    steps_per_turn: 1
+    group_tags: [rag_investors]
+    extras:
+      record_path: "${DISPOSITION_RAG_OUTPUT_DIR:-EXPERIMENT/DispositionEffect/Rag}/records"  # Source: simulation.yml
+      initial_cash: 10000.0  # Source: simulation-bases.md §4.4
+      initial_position: 50.0  # Source: simulation-bases.md §4.4
+      initial_purchase_price: 100.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: simulation.yml round_history_limit
+      llm:
+        sys_message: "examples.DispositionEffect.Rag.prompts:RAG_INDEX_HOLDER_SYS"  # Source: explain.md §3
+        user_message: "examples.DispositionEffect.Rag.prompts:RAG_USER_TEMPLATE"  # Source: explain.md §3
+        lm_type: "api"  # Source: explain.md §4
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: variant runtime choice
+        max_retries: 3  # Source: explain.md §4
+        generation_config: *llm_generation
+      rag:
+        <<: *rag_defaults
+        persist_dir: "${DISPOSITION_RAG_CACHE_DIR:-EXPERIMENT/DispositionEffect/Rag}/rag_index/ragllm_index_holder"  # Source: explain.md §6
+  persona: !include persona.yml
+
+ragllm_institutional_investor:
+  name: "RAG Institutional Investor"
+  class: "examples.DispositionEffect.Rag.players:RagInstitutionalInvestor"
+  num_instances: 2
+  config:
+    identity: "ragllm_institutional_investor"
+    role: player
+    steps_per_turn: 1
+    group_tags: [rag_investors]
+    extras:
+      record_path: "${DISPOSITION_RAG_OUTPUT_DIR:-EXPERIMENT/DispositionEffect/Rag}/records"  # Source: simulation.yml
+      initial_cash: 10000.0  # Source: simulation-bases.md §4.5
+      initial_position: 30.0  # Source: simulation-bases.md §4.5
+      initial_purchase_price: 100.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: simulation.yml round_history_limit
+      gain_threshold: 0.25  # Source: simulation-bases.md §6
+      loss_threshold: -0.15  # Source: simulation-bases.md §6
+      sell_fraction: 0.4  # Source: simulation-bases.md §6
+      llm:
+        sys_message: "examples.DispositionEffect.Rag.prompts:RAG_INSTITUTIONAL_SYS"  # Source: explain.md §3
+        user_message: "examples.DispositionEffect.Rag.prompts:RAG_USER_TEMPLATE"  # Source: explain.md §3
+        lm_type: "api"  # Source: explain.md §4
+        lm_name: "ark/doubao-seed-2-0-mini-260428"  # Source: variant runtime choice
+        max_retries: 3  # Source: explain.md §4
+        generation_config: *llm_generation
+      rag:
+        <<: *rag_defaults
+        persist_dir: "${DISPOSITION_RAG_CACHE_DIR:-EXPERIMENT/DispositionEffect/Rag}/rag_index/ragllm_institutional_investor"  # Source: explain.md §6
+  persona: !include persona.yml

@@ -1,0 +1,1 @@
+"""Mock lmbase.inference subpackage."""

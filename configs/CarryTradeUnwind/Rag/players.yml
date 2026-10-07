@@ -1,0 +1,285 @@
+# =============================================================================
+# CarryTradeUnwind Rag Players Configuration
+# =============================================================================
+# 1 Market (rule-based) + 5 RAG-augmented LLM Investor types
+# =============================================================================
+
+# =============================================================================
+# Shared Knowledge Configuration
+# =============================================================================
+knowledge:
+  backend: "local"                              # Source: RAG wiring — local vector store backend
+  global_uri: "examples/document-sources"       # Source: RAG wiring — canonical document root
+  resource_csv:
+    - "examples/document-sources/books.csv"    # Source: RAG wiring — global corpus index
+    - "examples/document-sources/source"       # Source: RAG wiring — supplemental source directory
+  preprocessing:
+    parser: "mineru"                            # Source: RAG wiring — MinerU PDF/HTML parser
+    output_position: "MinerU_processed"         # Source: RAG wiring — parsed-output directory
+  rag:
+    output_position: "rag_index"                # Source: RAG wiring — vector-index output directory
+    embed_type: "litellm"                       # Source: RAG wiring — embedder adapter
+    embed_model: "openai/hunyuan-embedding"     # Source: RAG wiring — Tencent Hunyuan embedding model
+    embed_api_key: "{{ HUNYUAN_API_KEY }}"      # Source: RAG wiring — env-var substitution
+    embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG wiring — Hunyuan inference endpoint
+    chunk_size: 512                             # Source: RAG wiring — chunk size convention
+    chunk_overlap: 64                           # Source: RAG wiring — chunk overlap convention
+    top_k: 5                                    # Source: RAG wiring — top-k retrieval
+
+# -----------------------------------------------------------------------------
+# Market (Coordinator) — rule-based, identical to Rule variant
+# -----------------------------------------------------------------------------
+market:
+  archetype: fx-currency-peg-and-attack  # -> AGENT_POOL/market/fx-currency-peg-and-attack.md
+  name: "Market"
+  class: "examples.CarryTradeUnwind.Rag.players:Market"
+  num_instances: 1
+  config:
+    identity: "market"
+    role: coordinator
+    steps_per_turn: 1
+    group_tags:
+      - market
+    extras:
+      record_path: "EXPERIMENT/CarryTradeUnwind/Rag/records"  # Source: implementation infrastructure (record path convention per polish-simulation-pipeline.md §6.4)
+      fundamental_value: 1.0      # Source: target §9 F; PPP normalization anchor
+      initial_price: 1.0          # Source: target §9 / simulation-bases.md §3 (starts at fundamental)
+      price_impact: 0.003         # Source: target §9 lambda; Brunnermeier & Pedersen (2009) https://doi.org/10.1093/rfs/hhn098
+      mean_reversion: 0.02        # Source: target §9 gamma; Rogoff (1996) PPP-reversion https://www.jstor.org/stable/2729217
+      noise_std: 0.005            # Source: simulation-bases.md §3.1 (low-noise FX environment)
+      custom_state_hot_limit: 3   # Source: implementation infrastructure (hot-state ring buffer)
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# RAG Carry Traders — carry-trade persona + RAG knowledge retrieval
+# Theory: Brunnermeier, Nagel & Pedersen (2009)
+# -----------------------------------------------------------------------------
+ragllm_carry_trader:
+  name: "RAG Carry Trader"
+  class: "examples.CarryTradeUnwind.Rag.players:RagLLMCarryTrader"
+  # Expander → ragllm_carry_trader_1, ragllm_carry_trader_2
+  num_instances: 2
+  config:
+    identity: "ragllm_carry_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/CarryTradeUnwind/Rag/records"  # Source: implementation infrastructure (record path)
+      initial_cash: 500000.0                                  # Source: target §7 carry-trader Intent line; simulation-bases.md §4.1
+      initial_position: 500.0                                 # Source: target §7 carry-trader Intent line (starts with open carry position)
+      custom_state_hot_limit: 3                               # Source: implementation infrastructure (hot-state ring buffer)
+      private_knowledge:
+        from_global_resources:
+          - "MinerU_processed"                                # Source: RAG wiring — inherit global processed corpus
+        local_resources:
+          local_uri: ""                                       # Source: RAG wiring — no per-agent local URI
+          local_resources: []                                 # Source: RAG wiring — no per-agent supplemental resources
+        rag:
+          from_global_index_dir:
+            - "rag_index"                                     # Source: RAG wiring — inherit global vector index
+          local_index_dir: ""                                 # Source: RAG wiring — no per-agent local index
+          embed_type: "litellm"                               # Source: RAG wiring — embedder adapter
+          embed_model: "openai/hunyuan-embedding"             # Source: RAG wiring — Hunyuan embedding model
+          embed_api_key: "{{ HUNYUAN_API_KEY }}"              # Source: RAG wiring — env-var substitution
+          embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG wiring — Hunyuan endpoint
+          chunk_size: 512                                     # Source: RAG wiring — chunk size convention
+          chunk_overlap: 64                                   # Source: RAG wiring — chunk overlap convention
+          top_k: 5                                            # Source: RAG wiring — top-k retrieval
+      llm:
+        sys_message: "examples.CarryTradeUnwind.Rag.prompts:RAG_CARRY_TRADER_SYS"  # Source: RAG wiring — persona prompt for carry-trader archetype
+        user_message: "examples.CarryTradeUnwind.Rag.prompts:RAG_USER_TEMPLATE"    # Source: RAG wiring — user template with retrieved-context injection
+        lm_type: "api"                             # Source: LLM wiring — inference mode
+        lm_name: "ark/doubao-seed-2-0-mini-260428" # Source: LLM wiring — model identifier
+        generation_config:
+          temperature: 0.3                         # Source: RAG wiring — low temperature for retrieval-grounded decisions
+          max_new_tokens: 600                      # Source: RAG wiring — response length cap (accommodates retrieved-context reasoning)
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# RAG Leveraged Carry Funds — high-leverage persona + RAG
+# Theory: Plantin & Shin (2018)
+# -----------------------------------------------------------------------------
+ragllm_leveraged_carry_fund:
+  name: "RAG Leveraged Carry Fund"
+  class: "examples.CarryTradeUnwind.Rag.players:RagLLMLeveragedCarryFund"
+  # Expander → ragllm_leveraged_carry_fund_1, ragllm_leveraged_carry_fund_2
+  num_instances: 2
+  config:
+    identity: "ragllm_leveraged_carry_fund"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/CarryTradeUnwind/Rag/records"  # Source: implementation infrastructure (record path)
+      initial_cash: 500000.0                                  # Source: target §7 leveraged-carry-fund Intent line; simulation-bases.md §4.2
+      initial_position: 800.0                                 # Source: target §7 leveraged-carry-fund Intent line (large open carry position)
+      custom_state_hot_limit: 3                               # Source: implementation infrastructure (hot-state ring buffer)
+      private_knowledge:
+        from_global_resources:
+          - "MinerU_processed"                                # Source: RAG wiring — inherit global processed corpus
+        local_resources:
+          local_uri: ""                                       # Source: RAG wiring — no per-agent local URI
+          local_resources: []                                 # Source: RAG wiring — no per-agent supplemental resources
+        rag:
+          from_global_index_dir:
+            - "rag_index"                                     # Source: RAG wiring — inherit global vector index
+          local_index_dir: ""                                 # Source: RAG wiring — no per-agent local index
+          embed_type: "litellm"                               # Source: RAG wiring — embedder adapter
+          embed_model: "openai/hunyuan-embedding"             # Source: RAG wiring — Hunyuan embedding model
+          embed_api_key: "{{ HUNYUAN_API_KEY }}"              # Source: RAG wiring — env-var substitution
+          embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG wiring — Hunyuan endpoint
+          chunk_size: 512                                     # Source: RAG wiring — chunk size convention
+          chunk_overlap: 64                                   # Source: RAG wiring — chunk overlap convention
+          top_k: 5                                            # Source: RAG wiring — top-k retrieval
+      llm:
+        sys_message: "examples.CarryTradeUnwind.Rag.prompts:RAG_LEVERAGED_CARRY_FUND_SYS"  # Source: RAG wiring — persona prompt for LCF archetype
+        user_message: "examples.CarryTradeUnwind.Rag.prompts:RAG_USER_TEMPLATE"            # Source: RAG wiring — user template with retrieved-context injection
+        lm_type: "api"                             # Source: LLM wiring — inference mode
+        lm_name: "ark/doubao-seed-2-0-mini-260428" # Source: LLM wiring — model identifier
+        generation_config:
+          temperature: 0.3                         # Source: RAG wiring — low temperature for retrieval-grounded decisions
+          max_new_tokens: 600                      # Source: RAG wiring — response length cap
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# RAG Funding Currency Buyers — safe-haven persona + RAG
+# Theory: Ranaldo & Söderlind (2010) / Menkhoff et al. (2012)
+# -----------------------------------------------------------------------------
+ragllm_funding_currency_buyer:
+  name: "RAG Funding Currency Buyer"
+  class: "examples.CarryTradeUnwind.Rag.players:RagLLMFundingCurrencyBuyer"
+  # Expander → ragllm_funding_currency_buyer_1, ragllm_funding_currency_buyer_2
+  num_instances: 2
+  config:
+    identity: "ragllm_funding_currency_buyer"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/CarryTradeUnwind/Rag/records"  # Source: implementation infrastructure (record path)
+      initial_cash: 300000.0                                  # Source: target §7 funding-currency-buyer Intent line; simulation-bases.md §4.3
+      initial_position: 0.0                                   # Source: target §7 funding-currency-buyer Intent line (safe-haven starts flat)
+      custom_state_hot_limit: 3                               # Source: implementation infrastructure (hot-state ring buffer)
+      private_knowledge:
+        from_global_resources:
+          - "MinerU_processed"                                # Source: RAG wiring — inherit global processed corpus
+        local_resources:
+          local_uri: ""                                       # Source: RAG wiring — no per-agent local URI
+          local_resources: []                                 # Source: RAG wiring — no per-agent supplemental resources
+        rag:
+          from_global_index_dir:
+            - "rag_index"                                     # Source: RAG wiring — inherit global vector index
+          local_index_dir: ""                                 # Source: RAG wiring — no per-agent local index
+          embed_type: "litellm"                               # Source: RAG wiring — embedder adapter
+          embed_model: "openai/hunyuan-embedding"             # Source: RAG wiring — Hunyuan embedding model
+          embed_api_key: "{{ HUNYUAN_API_KEY }}"              # Source: RAG wiring — env-var substitution
+          embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG wiring — Hunyuan endpoint
+          chunk_size: 512                                     # Source: RAG wiring — chunk size convention
+          chunk_overlap: 64                                   # Source: RAG wiring — chunk overlap convention
+          top_k: 5                                            # Source: RAG wiring — top-k retrieval
+      llm:
+        sys_message: "examples.CarryTradeUnwind.Rag.prompts:RAG_FUNDING_CURRENCY_BUYER_SYS"  # Source: RAG wiring — persona prompt for FCB archetype
+        user_message: "examples.CarryTradeUnwind.Rag.prompts:RAG_USER_TEMPLATE"              # Source: RAG wiring — user template with retrieved-context injection
+        lm_type: "api"                             # Source: LLM wiring — inference mode
+        lm_name: "ark/doubao-seed-2-0-mini-260428" # Source: LLM wiring — model identifier
+        generation_config:
+          temperature: 0.3                         # Source: RAG wiring — low temperature for retrieval-grounded decisions
+          max_new_tokens: 600                      # Source: RAG wiring — response length cap
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# RAG Hedged Carry Trader — FX stability mandate + RAG
+# Theory: Menkhoff et al. (2012)
+# -----------------------------------------------------------------------------
+ragllm_hedged_carry_trader:
+  name: "RAG Hedged Carry Trader"
+  class: "examples.CarryTradeUnwind.Rag.players:RagLLMHedgedCarryTrader"
+  num_instances: 1
+  config:
+    identity: "ragllm_hedged_carry_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/CarryTradeUnwind/Rag/records"  # Source: implementation infrastructure (record path)
+      initial_cash: 2000000.0                                 # Source: target §7 hedged-carry-trader Intent line; simulation-bases.md §4.4
+      initial_position: 0.0                                   # Source: target §7 hedged-carry-trader Intent line (starts flat, hedge-aware entry)
+      custom_state_hot_limit: 3                               # Source: implementation infrastructure (hot-state ring buffer)
+      private_knowledge:
+        from_global_resources:
+          - "MinerU_processed"                                # Source: RAG wiring — inherit global processed corpus
+        local_resources:
+          local_uri: ""                                       # Source: RAG wiring — no per-agent local URI
+          local_resources: []                                 # Source: RAG wiring — no per-agent supplemental resources
+        rag:
+          from_global_index_dir:
+            - "rag_index"                                     # Source: RAG wiring — inherit global vector index
+          local_index_dir: ""                                 # Source: RAG wiring — no per-agent local index
+          embed_type: "litellm"                               # Source: RAG wiring — embedder adapter
+          embed_model: "openai/hunyuan-embedding"             # Source: RAG wiring — Hunyuan embedding model
+          embed_api_key: "{{ HUNYUAN_API_KEY }}"              # Source: RAG wiring — env-var substitution
+          embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG wiring — Hunyuan endpoint
+          chunk_size: 512                                     # Source: RAG wiring — chunk size convention
+          chunk_overlap: 64                                   # Source: RAG wiring — chunk overlap convention
+          top_k: 5                                            # Source: RAG wiring — top-k retrieval
+      llm:
+        sys_message: "examples.CarryTradeUnwind.Rag.prompts:RAG_HEDGED_CARRY_TRADER_SYS"  # Source: RAG wiring — persona prompt for HCT archetype
+        user_message: "examples.CarryTradeUnwind.Rag.prompts:RAG_USER_TEMPLATE"           # Source: RAG wiring — user template with retrieved-context injection
+        lm_type: "api"                             # Source: LLM wiring — inference mode
+        lm_name: "ark/doubao-seed-2-0-mini-260428" # Source: LLM wiring — model identifier
+        generation_config:
+          temperature: 0.2                         # Source: RAG wiring — very low temperature for hedge discipline
+          max_new_tokens: 600                      # Source: RAG wiring — response length cap
+  persona: !include persona.yml
+
+# -----------------------------------------------------------------------------
+# RAG Noise Traders — random background + RAG (mostly ignored)
+# Theory: Black (1986)
+# -----------------------------------------------------------------------------
+ragllm_noise_trader:
+  name: "RAG Noise Trader"
+  class: "examples.CarryTradeUnwind.Rag.players:RagLLMNoiseTrader"
+  # Expander → ragllm_noise_trader_1, ragllm_noise_trader_2
+  num_instances: 2
+  config:
+    identity: "ragllm_noise_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/CarryTradeUnwind/Rag/records"  # Source: implementation infrastructure (record path)
+      initial_cash: 100000.0                                  # Source: target §7 noise-trader Intent line; simulation-bases.md §4.5
+      initial_position: 0.0                                   # Source: target §7 noise-trader Intent line (background flow starts flat)
+      custom_state_hot_limit: 3                               # Source: implementation infrastructure (hot-state ring buffer)
+      private_knowledge:
+        from_global_resources:
+          - "MinerU_processed"                                # Source: RAG wiring — inherit global processed corpus
+        local_resources:
+          local_uri: ""                                       # Source: RAG wiring — no per-agent local URI
+          local_resources: []                                 # Source: RAG wiring — no per-agent supplemental resources
+        rag:
+          from_global_index_dir:
+            - "rag_index"                                     # Source: RAG wiring — inherit global vector index
+          local_index_dir: ""                                 # Source: RAG wiring — no per-agent local index
+          embed_type: "litellm"                               # Source: RAG wiring — embedder adapter
+          embed_model: "openai/hunyuan-embedding"             # Source: RAG wiring — Hunyuan embedding model
+          embed_api_key: "{{ HUNYUAN_API_KEY }}"              # Source: RAG wiring — env-var substitution
+          embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"  # Source: RAG wiring — Hunyuan endpoint
+          chunk_size: 512                                     # Source: RAG wiring — chunk size convention
+          chunk_overlap: 64                                   # Source: RAG wiring — chunk overlap convention
+          top_k: 5                                            # Source: RAG wiring — top-k retrieval
+      llm:
+        sys_message: "examples.CarryTradeUnwind.Rag.prompts:RAG_NOISE_TRADER_SYS"  # Source: RAG wiring — persona prompt for noise-trader archetype
+        user_message: "examples.CarryTradeUnwind.Rag.prompts:RAG_USER_TEMPLATE"    # Source: RAG wiring — user template with retrieved-context injection
+        lm_type: "api"                             # Source: LLM wiring — inference mode
+        lm_name: "ark/doubao-seed-2-0-mini-260428" # Source: LLM wiring — model identifier
+        generation_config:
+          temperature: 0.9                         # Source: RAG wiring — high temperature for background stochastic flow
+          max_new_tokens: 600                      # Source: RAG wiring — response length cap
+  persona: !include persona.yml

@@ -1,0 +1,26 @@
+{
+  "round_num": 137,
+  "direction": "received",
+  "timestamp": "2026-07-29T16:55:40.775995",
+  "message": {
+    "message_type": "PEER",
+    "sender_id": "market",
+    "recipient_id": "rule_disposition_trader_2",
+    "payload": {
+      "content": {
+        "price": 103.3489200927058,
+        "prev_price": 102.92683959791061,
+        "fundamental": 100.0,
+        "deviation": 0.03348920092705796,
+        "round": 138
+      },
+      "content_type": "market_price",
+      "extras": {}
+    },
+    "timestamp": "2026-07-29T16:55:40.761328",
+    "priority": 1,
+    "extras": {
+      "round_num": 138
+    }
+  }
+}

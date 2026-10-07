@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:41.663131",
+  "size_bytes": 380,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"market\", \"recipient_id\": \"rule_contrarian_trader\", \"payload\": {\"content\": {\"price\": 104.3150069540466, \"prev_price\": 105.2994589523684, \"fundamental\": 100.0, \"deviation\": 0.04315006954046595, \"round\": 150}, \"content_type\": \"market_price\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:41.643730\", \"priority\": 1, \"extras\": {\"round_num\": 150}}"
+}

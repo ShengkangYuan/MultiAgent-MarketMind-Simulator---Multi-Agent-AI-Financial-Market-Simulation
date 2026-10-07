@@ -1,0 +1,45 @@
+# =============================================================================
+# ArchegosCollapse LLM - Topology Configuration
+# =============================================================================
+# Star topology: Market broadcasts to all LLM agents; agents send orders to market.
+#
+#         llm_concentrated_fund ──────────────┐
+#         llm_prime_broker_first_mover ──────┤
+#         llm_prime_broker_delayed_liquidator┼──▶ market ──▶ all agents
+#         llm_block_trade_buyer ──────────────┤        (price, deviation, volume)
+#         llm_information_trader ─────────────┘
+#
+# Execution flow per round:
+#   Level 0: market broadcasts current price + market data
+#   Level 1: all LLM agents execute in parallel, submit orders
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # Market → All agents (price + market data broadcast)
+  market:
+    - llm_concentrated_fund
+    - llm_prime_broker_first_mover
+    - llm_prime_broker_delayed_liquidator
+    - llm_block_trade_buyer
+    - llm_information_trader
+
+  # Each agent → Market only (order submission)
+  llm_concentrated_fund:
+    - market
+
+  llm_prime_broker_first_mover:
+    - market
+
+  llm_prime_broker_delayed_liquidator:
+    - market
+
+  llm_block_trade_buyer:
+    - market
+
+  llm_information_trader:
+    - market

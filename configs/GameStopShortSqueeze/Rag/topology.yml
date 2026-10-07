@@ -1,0 +1,29 @@
+# GameStopShortSqueeze Rag Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_retail_coordinated
+    - ragllm_short_seller_hf
+    - ragllm_market_maker_gamma
+    - ragllm_institutional_value
+    - ragllm_momentum_retail
+
+  ragllm_retail_coordinated:
+    - market
+
+  ragllm_short_seller_hf:
+    - market
+
+  ragllm_market_maker_gamma:
+    - market
+
+  ragllm_institutional_value:
+    - market
+
+  ragllm_momentum_retail:
+    - market

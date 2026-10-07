@@ -1,0 +1,26 @@
+{
+  "round_num": 39,
+  "direction": "received",
+  "timestamp": "2026-07-29T16:55:34.998515",
+  "message": {
+    "message_type": "PEER",
+    "sender_id": "rule_fundamental_analyst",
+    "recipient_id": "market",
+    "payload": {
+      "content": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 101.94349597482098,
+        "investor": "rule_fundamental_analyst",
+        "strategy": "fundamental-analyst"
+      },
+      "content_type": "investor_bid",
+      "extras": {}
+    },
+    "timestamp": "2026-07-29T16:55:34.984134",
+    "priority": 1,
+    "extras": {
+      "round_num": 39
+    }
+  }
+}

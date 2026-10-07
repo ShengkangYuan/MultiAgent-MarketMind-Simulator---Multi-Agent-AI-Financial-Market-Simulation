@@ -1,0 +1,45 @@
+# =============================================================================
+# CreditCycle Rule Topology - Star Pattern
+# =============================================================================
+# Market as hub, all investors communicate through market.
+#
+#         rule_pro_cyclical_lender ──────────┐
+#         rule_minsky_borrower ─────────────┤
+#         rule_counter_cyclical_lender ──────┼──▶ market ──▶ all investors
+#         rule_value_investor ──────────────┤
+#         rule_noise_trader ────────────────┘
+#
+# Execution flow per round:
+#   Level 0: market executes (broadcasts price + credit conditions)
+#   Level 1: all investors execute in parallel (submit orders)
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # Market → All investors (price + credit data broadcast)
+  market:
+    - rule_pro_cyclical_lender
+    - rule_minsky_borrower
+    - rule_counter_cyclical_lender
+    - rule_value_investor
+    - rule_noise_trader
+
+  # Each investor → Market only (order submission)
+  rule_pro_cyclical_lender:
+    - market
+
+  rule_minsky_borrower:
+    - market
+
+  rule_counter_cyclical_lender:
+    - market
+
+  rule_value_investor:
+    - market
+
+  rule_noise_trader:
+    - market

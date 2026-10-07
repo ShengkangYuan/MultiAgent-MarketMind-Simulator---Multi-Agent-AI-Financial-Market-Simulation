@@ -1,0 +1,502 @@
+[
+  {
+    "name": "timer_operate_duration",
+    "value": 2.0799636840820312,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:36.727842"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 76,
+      "duration_ms": 2.0799636840820312
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:36.727842"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.6779899597167969,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:36.789270"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 77,
+      "duration_ms": 1.6779899597167969
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:36.791288"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 0.5307197570800781,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:36.843556"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 78,
+      "duration_ms": 0.5307197570800781
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:36.843556"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.3675689697265625,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:36.904943"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 79,
+      "duration_ms": 1.3675689697265625
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:36.904943"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.468658447265625,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:36.962138"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 80,
+      "duration_ms": 1.468658447265625
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:36.962138"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.512289047241211,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.011910"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 81,
+      "duration_ms": 1.512289047241211
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.011910"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0559558868408203,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.059502"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 82,
+      "duration_ms": 1.0559558868408203
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.059502"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.3208389282226562,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.105337"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 83,
+      "duration_ms": 1.3208389282226562
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.105337"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0235309600830078,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.154870"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 84,
+      "duration_ms": 1.0235309600830078
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.154870"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0066032409667969,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.210715"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 85,
+      "duration_ms": 1.0066032409667969
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.210715"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 0.5235671997070312,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.264030"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 86,
+      "duration_ms": 0.5235671997070312
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.264030"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.5473365783691406,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.314050"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 87,
+      "duration_ms": 1.5473365783691406
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.314050"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0113716125488281,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.370280"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 88,
+      "duration_ms": 1.0113716125488281
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.370280"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 2.00653076171875,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.429436"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 89,
+      "duration_ms": 2.00653076171875
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.429436"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.007080078125,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.490617"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 90,
+      "duration_ms": 1.007080078125
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.490617"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 2.5162696838378906,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.564613"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 91,
+      "duration_ms": 2.5162696838378906
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.564613"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.5211105346679688,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.632900"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 92,
+      "duration_ms": 1.5211105346679688
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.632900"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0073184967041016,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.700460"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 93,
+      "duration_ms": 1.0073184967041016
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.700460"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0151863098144531,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.757360"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 94,
+      "duration_ms": 1.0151863098144531
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.757360"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.4028549194335938,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.821896"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 95,
+      "duration_ms": 1.4028549194335938
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.821896"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.2347698211669922,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.888555"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 96,
+      "duration_ms": 1.2347698211669922
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.888555"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.5158653259277344,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.957870"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 97,
+      "duration_ms": 1.5158653259277344
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:37.957870"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.59454345703125,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.022032"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 98,
+      "duration_ms": 1.59454345703125
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.022032"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 1.0204315185546875,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.080638"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 99,
+      "duration_ms": 1.0204315185546875
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.080638"
+  },
+  {
+    "name": "timer_operate_duration",
+    "value": 2.003908157348633,
+    "tags": {
+      "unit": "ms"
+    },
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.145758"
+  },
+  {
+    "name": "operate_completed",
+    "value": {
+      "player_id": "rule_liquidity_provider",
+      "round_num": 100,
+      "duration_ms": 2.003908157348633
+    },
+    "tags": {},
+    "entity_id": null,
+    "timestamp": "2026-07-29T16:55:38.145758"
+  }
+]

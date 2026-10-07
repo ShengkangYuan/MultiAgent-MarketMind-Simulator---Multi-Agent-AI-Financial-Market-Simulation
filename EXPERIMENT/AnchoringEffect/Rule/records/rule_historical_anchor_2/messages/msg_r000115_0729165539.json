@@ -1,0 +1,26 @@
+{
+  "round_num": 115,
+  "direction": "received",
+  "timestamp": "2026-07-29T16:55:39.166551",
+  "message": {
+    "message_type": "PEER",
+    "sender_id": "market",
+    "recipient_id": "rule_historical_anchor_2",
+    "payload": {
+      "content": {
+        "price": 104.76958981757002,
+        "prev_price": 103.2506527172625,
+        "fundamental": 100.0,
+        "deviation": 0.04769589817570022,
+        "round": 116
+      },
+      "content_type": "market_price",
+      "extras": {}
+    },
+    "timestamp": "2026-07-29T16:55:39.160912",
+    "priority": 1,
+    "extras": {
+      "round_num": 116
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "round_num": 87,
+  "timestamp": "2026-07-29T16:55:37.312502",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "hold",
+          "quantity": 0.0,
+          "bid_price": 101.90619236366473,
+          "investor": "rule_disposition_trader_1",
+          "strategy": "disposition-trader",
+          "_clipped": true,
+          "_clipped_from": "buy",
+          "_clipped_intended_quantity": 8.965465502544227,
+          "_clipped_reason": "insufficient_cash"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "hold",
+            "quantity": 0.0,
+            "bid_price": 101.90619236366473,
+            "investor": "rule_disposition_trader_1",
+            "strategy": "disposition-trader",
+            "_clipped": true,
+            "_clipped_from": "buy",
+            "_clipped_intended_quantity": 8.965465502544227,
+            "_clipped_reason": "insufficient_cash"
+          },
+          "source_id": "rule_disposition_trader_1",
+          "timestamp": "2026-07-29T16:55:37.312502",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.092
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 101.90619236366473,
+        "investor": "rule_disposition_trader_1",
+        "strategy": "disposition-trader",
+        "_clipped": true,
+        "_clipped_from": "buy",
+        "_clipped_intended_quantity": 8.965465502544227,
+        "_clipped_reason": "insufficient_cash"
+      },
+      "source_id": "rule_disposition_trader_1",
+      "timestamp": "2026-07-29T16:55:37.312502",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 87,
+    "tick_turn_duration_ms": 0.099,
+    "tick_turn_total_duration_ms": 15.535,
+    "tick_step_count": 1
+  }
+}

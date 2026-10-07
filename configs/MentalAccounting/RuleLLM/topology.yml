@@ -1,0 +1,29 @@
+# MentalAccounting RuleLLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_mental_accountant
+    - rulellm_house_money_trader
+    - rulellm_rational_portfolio_manager
+    - rulellm_sunk_cost_holder
+    - rulellm_noise_trader
+
+  rulellm_mental_accountant:
+    - market
+
+  rulellm_house_money_trader:
+    - market
+
+  rulellm_rational_portfolio_manager:
+    - market
+
+  rulellm_sunk_cost_holder:
+    - market
+
+  rulellm_noise_trader:
+    - market

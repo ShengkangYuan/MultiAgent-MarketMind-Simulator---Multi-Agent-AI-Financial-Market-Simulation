@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:36.964047",
+  "size_bytes": 516,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"rule_anchored_trader_2\", \"recipient_id\": \"market\", \"payload\": {\"content\": {\"action\": \"buy\", \"quantity\": 19.50747757193096, \"bid_price\": 100.19038342575016, \"investor\": \"rule_anchored_trader_2\", \"strategy\": \"anchored-trader\", \"_clipped\": true, \"_clipped_from\": \"buy\", \"_clipped_intended_quantity\": 20.0, \"_clipped_reason\": \"insufficient_cash\"}, \"content_type\": \"investor_bid\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:36.963534\", \"priority\": 1, \"extras\": {\"round_num\": 80}}"
+}

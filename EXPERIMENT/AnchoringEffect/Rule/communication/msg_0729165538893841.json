@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:38.893841",
+  "size_bytes": 531,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"rule_fundamental_analyst\", \"recipient_id\": \"market\", \"payload\": {\"content\": {\"action\": \"hold\", \"quantity\": 0.0, \"bid_price\": 102.13942637139336, \"investor\": \"rule_fundamental_analyst\", \"strategy\": \"fundamental-analyst\", \"_clipped\": true, \"_clipped_from\": \"sell\", \"_clipped_intended_quantity\": 21.207843964972774, \"_clipped_reason\": \"insufficient_position\"}, \"content_type\": \"investor_bid\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:38.879478\", \"priority\": 1, \"extras\": {\"round_num\": 111}}"
+}

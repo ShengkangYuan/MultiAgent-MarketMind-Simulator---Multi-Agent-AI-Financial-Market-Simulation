@@ -1,0 +1,26 @@
+{
+  "round_num": 105,
+  "direction": "received",
+  "timestamp": "2026-07-29T16:55:38.510297",
+  "message": {
+    "message_type": "PEER",
+    "sender_id": "rule_contrarian_trader",
+    "recipient_id": "market",
+    "payload": {
+      "content": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 102.94678418246103,
+        "investor": "rule_contrarian_trader",
+        "strategy": "contrarian-trader"
+      },
+      "content_type": "investor_bid",
+      "extras": {}
+    },
+    "timestamp": "2026-07-29T16:55:38.488739",
+    "priority": 1,
+    "extras": {
+      "round_num": 105
+    }
+  }
+}

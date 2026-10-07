@@ -1,0 +1,24 @@
+# StatusQuoBias RuleLLM Topology Configuration
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_inertial_holder
+    - rulellm_default_follower
+    - rulellm_active_rebalancer
+    - rulellm_momentum_trader
+    - rulellm_noise_trader
+  rulellm_inertial_holder:
+    - market
+  rulellm_default_follower:
+    - market
+  rulellm_active_rebalancer:
+    - market
+  rulellm_momentum_trader:
+    - market
+  rulellm_noise_trader:
+    - market

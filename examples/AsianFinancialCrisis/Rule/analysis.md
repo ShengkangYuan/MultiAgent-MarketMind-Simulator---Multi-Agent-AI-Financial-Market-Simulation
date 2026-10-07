@@ -1,0 +1,136 @@
+# AsianFinancialCrisis Rule — Analysis Documentation
+
+## §1 Overview
+
+| Item                                | Description                                                                                                                            |
+|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| **Implements**                      | `../analysis-bases.md`                                                                                                                 |
+| **Analysis Script**                 | `analysis.py` in this directory                                                                                                        |
+| **Output Location**                 | `EXPERIMENT/AsianFinancialCrisis/Rule/records/analysis/`                                                                               |
+| **Variant-Specific Considerations** | Deterministic baseline; provides calibration reference for cross-variant comparison of crisis depth and contagion signal effectiveness |
+
+---
+
+## §2 Metric Implementation
+
+All metrics defined in `../analysis-bases.md §2`. Rule `analysis.py` is the authoritative implementation — all other variants import from it.
+
+| Metric                     | Function              | Root Metric Reference | Rule-Specific Notes                                                                   |
+|----------------------------|-----------------------|-----------------------|---------------------------------------------------------------------------------------|
+| **Price Deviation**        | `def analyze_asian_financial_crisis(...)` | `analysis-bases.md §2.1`                | Deterministic cascade; deviation follows predictable contagion spiral                 |
+| **Maximum Drawdown**       | `def _compute_max_drawdown(prices)` | `analysis-bases.md §2.2`                | Calibration target 30%–60%; Rule shows cleanest drawdown matching threshold formulas  |
+| **Crisis Velocity**        | `def _compute_crisis_velocity(prices)` | `analysis-bases.md §2.3`                | Max price change per round; HotMoneyFunder + ContagionTrader combined selling visible |
+| **Return Autocorrelation** | `def _compute_rolling_ac1(returns, window=10)` | `analysis-bases.md §2.4`                | AC1 > 0.2 during contagion phase; negative in recovery                                |
+| **Agent-Type Volume**      | `def _load_data(results)` | `analysis-bases.md §2.5`                | HotMoneyFunder + ContagionTrader dominate sell volume; IMFRescuer dominates buy       |
+| **Crisis Onset Round**     | `def _compute_crisis_onset(prices, fundamentals)` | `analysis-bases.md §2.6`                | First round deviation < −10%; Rule: expected rounds 10–20                             |
+| **IMF Rescue Activation**  | `def analyze_asian_financial_crisis(...)` | `analysis-bases.md §2.7`                | IMFRescuer should activate after stress deepens; validates rescue timing              |
+
+---
+
+## §3 Dimension-by-Dimension Analysis
+
+### Dimension 1: Price Crisis Dynamics
+*(Objective from analysis-bases.md §3.1)*
+
+**Implementation in analysis.py:**
+- Function: `load_simulation_data()` → loads price/fundamental from `records/market/*.json`
+- Output: `01_asianfinancialcrisis_dynamics.png` and `02_asianfinancialcrisis_analysis.png`
+
+**Variant-Specific Interpretation:**
+Rule shows clean, formula-driven contagion: as deviation deepens past −2%, HotMoneyFunder reverses; at −2.5% signal, ContagionTrader amplifies. If crisis doesn't reach −30%, check `price_impact` (should be 0.04) and agent instance counts.
+
+---
+
+### Dimension 2: Agent Behavior Analysis
+*(Objective from analysis-bases.md §3.2)*
+
+**Implementation in analysis.py:**
+- Computation: per-agent volume from order records
+- Output: `summary.json` with nested validation and volume diagnostics by agent
+
+**Variant-Specific Interpretation:**
+HotMoneyFunder first sell round should match first round `deviation < −0.02`. ContagionTrader first sell depends on `price_return` signal — may lag by 1 round if price momentum just turned negative. IMFRescuer activates exactly at deviation < −0.05.
+
+---
+
+### Dimension 3: Contagion Signal Analysis
+*(Objective from analysis-bases.md §3.3)*
+
+**Implementation in analysis.py:**
+- Computation: `returns = np.diff(prices) / prices[:-1]`; return distribution and autocorrelation
+- Output: return time series (Panel 3); return distribution (Panel 4)
+
+**Variant-Specific Interpretation:**
+Return distribution should show strong left tail (large negative returns during contagion phase). Rolling return autocorrelation should be positive (0.2–0.5) during contagion then negative during recovery.
+
+---
+
+### Dimension 4: Cross-Variant Comparison
+*(Objective from analysis-bases.md §3.4)*
+
+Rule is the deterministic reference. Other variants compared against Rule's drawdown magnitude and crisis onset round. Key question: does LLM behavioral panic produce deeper or shallower drawdown than formula?
+
+---
+
+## §4 Variant-Specific Observable Phenomena
+
+| Phenomenon                        | Description                                                                | How to Observe                                      | Contrast with LLM                           |
+|-----------------------------------|----------------------------------------------------------------------------|-----------------------------------------------------|---------------------------------------------|
+| **Contagion Signal Cascade**      | ContagionTrader signal activates exactly when dual-negative conditions met | ContagionTrader first sell round vs. signal formula | LLM: may sell earlier from behavioral panic |
+| **IMF Exact Threshold**           | IMFRescuer buys start exactly at deviation = −5%                           | First IMFRescuer buy round in order records         | LLM: patience may vary round-to-round       |
+| **Deterministic Crisis Shape**    | Same crisis trajectory in each run (given same seed)                       | Multiple runs overlay — identical curves            | LLM: variable crisis shape and depth        |
+| **ValueContrarian Exact Trigger** | ValueContrarian buys start exactly at deviation = −8%                      | First ValueContrarian buy round                     | LLM: buying may start at different levels   |
+
+---
+
+## §5 Scaling and Sensitivity Analysis
+
+### Round Scaling
+
+| Total Rounds   | Expected Observable                                   |
+|----------------|-------------------------------------------------------|
+| **50 rounds**  | Full crisis lifecycle (onset → peak → early recovery) |
+| **100 rounds** | Complete recovery visible; all 5 phases observable    |
+
+### Parameter Sensitivity
+
+| Parameter            | Change        | Expected Effect                                         |
+|----------------------|---------------|---------------------------------------------------------|
+| `price_impact`       | 0.04 → 0.06   | Deeper crisis; faster depreciation cascade              |
+| `contagion_weight`   | 0.60 → 0.80   | Stronger deviation-driven selling; earlier crisis onset |
+| `rescue_threshold`   | −0.05 → −0.08 | Delayed IMF intervention; deeper trough before floor    |
+| `oversold_threshold` | −0.08 → −0.15 | ValueContrarian provides floor only at deeper discounts |
+
+---
+
+## §6 Output Files Reference
+
+All outputs written to `EXPERIMENT/AsianFinancialCrisis/Rule/records/analysis/`.
+
+| Output File                         | Generated By              | Contents                                         | Interpretation                            |
+|-------------------------------------|---------------------------|--------------------------------------------------|-------------------------------------------|
+| `00_investor_bids.png` | `_create_visualizations()` | Market price and per-agent bid traces | Primary order-quality check |
+| `01_asianfinancialcrisis_dynamics.png` | `_create_visualizations()` | Price/fundamental and deviation bands | Primary crisis-depth verification |
+| `02_asianfinancialcrisis_analysis.png` | `_create_visualizations()` | Returns and rolling volatility | Crisis velocity and volatility check |
+| `03_summary.png` | `_create_visualizations()` | Agent volume and validation score summary | Compact scenario diagnosis |
+| `summary.json` | `analyze_asian_financial_crisis()` | `metrics` and nested `validation` object | Machine-readable cross-variant comparison |
+
+---
+
+## §7 Cross-Variant Comparison Notes
+
+- **Crash emergence speed**: Rule shows fastest, most predictable crisis (immediate formula triggers)
+- **Crash intensity**: Rule max drawdown is calibration reference (30–60%); other variants compared against this
+- **Behavioral realism**: Rule is least realistic (no psychology) but most interpretable
+- **Contagion clarity**: Rule shows purest dual-signal contagion; no LLM noise or persona variation
+
+Cross-variant comparison protocol: `../analysis-bases.md §5`.
+
+---
+
+## References
+
+- `../analysis-bases.md` — master analysis specification
+- `../simulation-bases.md §3.1` — price formula (λ=0.04 rationale)
+- `../simulation-bases.md §4` — investor type specs and threshold rules
+- `../simulation-bases.md §8` — historical calibration targets (30–60% drawdown)

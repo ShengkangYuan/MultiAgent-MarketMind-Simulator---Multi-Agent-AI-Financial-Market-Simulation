@@ -1,0 +1,29 @@
+# GameStopShortSqueeze LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_retail_coordinated
+    - llm_short_seller_hf
+    - llm_market_maker_gamma
+    - llm_institutional_value
+    - llm_momentum_retail
+
+  llm_retail_coordinated:
+    - market
+
+  llm_short_seller_hf:
+    - market
+
+  llm_market_maker_gamma:
+    - market
+
+  llm_institutional_value:
+    - market
+
+  llm_momentum_retail:
+    - market

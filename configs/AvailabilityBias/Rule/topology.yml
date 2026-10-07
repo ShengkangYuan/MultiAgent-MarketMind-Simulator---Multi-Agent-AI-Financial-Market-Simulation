@@ -1,0 +1,45 @@
+# =============================================================================
+# AvailabilityBias Topology - Star Pattern
+# =============================================================================
+# Market as hub, all investors communicate through market.
+#
+#   rule_recent_event_overweighter ────┐
+#   rule_media_influenced_trader ──────┤
+#   rule_systematic_analyst ───────────┼──▶ market ──▶ all investors
+#   rule_value_trader ─────────────────┤
+#   rule_noise_trader ─────────────────┘
+#
+# Execution flow per round:
+#   Level 0: market executes (broadcasts price, fundamental, deviation data)
+#   Level 1: all investors execute in parallel (submit P,Q orders)
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # Market → All investors (price + market data broadcast)
+  market:
+    - rule_recent_event_overweighter
+    - rule_media_influenced_trader
+    - rule_systematic_analyst
+    - rule_value_trader
+    - rule_noise_trader
+
+  # Each investor → Market only (order submission)
+  rule_recent_event_overweighter:
+    - market
+
+  rule_media_influenced_trader:
+    - market
+
+  rule_systematic_analyst:
+    - market
+
+  rule_value_trader:
+    - market
+
+  rule_noise_trader:
+    - market

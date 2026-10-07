@@ -1,0 +1,31 @@
+# =============================================================================
+# CreditCycle RuleLLM Topology - Star Pattern
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_pro_cyclical_lender
+    - rulellm_minsky_borrower
+    - rulellm_counter_cyclical_lender
+    - rulellm_value_investor
+    - rulellm_noise_trader
+
+  rulellm_pro_cyclical_lender:
+    - market
+
+  rulellm_minsky_borrower:
+    - market
+
+  rulellm_counter_cyclical_lender:
+    - market
+
+  rulellm_value_investor:
+    - market
+
+  rulellm_noise_trader:
+    - market

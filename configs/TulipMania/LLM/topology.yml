@@ -1,0 +1,21 @@
+type: "star"
+sources:
+  - market
+
+connections:
+  market:
+    - llm_trend_chaser
+    - llm_social_proof_follower
+    - llm_intrinsic_value_trader
+    - llm_early_exit_trader
+    - llm_noise_trader
+  llm_trend_chaser:
+    - market
+  llm_social_proof_follower:
+    - market
+  llm_intrinsic_value_trader:
+    - market
+  llm_early_exit_trader:
+    - market
+  llm_noise_trader:
+    - market

@@ -1,0 +1,27 @@
+# =============================================================================
+# MomentumEffectRuleLLM - Topology Configuration
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_momentum_trader
+    - rulellm_contrarian_trader
+    - rulellm_technical_trader
+    - rulellm_trend_follower
+    - rulellm_fundamental_anchor
+
+  rulellm_momentum_trader:
+    - market
+  rulellm_contrarian_trader:
+    - market
+  rulellm_technical_trader:
+    - market
+  rulellm_trend_follower:
+    - market
+  rulellm_fundamental_anchor:
+    - market

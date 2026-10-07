@@ -1,0 +1,24 @@
+# SouthSeaBubble RuleLLM Topology Configuration
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_insider_advantaged
+    - rulellm_narrative_believer
+    - rulellm_skeptical_analyst
+    - rulellm_arbitrageur
+    - rulellm_noise_trader
+  rulellm_insider_advantaged:
+    - market
+  rulellm_narrative_believer:
+    - market
+  rulellm_skeptical_analyst:
+    - market
+  rulellm_arbitrageur:
+    - market
+  rulellm_noise_trader:
+    - market

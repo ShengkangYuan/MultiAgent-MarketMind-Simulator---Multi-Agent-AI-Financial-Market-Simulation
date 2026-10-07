@@ -1,0 +1,29 @@
+# EuropeanDebtCrisis LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_periphery_bond_seller
+    - llm_creditor_panicker
+    - llm_core_bond_buyer
+    - llm_ecb_intervenor
+    - llm_hedged_fund
+
+  llm_periphery_bond_seller:
+    - market
+
+  llm_creditor_panicker:
+    - market
+
+  llm_core_bond_buyer:
+    - market
+
+  llm_ecb_intervenor:
+    - market
+
+  llm_hedged_fund:
+    - market

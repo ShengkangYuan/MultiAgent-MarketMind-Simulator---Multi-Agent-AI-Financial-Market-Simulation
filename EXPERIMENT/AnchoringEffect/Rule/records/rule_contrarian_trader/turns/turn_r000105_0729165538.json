@@ -1,0 +1,51 @@
+{
+  "round_num": 105,
+  "timestamp": "2026-07-29T16:55:38.485491",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "hold",
+          "quantity": 0.0,
+          "bid_price": 102.94678418246103,
+          "investor": "rule_contrarian_trader",
+          "strategy": "contrarian-trader"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "hold",
+            "quantity": 0.0,
+            "bid_price": 102.94678418246103,
+            "investor": "rule_contrarian_trader",
+            "strategy": "contrarian-trader"
+          },
+          "source_id": "rule_contrarian_trader",
+          "timestamp": "2026-07-29T16:55:38.485491",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.074
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 102.94678418246103,
+        "investor": "rule_contrarian_trader",
+        "strategy": "contrarian-trader"
+      },
+      "source_id": "rule_contrarian_trader",
+      "timestamp": "2026-07-29T16:55:38.485491",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 105,
+    "tick_turn_duration_ms": 0.081,
+    "tick_turn_total_duration_ms": 17.453,
+    "tick_step_count": 1
+  }
+}

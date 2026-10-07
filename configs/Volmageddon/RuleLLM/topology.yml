@@ -1,0 +1,29 @@
+# Volmageddon RuleLLM Communication Topology
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_short_vol_trader
+    - rulellm_vol_etn_manager
+    - rulellm_long_vol_hedger
+    - rulellm_vol_arbitrageur
+    - rulellm_equity_trader
+
+  rulellm_short_vol_trader:
+    - market
+
+  rulellm_vol_etn_manager:
+    - market
+
+  rulellm_long_vol_hedger:
+    - market
+
+  rulellm_vol_arbitrageur:
+    - market
+
+  rulellm_equity_trader:
+    - market

@@ -1,0 +1,63 @@
+{
+  "round_num": 90,
+  "timestamp": "2026-07-29T16:55:37.489610",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "hold",
+          "quantity": 0.0,
+          "bid_price": 102.3226492278798,
+          "investor": "rule_fundamental_analyst",
+          "strategy": "fundamental-analyst",
+          "_clipped": true,
+          "_clipped_from": "sell",
+          "_clipped_intended_quantity": 22.678314896175763,
+          "_clipped_reason": "insufficient_position"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "hold",
+            "quantity": 0.0,
+            "bid_price": 102.3226492278798,
+            "investor": "rule_fundamental_analyst",
+            "strategy": "fundamental-analyst",
+            "_clipped": true,
+            "_clipped_from": "sell",
+            "_clipped_intended_quantity": 22.678314896175763,
+            "_clipped_reason": "insufficient_position"
+          },
+          "source_id": "rule_fundamental_analyst",
+          "timestamp": "2026-07-29T16:55:37.489610",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.097
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 102.3226492278798,
+        "investor": "rule_fundamental_analyst",
+        "strategy": "fundamental-analyst",
+        "_clipped": true,
+        "_clipped_from": "sell",
+        "_clipped_intended_quantity": 22.678314896175763,
+        "_clipped_reason": "insufficient_position"
+      },
+      "source_id": "rule_fundamental_analyst",
+      "timestamp": "2026-07-29T16:55:37.489610",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 90,
+    "tick_turn_duration_ms": 0.104,
+    "tick_turn_total_duration_ms": 15.903,
+    "tick_step_count": 1
+  }
+}

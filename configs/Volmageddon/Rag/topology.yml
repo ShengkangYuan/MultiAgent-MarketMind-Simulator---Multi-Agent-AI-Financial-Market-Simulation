@@ -1,0 +1,29 @@
+# Volmageddon Rag Communication Topology
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_short_vol_trader
+    - ragllm_vol_etn_manager
+    - ragllm_long_vol_hedger
+    - ragllm_vol_arbitrageur
+    - ragllm_equity_trader
+
+  ragllm_short_vol_trader:
+    - market
+
+  ragllm_vol_etn_manager:
+    - market
+
+  ragllm_long_vol_hedger:
+    - market
+
+  ragllm_vol_arbitrageur:
+    - market
+
+  ragllm_equity_trader:
+    - market

@@ -1,0 +1,29 @@
+# GameStopShortSqueeze RuleLLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_retail_coordinated
+    - rulellm_short_seller_hf
+    - rulellm_market_maker_gamma
+    - rulellm_institutional_value
+    - rulellm_momentum_retail
+
+  rulellm_retail_coordinated:
+    - market
+
+  rulellm_short_seller_hf:
+    - market
+
+  rulellm_market_maker_gamma:
+    - market
+
+  rulellm_institutional_value:
+    - market
+
+  rulellm_momentum_retail:
+    - market

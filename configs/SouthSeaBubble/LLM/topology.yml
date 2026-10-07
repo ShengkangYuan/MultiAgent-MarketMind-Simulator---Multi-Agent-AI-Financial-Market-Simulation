@@ -1,0 +1,24 @@
+# SouthSeaBubble LLM Topology Configuration
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_insider_advantaged
+    - llm_narrative_believer
+    - llm_skeptical_analyst
+    - llm_arbitrageur
+    - llm_noise_trader
+  llm_insider_advantaged:
+    - market
+  llm_narrative_believer:
+    - market
+  llm_skeptical_analyst:
+    - market
+  llm_arbitrageur:
+    - market
+  llm_noise_trader:
+    - market

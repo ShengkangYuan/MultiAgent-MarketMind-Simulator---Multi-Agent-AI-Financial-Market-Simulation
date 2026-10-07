@@ -1,0 +1,24 @@
+# RepresentativenessBias Rag Topology Configuration
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_pattern_matcher
+    - ragllm_category_overgeneralizer
+    - ragllm_bayesian_updater
+    - ragllm_contrarian_statistical
+    - ragllm_noise_trader
+  ragllm_pattern_matcher:
+    - market
+  ragllm_category_overgeneralizer:
+    - market
+  ragllm_bayesian_updater:
+    - market
+  ragllm_contrarian_statistical:
+    - market
+  ragllm_noise_trader:
+    - market

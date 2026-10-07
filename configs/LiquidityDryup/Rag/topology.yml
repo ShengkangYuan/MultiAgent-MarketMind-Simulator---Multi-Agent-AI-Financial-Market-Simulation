@@ -1,0 +1,27 @@
+# =============================================================================
+# LiquidityDryupRag - Topology Configuration
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_market_maker
+    - ragllm_liquidity_seeker
+    - ragllm_value_trader
+    - ragllm_momentum_trader
+    - ragllm_noise_trader
+
+  ragllm_market_maker:
+    - market
+  ragllm_liquidity_seeker:
+    - market
+  ragllm_value_trader:
+    - market
+  ragllm_momentum_trader:
+    - market
+  ragllm_noise_trader:
+    - market

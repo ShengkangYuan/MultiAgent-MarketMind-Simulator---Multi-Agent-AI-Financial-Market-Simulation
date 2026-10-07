@@ -1,0 +1,29 @@
+# Volmageddon Rule Communication Topology
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_short_vol_trader
+    - rule_vol_etn_manager
+    - rule_long_vol_hedger
+    - rule_vol_arbitrageur
+    - rule_equity_trader
+
+  rule_short_vol_trader:
+    - market
+
+  rule_vol_etn_manager:
+    - market
+
+  rule_long_vol_hedger:
+    - market
+
+  rule_vol_arbitrageur:
+    - market
+
+  rule_equity_trader:
+    - market

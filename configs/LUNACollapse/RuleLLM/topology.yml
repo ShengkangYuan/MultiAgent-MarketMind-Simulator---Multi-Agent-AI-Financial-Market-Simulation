@@ -1,0 +1,29 @@
+# LUNACollapse RuleLLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_stablecoin_holder
+    - rulellm_arbitrageur
+    - rulellm_de_fi_lender
+    - rulellm_anchor_depositor
+    - rulellm_value_buyer
+
+  rulellm_stablecoin_holder:
+    - market
+
+  rulellm_arbitrageur:
+    - market
+
+  rulellm_de_fi_lender:
+    - market
+
+  rulellm_anchor_depositor:
+    - market
+
+  rulellm_value_buyer:
+    - market

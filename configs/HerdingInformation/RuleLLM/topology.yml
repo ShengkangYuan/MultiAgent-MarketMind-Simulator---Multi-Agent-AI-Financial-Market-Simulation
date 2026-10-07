@@ -1,0 +1,29 @@
+# HerdingInformation RuleLLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_cascade_follower
+    - rulellm_reputation_herder
+    - rulellm_independent_thinker
+    - rulellm_contrarian
+    - rulellm_noise_trader
+
+  rulellm_cascade_follower:
+    - market
+
+  rulellm_reputation_herder:
+    - market
+
+  rulellm_independent_thinker:
+    - market
+
+  rulellm_contrarian:
+    - market
+
+  rulellm_noise_trader:
+    - market

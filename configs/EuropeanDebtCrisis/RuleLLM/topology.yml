@@ -1,0 +1,29 @@
+# EuropeanDebtCrisis RuleLLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_periphery_bond_seller
+    - rulellm_creditor_panicker
+    - rulellm_core_bond_buyer
+    - rulellm_ecb_intervenor
+    - rulellm_hedged_fund
+
+  rulellm_periphery_bond_seller:
+    - market
+
+  rulellm_creditor_panicker:
+    - market
+
+  rulellm_core_bond_buyer:
+    - market
+
+  rulellm_ecb_intervenor:
+    - market
+
+  rulellm_hedged_fund:
+    - market

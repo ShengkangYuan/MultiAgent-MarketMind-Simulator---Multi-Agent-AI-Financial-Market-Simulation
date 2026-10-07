@@ -1,0 +1,21 @@
+type: "star"
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_trend_chaser
+    - ragllm_social_proof_follower
+    - ragllm_intrinsic_value_trader
+    - ragllm_early_exit_trader
+    - ragllm_noise_trader
+  ragllm_trend_chaser:
+    - market
+  ragllm_social_proof_follower:
+    - market
+  ragllm_intrinsic_value_trader:
+    - market
+  ragllm_early_exit_trader:
+    - market
+  ragllm_noise_trader:
+    - market

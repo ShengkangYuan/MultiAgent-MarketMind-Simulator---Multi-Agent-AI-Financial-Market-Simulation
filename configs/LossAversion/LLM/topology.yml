@@ -1,0 +1,29 @@
+# LossAversion LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_loss_averse_investor
+    - llm_break_even_trader
+    - llm_rational_trader
+    - llm_momentum_trader
+    - llm_market_maker
+
+  llm_loss_averse_investor:
+    - market
+
+  llm_break_even_trader:
+    - market
+
+  llm_rational_trader:
+    - market
+
+  llm_momentum_trader:
+    - market
+
+  llm_market_maker:
+    - market

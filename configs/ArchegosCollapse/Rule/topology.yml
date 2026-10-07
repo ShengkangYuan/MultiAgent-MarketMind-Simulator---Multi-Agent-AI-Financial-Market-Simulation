@@ -1,0 +1,45 @@
+# =============================================================================
+# ArchegosCollapse Rule - Topology Configuration
+# =============================================================================
+# Star topology: Market broadcasts to all agents; agents send orders to market.
+#
+#         rule_concentrated_fund ──────────────┐
+#         rule_prime_broker_first_mover ──────┤
+#         rule_prime_broker_delayed_liquidator┼──▶ market ──▶ all agents
+#         rule_block_trade_buyer ──────────────┤        (price, deviation, volume)
+#         rule_information_trader ─────────────┘
+#
+# Execution flow per round:
+#   Level 0: market broadcasts current price + market data
+#   Level 1: all agents execute in parallel, submit orders
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # Market → All agents (price + market data broadcast)
+  market:
+    - rule_concentrated_fund
+    - rule_prime_broker_first_mover
+    - rule_prime_broker_delayed_liquidator
+    - rule_block_trade_buyer
+    - rule_information_trader
+
+  # Each agent → Market only (order submission)
+  rule_concentrated_fund:
+    - market
+
+  rule_prime_broker_first_mover:
+    - market
+
+  rule_prime_broker_delayed_liquidator:
+    - market
+
+  rule_block_trade_buyer:
+    - market
+
+  rule_information_trader:
+    - market

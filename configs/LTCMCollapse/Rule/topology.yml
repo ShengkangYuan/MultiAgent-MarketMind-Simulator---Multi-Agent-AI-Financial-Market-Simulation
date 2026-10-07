@@ -1,0 +1,29 @@
+# LTCMCollapse Rule Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_convergence_arbitrageur
+    - rule_leverage_trader
+    - rule_risk_manager
+    - rule_liquidity_provider
+    - rule_central_bank
+
+  rule_convergence_arbitrageur:
+    - market
+
+  rule_leverage_trader:
+    - market
+
+  rule_risk_manager:
+    - market
+
+  rule_liquidity_provider:
+    - market
+
+  rule_central_bank:
+    - market

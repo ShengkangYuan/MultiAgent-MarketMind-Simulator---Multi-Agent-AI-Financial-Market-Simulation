@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:40.612049",
+  "size_bytes": 388,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"rule_contrarian_trader\", \"recipient_id\": \"market\", \"payload\": {\"content\": {\"action\": \"hold\", \"quantity\": 0.0, \"bid_price\": 103.32798490092797, \"investor\": \"rule_contrarian_trader\", \"strategy\": \"contrarian-trader\"}, \"content_type\": \"investor_bid\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:40.597967\", \"priority\": 1, \"extras\": {\"round_num\": 135}}"
+}

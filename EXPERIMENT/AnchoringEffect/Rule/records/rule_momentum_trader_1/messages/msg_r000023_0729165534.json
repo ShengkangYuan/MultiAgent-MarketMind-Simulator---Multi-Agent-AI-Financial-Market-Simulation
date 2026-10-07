@@ -1,0 +1,26 @@
+{
+  "round_num": 23,
+  "direction": "received",
+  "timestamp": "2026-07-29T16:55:34.170486",
+  "message": {
+    "message_type": "PEER",
+    "sender_id": "market",
+    "recipient_id": "rule_momentum_trader_1",
+    "payload": {
+      "content": {
+        "price": 103.62800190719308,
+        "prev_price": 103.41536972244718,
+        "fundamental": 100.0,
+        "deviation": 0.03628001907193081,
+        "round": 24
+      },
+      "content_type": "market_price",
+      "extras": {}
+    },
+    "timestamp": "2026-07-29T16:55:34.164025",
+    "priority": 1,
+    "extras": {
+      "round_num": 24
+    }
+  }
+}

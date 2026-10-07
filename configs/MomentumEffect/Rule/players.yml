@@ -1,0 +1,183 @@
+# =============================================================================
+# MomentumEffect Players Configuration
+# =============================================================================
+# All parameters explicitly defined - no defaults in code.
+#
+# Investor Types:
+#   - MomentumTrader: Buys past winners, sells past losers (Jegadeesh & Titman 1993)
+#   - ContrarianTrader: Mean reversion - buys losers, sells winners
+#   - IndexFund: Passive baseline - fixed allocation
+#   - MarketMaker: Liquidity provision - inventory mean reversion
+#   - TechnicalTrader: Moving average crossover (golden/death cross)
+#   - FundamentalTrader: Value-based anchor toward intrinsic value
+# =============================================================================
+
+market:
+  archetype: stock-standard-price-impact  # -> AGENT_POOL/market/stock-standard-price-impact.md
+  name: "Market"
+  class: "examples.MomentumEffect.Rule.players:Market"
+  num_instances: 1
+  config:
+    identity: "market"
+    role: coordinator
+    steps_per_turn: 1
+    group_tags:
+      - market
+    extras:
+      record_path: "EXPERIMENT/MomentumEffect/Rule/records"  # Source: framework infrastructure
+      # Market parameters
+      initial_price: 100.0  # Source: simulation-bases.md §6
+      initial_fundamental: 100.0  # Source: simulation-bases.md §6
+      price_impact: 0.08  # Source: simulation-bases.md §6
+      # Slow - allows momentum to persist
+      mean_reversion: 0.01  # Source: simulation-bases.md §6
+      noise_std: 0.3  # Source: simulation-bases.md §6
+      # Fundamental drift (creates momentum opportunities)
+      # Autocorrelated drift
+      drift_persistence: 0.95  # Source: simulation-bases.md §6
+      drift_volatility: 0.5  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+  persona: !include persona.yml
+
+rule_momentum_trader:
+  name: "Momentum Trader"
+  class: "examples.MomentumEffect.Rule.players:MomentumTrader"
+  # Expander → momentum_trader_1, momentum_trader_2, momentum_trader_3
+  num_instances: 3
+  config:
+    identity: "rule_momentum_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/MomentumEffect/Rule/records"  # Source: framework infrastructure
+      # Base investor parameters
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 0.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # MomentumTrader specific
+      lookback_window: 5  # Source: simulation-bases.md §4.1.7
+      # 2% threshold
+      momentum_threshold: 0.02  # Source: simulation-bases.md §4.1.7
+      # Aggressiveness
+      scale: 3.0  # Source: simulation-bases.md §4.1.7
+      max_position: 100.0  # Source: simulation-bases.md §4.1.7
+  persona: !include persona.yml
+
+rule_contrarian_trader:
+  name: "Contrarian Trader"
+  class: "examples.MomentumEffect.Rule.players:ContrarianTrader"
+  # Expander → contrarian_trader_1, contrarian_trader_2
+  num_instances: 2
+  config:
+    identity: "rule_contrarian_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/MomentumEffect/Rule/records"  # Source: framework infrastructure
+      # Base investor parameters
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 0.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # ContrarianTrader specific
+      # 3% deviation
+      reversion_threshold: 0.03  # Source: simulation-bases.md §4.2.7
+      scale: 2.0  # Source: simulation-bases.md §4.2.7
+      max_position: 80.0  # Source: simulation-bases.md §4.2.7
+  persona: !include persona.yml
+
+rule_index_fund:
+  name: "Index Fund"
+  class: "examples.MomentumEffect.Rule.players:IndexFund"
+  num_instances: 1
+  config:
+    identity: "rule_index_fund"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/MomentumEffect/Rule/records"  # Source: framework infrastructure
+      # Base investor parameters
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 0.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # IndexFund specific
+      # 60% equity
+      target_allocation: 0.6  # Source: simulation-bases.md §4.3.7
+      # 5% deviation triggers rebalance
+      rebalance_threshold: 0.05  # Source: simulation-bases.md §4.3.7
+  persona: !include persona.yml
+
+rule_market_maker:
+  name: "Market Maker"
+  class: "examples.MomentumEffect.Rule.players:MarketMaker"
+  num_instances: 1
+  config:
+    identity: "rule_market_maker"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/MomentumEffect/Rule/records"  # Source: framework infrastructure
+      # Base investor parameters
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 0.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # MarketMaker specific
+      inventory_target: 0.0  # Source: simulation-bases.md §4.4.7
+      reversion_speed: 0.2  # Source: simulation-bases.md §4.4.7
+  persona: !include persona.yml
+
+rule_technical_trader:
+  name: "Technical Trader"
+  class: "examples.MomentumEffect.Rule.players:TechnicalTrader"
+  # Expander → technical_trader_1, technical_trader_2
+  num_instances: 2
+  config:
+    identity: "rule_technical_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/MomentumEffect/Rule/records"  # Source: framework infrastructure
+      # Base investor parameters
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      # Start with some position
+      initial_position: 20.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # TechnicalTrader specific (MA crossover)
+      short_window: 3  # Source: simulation-bases.md §4.5.7
+      long_window: 10  # Source: simulation-bases.md §4.5.7
+      scale: 2.0  # Source: simulation-bases.md §4.5.7
+      max_position: 60.0  # Source: simulation-bases.md §4.5.7
+  persona: !include persona.yml
+
+rule_fundamental_trader:
+  name: "Fundamental Trader"
+  class: "examples.MomentumEffect.Rule.players:FundamentalTrader"
+  # Expander → fundamental_trader_1, fundamental_trader_2
+  num_instances: 2
+  config:
+    identity: "rule_fundamental_trader"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/MomentumEffect/Rule/records"  # Source: framework infrastructure
+      # Base investor parameters
+      initial_cash: 10000.0  # Source: simulation-bases.md §6
+      initial_position: 0.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      # FundamentalTrader specific
+      # 5% mispricing
+      value_threshold: 0.05  # Source: simulation-bases.md §4.6.7
+      scale: 1.5  # Source: simulation-bases.md §4.6.7
+      max_position: 50.0  # Source: simulation-bases.md §4.6.7
+  persona: !include persona.yml

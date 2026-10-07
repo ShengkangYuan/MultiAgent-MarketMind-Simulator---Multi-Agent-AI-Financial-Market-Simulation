@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:33.897476",
+  "size_bytes": 407,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"rule_disposition_trader_1\", \"recipient_id\": \"market\", \"payload\": {\"content\": {\"action\": \"buy\", \"quantity\": 9.995599622813332, \"bid_price\": 102.88707394673605, \"investor\": \"rule_disposition_trader_1\", \"strategy\": \"disposition-trader\"}, \"content_type\": \"investor_bid\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:33.889423\", \"priority\": 1, \"extras\": {\"round_num\": 18}}"
+}

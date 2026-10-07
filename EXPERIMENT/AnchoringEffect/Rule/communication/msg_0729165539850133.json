@@ -1,0 +1,5 @@
+{
+  "timestamp": "2026-07-29T16:55:39.850133",
+  "size_bytes": 385,
+  "encoded": "{\"message_type\": \"PEER\", \"sender_id\": \"market\", \"recipient_id\": \"rule_disposition_trader_1\", \"payload\": {\"content\": {\"price\": 103.64985773303258, \"prev_price\": 103.75126427887693, \"fundamental\": 100.0, \"deviation\": 0.03649857733032576, \"round\": 126}, \"content_type\": \"market_price\", \"extras\": {}}, \"timestamp\": \"2026-07-29T16:55:39.836902\", \"priority\": 1, \"extras\": {\"round_num\": 126}}"
+}

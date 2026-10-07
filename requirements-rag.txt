@@ -1,0 +1,24 @@
+# =============================================================================
+# MarketMind Sim — OPTIONAL dependencies for RAG-enabled scenarios
+# =============================================================================
+# Only needed if you want to run the ``Rag`` engine variants
+# (examples/<Scenario>/Rag), which augment agents with a local retrieval
+# knowledge base.  The web interface and every Rule / LLM / RuleLLM scenario
+# work WITHOUT installing this file.
+#
+#     pip install -r requirements-rag.txt
+#
+# NOTE: llama-index-embeddings-huggingface pulls in PyTorch and downloads an
+# embedding model on first RAG run — expect a multi-GB footprint and network
+# access during setup.
+# =============================================================================
+
+-r requirements.txt
+
+llama-index-core>=0.11
+llama-index-readers-file>=0.2
+llama-index-embeddings-huggingface>=0.3
+llama-index-embeddings-openai>=0.2
+llama-index-embeddings-litellm>=0.1
+PyMuPDF>=1.24
+beautifulsoup4>=4.12

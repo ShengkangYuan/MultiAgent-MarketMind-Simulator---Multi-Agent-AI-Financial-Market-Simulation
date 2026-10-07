@@ -1,0 +1,29 @@
+# FramingEffect LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_gain_frame_follower
+    - llm_loss_frame_reactor
+    - llm_frame_invariant_trader
+    - llm_arbitrage_framer
+    - llm_noise_trader
+
+  llm_gain_frame_follower:
+    - market
+
+  llm_loss_frame_reactor:
+    - market
+
+  llm_frame_invariant_trader:
+    - market
+
+  llm_arbitrage_framer:
+    - market
+
+  llm_noise_trader:
+    - market

@@ -1,0 +1,29 @@
+# GamblerFallacy RuleLLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_streak_reversal_trader
+    - rulellm_hot_hand_trader
+    - rulellm_independent_assessor
+    - rulellm_arbitrageur
+    - rulellm_noise_trader
+
+  rulellm_streak_reversal_trader:
+    - market
+
+  rulellm_hot_hand_trader:
+    - market
+
+  rulellm_independent_assessor:
+    - market
+
+  rulellm_arbitrageur:
+    - market
+
+  rulellm_noise_trader:
+    - market

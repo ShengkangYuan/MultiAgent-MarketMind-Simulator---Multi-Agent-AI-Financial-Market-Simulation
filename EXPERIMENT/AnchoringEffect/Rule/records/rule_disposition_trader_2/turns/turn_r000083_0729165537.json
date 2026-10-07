@@ -1,0 +1,63 @@
+{
+  "round_num": 83,
+  "timestamp": "2026-07-29T16:55:37.102349",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "hold",
+          "quantity": 0.0,
+          "bid_price": 100.98233913712595,
+          "investor": "rule_disposition_trader_2",
+          "strategy": "disposition-trader",
+          "_clipped": true,
+          "_clipped_from": "buy",
+          "_clipped_intended_quantity": 13.417048164160706,
+          "_clipped_reason": "insufficient_cash"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "hold",
+            "quantity": 0.0,
+            "bid_price": 100.98233913712595,
+            "investor": "rule_disposition_trader_2",
+            "strategy": "disposition-trader",
+            "_clipped": true,
+            "_clipped_from": "buy",
+            "_clipped_intended_quantity": 13.417048164160706,
+            "_clipped_reason": "insufficient_cash"
+          },
+          "source_id": "rule_disposition_trader_2",
+          "timestamp": "2026-07-29T16:55:37.102349",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.177
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 100.98233913712595,
+        "investor": "rule_disposition_trader_2",
+        "strategy": "disposition-trader",
+        "_clipped": true,
+        "_clipped_from": "buy",
+        "_clipped_intended_quantity": 13.417048164160706,
+        "_clipped_reason": "insufficient_cash"
+      },
+      "source_id": "rule_disposition_trader_2",
+      "timestamp": "2026-07-29T16:55:37.102349",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 83,
+    "tick_turn_duration_ms": 0.19,
+    "tick_turn_total_duration_ms": 16.613,
+    "tick_step_count": 1
+  }
+}

@@ -1,0 +1,52 @@
+# =============================================================================
+# ReversalEffect Topology - Star Pattern
+# =============================================================================
+# Market as hub, all investors communicate through market.
+#
+# Note: player keys with num_instances > 1 use their base key here.
+# The simulator expander resolves them to foo_1, foo_2, ... before building
+# the TopologyGraph, so all edge rules apply to every instance automatically.
+#
+#         rule_contrarian_investor ───────────────┐
+#         rule_momentum_investor ─────────────────┤
+#         rule_overconfident_trader ────────────┼──▶ market ──▶ all investors
+#         rule_noise_trader ─────────────┤             (market data)
+#         rule_value_investor ───────────┤
+#         rule_index_tracker ────────────┘
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  # num_instances: 2 → contrarian_1/2, momentum_1/2, overconfident_1/2
+  market:
+    - rule_contrarian_investor
+    - rule_momentum_investor
+    - rule_overconfident_trader
+    - rule_noise_trader
+    - rule_value_investor
+    - rule_index_tracker
+
+  # num_instances: 2 → expands to contrarian_1/2 → market
+  rule_contrarian_investor:
+    - market
+
+  # num_instances: 2 → expands to momentum_1/2 → market
+  rule_momentum_investor:
+    - market
+
+  # num_instances: 2 → expands to overconfident_1/2 → market
+  rule_overconfident_trader:
+    - market
+
+  rule_noise_trader:
+    - market
+
+  rule_value_investor:
+    - market
+
+  rule_index_tracker:
+    - market

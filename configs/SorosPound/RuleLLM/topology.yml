@@ -1,0 +1,24 @@
+# SorosPound RuleLLM Topology Configuration
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_macro_hedge_fund
+    - rulellm_peg_defender
+    - rulellm_convergence_trader
+    - rulellm_opportunistic_trader
+    - rulellm_noise_trader
+  rulellm_macro_hedge_fund:
+    - market
+  rulellm_peg_defender:
+    - market
+  rulellm_convergence_trader:
+    - market
+  rulellm_opportunistic_trader:
+    - market
+  rulellm_noise_trader:
+    - market

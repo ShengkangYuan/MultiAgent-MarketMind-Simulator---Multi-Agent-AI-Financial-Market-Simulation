@@ -1,0 +1,51 @@
+{
+  "round_num": 12,
+  "timestamp": "2026-07-29T16:55:33.579869",
+  "turn_result": {
+    "step_results": [
+      {
+        "decision_payload": {
+          "action": "hold",
+          "quantity": 0.0,
+          "bid_price": 106.2775752342329,
+          "investor": "rule_disposition_trader_1",
+          "strategy": "disposition-trader"
+        },
+        "action": {
+          "action_type": "investor_bid",
+          "payload": {
+            "action": "hold",
+            "quantity": 0.0,
+            "bid_price": 106.2775752342329,
+            "investor": "rule_disposition_trader_1",
+            "strategy": "disposition-trader"
+          },
+          "source_id": "rule_disposition_trader_1",
+          "timestamp": "2026-07-29T16:55:33.579869",
+          "extras": {},
+          "status": "CREATED"
+        },
+        "tick_step_count": 1,
+        "tick_step_duration_ms": 0.128
+      }
+    ],
+    "final_action": {
+      "action_type": "investor_bid",
+      "payload": {
+        "action": "hold",
+        "quantity": 0.0,
+        "bid_price": 106.2775752342329,
+        "investor": "rule_disposition_trader_1",
+        "strategy": "disposition-trader"
+      },
+      "source_id": "rule_disposition_trader_1",
+      "timestamp": "2026-07-29T16:55:33.579869",
+      "extras": {},
+      "status": "CREATED"
+    },
+    "tick_turn_count": 12,
+    "tick_turn_duration_ms": 0.138,
+    "tick_turn_total_duration_ms": 6.276,
+    "tick_step_count": 1
+  }
+}

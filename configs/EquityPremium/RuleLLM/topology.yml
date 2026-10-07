@@ -1,0 +1,27 @@
+# =============================================================================
+# EquityPremiumRuleLLM - Topology Configuration
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rulellm_myopic_loss_averse
+    - rulellm_long_term_investor
+    - rulellm_institutional_investor
+    - rulellm_risk_averse_saver
+    - rulellm_rational_optimizer
+
+  rulellm_myopic_loss_averse:
+    - market
+  rulellm_long_term_investor:
+    - market
+  rulellm_institutional_investor:
+    - market
+  rulellm_risk_averse_saver:
+    - market
+  rulellm_rational_optimizer:
+    - market

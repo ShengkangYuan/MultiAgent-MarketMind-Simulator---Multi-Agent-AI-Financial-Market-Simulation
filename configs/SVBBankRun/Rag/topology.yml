@@ -1,0 +1,21 @@
+type: "star"
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_depositor
+    - ragllm_social_media_influencer
+    - ragllm_bank_manager
+    - ragllm_regulator
+    - ragllm_bond_trader
+  ragllm_depositor:
+    - market
+  ragllm_social_media_influencer:
+    - market
+  ragllm_bank_manager:
+    - market
+  ragllm_regulator:
+    - market
+  ragllm_bond_trader:
+    - market

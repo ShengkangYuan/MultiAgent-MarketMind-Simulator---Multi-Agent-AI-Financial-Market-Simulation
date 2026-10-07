@@ -1,0 +1,27 @@
+# =============================================================================
+# ReversalEffectRag - Topology Configuration
+# =============================================================================
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_contrarian_investor
+    - ragllm_overconfident_trader
+    - ragllm_value_investor
+    - ragllm_momentum_chaser
+    - ragllm_noise_trader
+
+  ragllm_contrarian_investor:
+    - market
+  ragllm_overconfident_trader:
+    - market
+  ragllm_value_investor:
+    - market
+  ragllm_momentum_chaser:
+    - market
+  ragllm_noise_trader:
+    - market

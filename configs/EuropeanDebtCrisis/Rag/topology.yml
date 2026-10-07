@@ -1,0 +1,29 @@
+# EuropeanDebtCrisis Rag Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_periphery_bond_seller
+    - ragllm_creditor_panicker
+    - ragllm_core_bond_buyer
+    - ragllm_ecb_intervenor
+    - ragllm_hedged_fund
+
+  ragllm_periphery_bond_seller:
+    - market
+
+  ragllm_creditor_panicker:
+    - market
+
+  ragllm_core_bond_buyer:
+    - market
+
+  ragllm_ecb_intervenor:
+    - market
+
+  ragllm_hedged_fund:
+    - market

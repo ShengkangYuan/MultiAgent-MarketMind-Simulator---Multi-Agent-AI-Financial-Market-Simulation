@@ -1,0 +1,29 @@
+# DotComBubble LLM Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - llm_new_economy_evangelist
+    - llm_ipo_flipper
+    - llm_momentum_follower
+    - llm_skeptical_value_investor
+    - llm_short_seller
+
+  llm_new_economy_evangelist:
+    - market
+
+  llm_ipo_flipper:
+    - market
+
+  llm_momentum_follower:
+    - market
+
+  llm_skeptical_value_investor:
+    - market
+
+  llm_short_seller:
+    - market

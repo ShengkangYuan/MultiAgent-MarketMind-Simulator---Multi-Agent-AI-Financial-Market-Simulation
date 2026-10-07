@@ -1,0 +1,158 @@
+# Volmageddon Rag Agent Configuration
+
+knowledge: &volmageddon_knowledge
+  backend: "local"
+  global_uri: "examples/document-sources"
+  resource_csv:
+    - "examples/document-sources/books.csv"
+    - "examples/document-sources/source"
+  preprocessing:
+    parser: "mineru"
+    timeout_per_page: 30
+    max_pages: 250
+    output_position: "MinerU_processed"
+  rag:
+    output_position: "rag_index"
+    embed_type: "litellm"
+    embed_model: "openai/hunyuan-embedding"
+    embed_api_key: "{{ HUNYUAN_API_KEY }}"
+    embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"
+    chunk_size: 512
+    chunk_overlap: 64
+    top_k: 5
+
+market:
+  archetype: derivatives-vol-feedback  # -> AGENT_POOL/market/derivatives-vol-feedback.md
+  name: "Market"
+  class: "examples.Volmageddon.Rag.players:Market"
+  num_instances: 1
+  persona: !include persona.yml
+  config:
+    identity: "market"
+    role: coordinator
+    extras:
+      initial_price: 15.0        # Source: target §6 initial_price row; normalization (scale-only)
+      fundamental_value: 15.0    # Source: target §6 fundamental_value row; normalization (scale-only)
+      price_impact: 0.04         # Source: target §6 price_impact row; Brunnermeier & Pedersen (2009) 10.1093/rfs/hhn098
+      mean_reversion: 0.03       # Source: target §6 mean_reversion row; Culp, Nozawa & Veronesi (2018) 10.3905/jai.2018.21.2.001
+      noise_std: 0.05            # Source: target §6 noise_std row; Engle (1982) 10.2307/1912773
+
+ragllm_short_vol_trader:
+  name: "ShortVolTrader 1"
+  class: "examples.Volmageddon.Rag.players:RagLLMShortVolTrader"
+  num_instances: 2
+  persona: !include persona.yml
+  config:
+    identity: "ragllm_short_vol_trader"
+    role: player
+    extras:
+      record_path: "EXPERIMENT/Volmageddon/Rag/records"   # Source: target §10.1 Rag variant record layout
+      initial_cash: 1000000.00   # Source: target §4.1.6 scenario normalization
+      initial_position: 0        # Source: target §4.1.6 scenario normalization
+      initial_price: 15.0        # Source: target §6 initial_price row; normalization (scale-only)
+      fundamental_value: 15.0    # Source: target §6 fundamental_value row; normalization (scale-only)
+      agent_type: "short_vol_trader"        # Source: target §4.1.5.0 I/O Contract agent_type field
+      knowledge: *volmageddon_knowledge     # Source: target §10.1 Rag variant knowledge index
+      private_knowledge: &volmageddon_private_knowledge  # Source: target §10.1 Rag variant private-knowledge block
+        from_global_resources:
+          - "MinerU_processed"
+        local_resources:
+          local_uri: ""
+          local_resources: []
+        rag:
+          from_global_index_dir:
+            - "rag_index"
+          local_index_dir: ""
+          embed_type: "litellm"
+          embed_model: "openai/hunyuan-embedding"
+          embed_api_key: "{{ HUNYUAN_API_KEY }}"
+          embed_api_base: "https://api.hunyuan.cloud.tencent.com/v1"
+          chunk_size: 512
+          chunk_overlap: 64
+          top_k: 5
+      llm: &volmageddon_rag_llm_config      # Source: target §10.1 Rag variant declaration
+        lm_type: "api"
+        lm_name: "ark/doubao-seed-2-0-mini-260428"
+        generation_config:
+          temperature: 0.3
+          max_new_tokens: 600
+
+
+ragllm_vol_etn_manager:
+  name: "VolETNManager 2"
+  class: "examples.Volmageddon.Rag.players:RagLLMVolETNManager"
+  num_instances: 2
+  persona: !include persona.yml
+  config:
+    identity: "ragllm_vol_etn_manager"
+    role: player
+    extras:
+      record_path: "EXPERIMENT/Volmageddon/Rag/records"   # Source: target §10.1 Rag variant record layout
+      initial_cash: 1000000.00   # Source: target §4.2.6 scenario normalization
+      initial_position: 0        # Source: target §4.2.6 scenario normalization
+      initial_price: 15.0        # Source: target §6 initial_price row; normalization (scale-only)
+      fundamental_value: 15.0    # Source: target §6 fundamental_value row; normalization (scale-only)
+      agent_type: "vol_e_t_n_manager"       # Source: target §4.2.5.0 I/O Contract agent_type field
+      knowledge: *volmageddon_knowledge     # Source: target §10.1 Rag variant knowledge index
+      private_knowledge: *volmageddon_private_knowledge  # Source: target §10.1 Rag variant private-knowledge block
+      llm: *volmageddon_rag_llm_config      # Source: target §10.1 Rag variant declaration
+
+
+ragllm_long_vol_hedger:
+  name: "LongVolHedger 3"
+  class: "examples.Volmageddon.Rag.players:RagLLMLongVolHedger"
+  num_instances: 1
+  persona: !include persona.yml
+  config:
+    identity: "ragllm_long_vol_hedger"
+    role: player
+    extras:
+      record_path: "EXPERIMENT/Volmageddon/Rag/records"   # Source: target §10.1 Rag variant record layout
+      initial_cash: 1000000.00   # Source: target §4.3.6 scenario normalization
+      initial_position: 0        # Source: target §4.3.6 scenario normalization
+      initial_price: 15.0        # Source: target §6 initial_price row; normalization (scale-only)
+      fundamental_value: 15.0    # Source: target §6 fundamental_value row; normalization (scale-only)
+      agent_type: "long_vol_hedger"         # Source: target §4.3.5.0 I/O Contract agent_type field
+      knowledge: *volmageddon_knowledge     # Source: target §10.1 Rag variant knowledge index
+      private_knowledge: *volmageddon_private_knowledge  # Source: target §10.1 Rag variant private-knowledge block
+      llm: *volmageddon_rag_llm_config      # Source: target §10.1 Rag variant declaration
+
+
+ragllm_vol_arbitrageur:
+  name: "VolArbitrageur 4"
+  class: "examples.Volmageddon.Rag.players:RagLLMVolArbitrageur"
+  num_instances: 2
+  persona: !include persona.yml
+  config:
+    identity: "ragllm_vol_arbitrageur"
+    role: player
+    extras:
+      record_path: "EXPERIMENT/Volmageddon/Rag/records"   # Source: target §10.1 Rag variant record layout
+      initial_cash: 1000000.00   # Source: target §4.4.6 scenario normalization
+      initial_position: 0        # Source: target §4.4.6 scenario normalization
+      initial_price: 15.0        # Source: target §6 initial_price row; normalization (scale-only)
+      fundamental_value: 15.0    # Source: target §6 fundamental_value row; normalization (scale-only)
+      agent_type: "vol_arbitrageur"         # Source: target §4.4.5.0 I/O Contract agent_type field
+      knowledge: *volmageddon_knowledge     # Source: target §10.1 Rag variant knowledge index
+      private_knowledge: *volmageddon_private_knowledge  # Source: target §10.1 Rag variant private-knowledge block
+      llm: *volmageddon_rag_llm_config      # Source: target §10.1 Rag variant declaration
+
+
+ragllm_equity_trader:
+  name: "EquityTrader 5"
+  class: "examples.Volmageddon.Rag.players:RagLLMEquityTrader"
+  num_instances: 2
+  persona: !include persona.yml
+  config:
+    identity: "ragllm_equity_trader"
+    role: player
+    extras:
+      record_path: "EXPERIMENT/Volmageddon/Rag/records"   # Source: target §10.1 Rag variant record layout
+      initial_cash: 1000000.00   # Source: target §4.5.6 scenario normalization
+      initial_position: 0        # Source: target §4.5.6 scenario normalization
+      initial_price: 15.0        # Source: target §6 initial_price row; normalization (scale-only)
+      fundamental_value: 15.0    # Source: target §6 fundamental_value row; normalization (scale-only)
+      agent_type: "equity_trader"           # Source: target §4.5.5.0 I/O Contract agent_type field
+      knowledge: *volmageddon_knowledge     # Source: target §10.1 Rag variant knowledge index
+      private_knowledge: *volmageddon_private_knowledge  # Source: target §10.1 Rag variant private-knowledge block
+      llm: *volmageddon_rag_llm_config      # Source: target §10.1 Rag variant declaration

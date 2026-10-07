@@ -1,0 +1,158 @@
+# GameStopShortSqueeze RuleLLM Agent Configuration
+
+market:
+  archetype: stock-standard-price-impact  # -> AGENT_POOL/market/stock-standard-price-impact.md
+  name: "Market"
+  class: "examples.GameStopShortSqueeze.RuleLLM.players:Market"
+  num_instances: 1
+  config:
+    identity: "market"
+    role: coordinator
+    steps_per_turn: 1
+    group_tags:
+      - market
+    extras:
+      record_path: "EXPERIMENT/GameStopShortSqueeze/RuleLLM/records"  # Source: framework infrastructure
+      initial_price: 20.0  # Source: simulation-bases.md §6
+      fundamental_value: 20.0  # Source: simulation-bases.md §6
+      price_impact: 0.04  # Source: simulation-bases.md §6
+      mean_reversion: 0.01  # Source: simulation-bases.md §6
+      noise_std: 0.02  # Source: simulation-bases.md §6
+      initial_short_interest: 1.5  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+  persona: !include persona.yml
+
+rulellm_retail_coordinated:
+  name: "RetailCoordinated"
+  class: "examples.GameStopShortSqueeze.RuleLLM.players:RuleLLMRetailCoordinated"
+  num_instances: 3
+  config:
+    identity: "rulellm_retail_coordinated"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/GameStopShortSqueeze/RuleLLM/records"  # Source: framework infrastructure
+      initial_cash: 500000.0  # Source: simulation-bases.md §6
+      initial_position: 100  # Source: simulation-bases.md §6
+      initial_price: 20.0  # Source: simulation-bases.md §6
+      fundamental_value: 20.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      llm:
+        sys_message: "examples.GameStopShortSqueeze.RuleLLM.prompts:RULELLM_RETAIL_COORDINATED_SYS"
+        user_message: "examples.GameStopShortSqueeze.RuleLLM.prompts:RULELLM_USER_TEMPLATE"
+        lm_type: "api"
+        lm_name: "ark/doubao-seed-2-0-mini-260428"
+        generation_config:
+          temperature: 0.5
+          max_tokens: 512
+  persona: !include persona.yml
+
+rulellm_short_seller_hf:
+  name: "ShortSellerHF"
+  class: "examples.GameStopShortSqueeze.RuleLLM.players:RuleLLMShortSellerHF"
+  num_instances: 2
+  config:
+    identity: "rulellm_short_seller_hf"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/GameStopShortSqueeze/RuleLLM/records"  # Source: framework infrastructure
+      initial_cash: 2000000.0  # Source: simulation-bases.md §6
+      initial_position: -1000  # Source: simulation-bases.md §6
+      initial_price: 20.0  # Source: simulation-bases.md §6
+      fundamental_value: 20.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      llm:
+        sys_message: "examples.GameStopShortSqueeze.RuleLLM.prompts:RULELLM_SHORT_SELLER_HF_SYS"
+        user_message: "examples.GameStopShortSqueeze.RuleLLM.prompts:RULELLM_USER_TEMPLATE"
+        lm_type: "api"
+        lm_name: "ark/doubao-seed-2-0-mini-260428"
+        generation_config:
+          temperature: 0.4
+          max_tokens: 512
+  persona: !include persona.yml
+
+rulellm_market_maker_gamma:
+  name: "MarketMakerGamma"
+  class: "examples.GameStopShortSqueeze.RuleLLM.players:RuleLLMMarketMakerGamma"
+  num_instances: 1
+  config:
+    identity: "rulellm_market_maker_gamma"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/GameStopShortSqueeze/RuleLLM/records"  # Source: framework infrastructure
+      initial_cash: 3000000.0  # Source: simulation-bases.md §6
+      initial_position: 0  # Source: simulation-bases.md §6
+      initial_price: 20.0  # Source: simulation-bases.md §6
+      fundamental_value: 20.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      llm:
+        sys_message: "examples.GameStopShortSqueeze.RuleLLM.prompts:RULELLM_MARKET_MAKER_GAMMA_SYS"
+        user_message: "examples.GameStopShortSqueeze.RuleLLM.prompts:RULELLM_USER_TEMPLATE"
+        lm_type: "api"
+        lm_name: "ark/doubao-seed-2-0-mini-260428"
+        generation_config:
+          temperature: 0.3
+          max_tokens: 512
+  persona: !include persona.yml
+
+rulellm_institutional_value:
+  name: "InstitutionalValue"
+  class: "examples.GameStopShortSqueeze.RuleLLM.players:RuleLLMInstitutionalValue"
+  num_instances: 1
+  config:
+    identity: "rulellm_institutional_value"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/GameStopShortSqueeze/RuleLLM/records"  # Source: framework infrastructure
+      initial_cash: 2000000.0  # Source: simulation-bases.md §6
+      initial_position: 2000  # Source: simulation-bases.md §6
+      initial_price: 20.0  # Source: simulation-bases.md §6
+      fundamental_value: 20.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      llm:
+        sys_message: "examples.GameStopShortSqueeze.RuleLLM.prompts:RULELLM_INSTITUTIONAL_VALUE_SYS"
+        user_message: "examples.GameStopShortSqueeze.RuleLLM.prompts:RULELLM_USER_TEMPLATE"
+        lm_type: "api"
+        lm_name: "ark/doubao-seed-2-0-mini-260428"
+        generation_config:
+          temperature: 0.4
+          max_tokens: 512
+  persona: !include persona.yml
+
+rulellm_momentum_retail:
+  name: "NoiseTrader"
+  class: "examples.GameStopShortSqueeze.RuleLLM.players:RuleLLMMomentumRetail"
+  num_instances: 2
+  config:
+    identity: "rulellm_momentum_retail"
+    role: player
+    steps_per_turn: 1
+    group_tags:
+      - investors
+    extras:
+      record_path: "EXPERIMENT/GameStopShortSqueeze/RuleLLM/records"  # Source: framework infrastructure
+      initial_cash: 300000.0  # Source: simulation-bases.md §6
+      initial_position: 0  # Source: simulation-bases.md §6
+      initial_price: 20.0  # Source: simulation-bases.md §6
+      fundamental_value: 20.0  # Source: simulation-bases.md §6
+      custom_state_hot_limit: 3  # Source: framework infrastructure
+      llm:
+        sys_message: "examples.GameStopShortSqueeze.RuleLLM.prompts:RULELLM_MOMENTUM_RETAIL_SYS"
+        user_message: "examples.GameStopShortSqueeze.RuleLLM.prompts:RULELLM_USER_TEMPLATE"
+        lm_type: "api"
+        lm_name: "ark/doubao-seed-2-0-mini-260428"
+        generation_config:
+          temperature: 0.9
+          max_tokens: 512
+  persona: !include persona.yml

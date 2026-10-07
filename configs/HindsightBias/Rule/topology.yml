@@ -1,0 +1,29 @@
+# HindsightBias Rule Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_hindsight_overconfident
+    - rule_outcome_learner
+    - rule_process_evaluator
+    - rule_contrarian_skeptic
+    - rule_noise_trader
+
+  rule_hindsight_overconfident:
+    - market
+
+  rule_outcome_learner:
+    - market
+
+  rule_process_evaluator:
+    - market
+
+  rule_contrarian_skeptic:
+    - market
+
+  rule_noise_trader:
+    - market

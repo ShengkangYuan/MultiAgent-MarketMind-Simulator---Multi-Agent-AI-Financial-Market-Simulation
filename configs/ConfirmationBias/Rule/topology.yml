@@ -1,0 +1,30 @@
+# =============================================================================
+# ConfirmationBias Rule Topology - Star Pattern
+# =============================================================================
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - rule_belief_anchor
+    - rule_selective_scanner
+    - rule_balanced_analyst
+    - rule_contrarian_trader
+    - rule_noise_trader
+
+  rule_belief_anchor:
+    - market
+
+  rule_selective_scanner:
+    - market
+
+  rule_balanced_analyst:
+    - market
+
+  rule_contrarian_trader:
+    - market
+
+  rule_noise_trader:
+    - market

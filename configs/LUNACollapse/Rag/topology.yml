@@ -1,0 +1,29 @@
+# LUNACollapse Rag Topology - Star Pattern
+
+type: "star"
+
+sources:
+  - market
+
+connections:
+  market:
+    - ragllm_stablecoin_holder
+    - ragllm_arbitrageur
+    - ragllm_de_fi_lender
+    - ragllm_anchor_depositor
+    - ragllm_value_buyer
+
+  ragllm_stablecoin_holder:
+    - market
+
+  ragllm_arbitrageur:
+    - market
+
+  ragllm_de_fi_lender:
+    - market
+
+  ragllm_anchor_depositor:
+    - market
+
+  ragllm_value_buyer:
+    - market
